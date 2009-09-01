@@ -1,0 +1,17 @@
+<?php
+/***************************************************/
+/* Fichier PHP regroupant des constantes usuelles  */
+/***************************************************/
+
+define('TITLE', 'Pronos Foot Arthur');
+
+define('TIMEZONE', 'Europe/Paris');
+
+define('DEFAULT_MAIL', 'arthurfoucher@hotmail.com');
+
+define('WEBLINK', 'http://');
+
+// durée des cookies
+define('COOKIE_EXPIRE', time() + 365 * 24 * 3600); // 1 an
+define('COOKIE_UNSET',  time() - 3600);
+

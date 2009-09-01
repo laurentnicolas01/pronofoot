@@ -1,0 +1,151 @@
+@charset "utf-8";
+/*******************************/
+/* Common Layout CSS Document  */
+/*******************************/
+
+.hidden { display:none; }
+.clear { clear:both; }
+.center { text-align:center; }
+
+/* messages de succès/erreur/info/avertissement ------------------------ */
+
+div.success, div.info, div.error, div.warning, p.success, p.info, p.error, p.warning {
+	min-height: 15px;
+	line-height: 15px;
+	margin: 15px 20px 15px 10px !important;
+	padding: 10px 33px !important;
+	text-align: left !important;
+}
+
+div.success, p.success {
+	background: #D4FFD4 url('../images/icons/accept.png') no-repeat 10px 10px;
+	border: 1px solid #4DA24D;
+	color: #348934;
+}
+
+div.info, p.info {
+	background: #DFF4FF url('../images/icons/information.png') no-repeat 10px 10px;
+	border: 1px solid #4985B2;
+	color: #005B9F;
+}
+
+div.warning, p.warning {
+	background: #FFFFD4 url('../images/icons/error.png') no-repeat 10px 10px;
+	border: 1px solid #D5AA00;
+	color: #D5AA00;
+}
+
+div.error, p.error {
+	background: #FFD4D4 url('../images/icons/exclamation.png') no-repeat 10px 10px;
+	border: 1px solid #D02626;
+	color: #D02626;
+}
+
+.error ul.list li {
+	background: url('../images/icons/bullet_red.png') no-repeat;
+}
+
+span.success, span.info, span.warning, span.error, span.save, span.list {
+	display: block;
+	text-indent: 20px;
+	padding-bottom:2px;
+}
+
+
+span.success {
+	background: url('../images/icons/accept.png') no-repeat;
+	color: #348934;
+}
+
+span.info {
+	background: url('../images/icons/information.png') no-repeat;
+	color: #343489;
+}
+
+span.warning {
+	background: url('../images/icons/error.png') no-repeat;
+	color: #D5AA00;
+}
+
+span.error {
+	background: url('../images/icons/exclamation.png') no-repeat;
+	color: #D02626;
+}
+
+span.save {
+	background: url('../images/icons/disk.png') no-repeat;
+	color: black;
+}
+
+span.list {
+	background: url('../images/icons/bullet_blue.png') no-repeat;
+}
+
+ul.list li {
+	background:url('../images/icons/bullet_blue.png') no-repeat 5px 5px;
+	list-style-type:none;
+}
+
+ul.listmenu li a, ul.listmenu li a:hover {
+	background:url('../images/icons/bullet_blue.png') no-repeat 5px 5px;
+	list-style-type:none;
+}
+
+ul.listmenu li a:hover {
+	background:#E0E0E0 url('../images/icons/bullet_blue.png') no-repeat 5px 5px;
+}
+
+/* bulles d'aide --------------------------------------------------- */
+
+.tooltip, .tooltip-right {
+	position: relative;
+}
+
+.tooltip span, .tooltip-right span {
+	display: none;
+	top: -60px;
+	right: -30px;
+	padding: 16px;
+	width: 250px;
+	background-image: url('images/blue_trans.png');
+	color: white;
+	border: 1px solid #1C3B5C;
+	-moz-border-radius: 10px;
+}
+
+.tooltip-right span {
+	left: -30px;
+}
+
+.tooltip:hover span, .tooltip-right:hover span {
+	display: inline;
+	position: absolute;
+	cursor: help;
+}
+
+/* Liens flèches et autres icones ---------------------------------- */
+
+.back, .go, .connect, .color, .pic, .add, .delete, .edit, .refresh {
+	padding-left: 20px;
+	min-height: 16px;
+}
+.rss, .tick, .time, .table {
+	padding: 5px 0 5px 23px;
+}
+.connect {
+	background: url('../images/icons/lock.png') no-repeat;
+	padding-left: 25px !important;
+}
+.back	{ background:url('../images/icons/arrow_left.png') no-repeat; }
+.go		{ background:url('../images/icons/arrow_right.png') no-repeat; }
+.color	{ background:url('../images/icons/color_swatch.png') no-repeat; }
+.pic	{ background:url('../images/icons/picture.png') no-repeat; }
+.add	{ background:url('../images/icons/add.png') no-repeat; }
+.delete	{ background:url('../images/icons/delete.png') no-repeat; }
+.edit	{ background:url('../images/icons/pencil.png') no-repeat; }
+.refresh{ background:url('../images/icons/arrow_refresh.png') no-repeat; }
+.rss	{ background:url('../images/icons/feed.png') no-repeat 0 center; }
+.tick	{ background:url('../images/icons/tick.png') no-repeat 0 center; }
+.time	{ background:url('../images/icons/time.png') no-repeat 0 center; }
+.table	{ background:url('../images/icons/table.png') no-repeat 0 center; }
+
