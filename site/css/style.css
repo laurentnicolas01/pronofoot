@@ -1,0 +1,110 @@
+@charset "utf-8";
+/*******************************/
+/* Public Layout CSS Document  */
+/*******************************/
+
+* {
+	margin:0;
+	padding:0;
+	outline:0;
+	font-size:12px;
+	vertical-align:baseline;
+}
+
+img {
+	border:none;
+}
+
+ol, ul {
+	list-style:none;
+}
+
+body {
+	background:#DDDDDD;
+	font-family:tahoma,arial,helvetica,lucida sans,sans-serif;
+}
+
+a {
+	color:gray;
+	text-decoration:none;
+}
+
+a:hover {
+	text-decoration:underline;
+}
+
+input[type=submit] {
+	padding:0 5px;
+}
+
+.colonne { margin-bottom:-10000px; padding-bottom:10000px; }
+
+div#global  {
+	width:800px;
+	margin:10px auto;
+	border:1px solid #999999;
+	background:#F2F2F2;
+}
+
+div#global div#container {
+	overflow:hidden;
+	padding-bottom:50px;
+}
+
+div#menu {
+	width:110px;
+	border-right:1px solid #999999;
+	padding-right:5px;
+}
+
+div#menu h2 {
+	font-weight:bold;
+	margin:0 0 15px 0;
+	text-align:center;
+}
+
+#menu ul li a {
+	display:block;
+	padding:5px 5px 5px 25px;
+	text-decoration:none;
+	color:black;
+}
+
+#menu ul li a.last {
+	margin-top:15px;
+}
+
+div#content {
+	width:626px;
+	padding-left:10px;
+	padding-right:10px;
+}
+
+div#menu, div#content {
+	float:left;
+	margin-top:5px;
+	margin-left:5px;
+	margin-right:5px;
+	padding-top:10px;
+}
+
+div#footer {
+	margin:5px;
+	padding:10px;
+	border-top:1px solid #999999;
+}
+
+div#footer {
+	clear:both;
+	text-align:center;
+}
+
+div#global div#content h1 {
+	margin:5px 0 15px 0;
+	font-size:16px;
+}
+
+div#global div#content p {
+	margin:15px 0;
+	text-align:justify;
+}
