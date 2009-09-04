@@ -1,7 +1,7 @@
 <div id="menu" class="colonne">
 	<h2>Menu</h2>
 	<ul class="listmenu">
-		<li><a href="/">Accueil</a></li>
+		<li><a href="/pronofoot">Accueil</a></li>
 		<?php 
 		if($_SESSION['is_connect']) { ?>
 			<li><a href="?p=pronos">Mes pronos</a></li>

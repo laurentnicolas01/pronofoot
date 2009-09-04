@@ -258,37 +258,6 @@ function print_sorted_th($name, $self_row, $sorted_row, $is_desc, $uri = NULL)
         </th>';
 }
 
-/**
- * Ajouter un événement au fichier de logs
- * @return true si le log a réussi, false sinon
- */
-function log_action($ip, $status, $name, $firstname, $mail, $query)
-{
-	$log_file = fopen(LOG, 'a+');
-	if($log_file) {
-		$query_elements = explode(' ', strtoupper($query));
-		
-		// Récupération de l'action
-		$action = $query_elements[0];
-		
-		// Récupération de la table affectée
-		if($query_elements[1] == 'INTO')
-			$table = $query_elements[2];
-		else {
-			$pos = $query_elements[1] == 'FROM' ? 2 : 1;
-			$table = explode("\t", $query_elements[$pos]);
-			$table = substr($table[0], 0, -1);
-		}
-		
-		$time = time_to_str(time());
-
-		fputs($log_file, "* $ip $name $firstname ($mail) [$status] Action: $action, Table: $table ($time)\n");
-		fclose($log_file);
-		return true;
-	}
-	else return false;
-}
-
 
 /**
  * Générer un titre 'correct' pour le <title>
@@ -320,7 +289,7 @@ function session_connect($email, $password)
 {
 	$email = mysql_real_escape_string($email);
 	
-	$sql = 'SELECT id, email, pseudo
+	$sql = 'SELECT id, email, pseudo, idgroups
 	        FROM joueur
 	        WHERE email = "'.$email.'" AND pass = "'.$password.'";';
 	
@@ -330,6 +299,7 @@ function session_connect($email, $password)
 		$_SESSION['id'] = intval($row['id']);
 		$_SESSION['email'] = $row['email'];
 		$_SESSION['pseudo'] = $row['pseudo'];
+		$_SESSION['groups'] = $row['idgroups'];
 		return true;
 	}
 	$_SESSION['is_connect'] = false;
