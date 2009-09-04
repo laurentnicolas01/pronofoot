@@ -39,8 +39,23 @@ input[type=submit] {
 
 .colonne { margin-bottom:-10000px; padding-bottom:10000px; }
 
+table.table-contain {
+	border-collapse:collapse;
+}
+
+table.table-contain td, table.table-contain th {
+	border:1px solid #999;
+	padding:.6em 10px;
+	text-align:left;
+	vertical-align:middle;
+}
+
+table.table-contain th {
+	background:#84CBF3;
+}
+
 div#global  {
-	width:800px;
+	width:900px;
 	margin:10px auto;
 	border:1px solid #999999;
 	background:#F2F2F2;
@@ -52,7 +67,7 @@ div#global div#container {
 }
 
 div#menu {
-	width:110px;
+	width:125px;
 	border-right:1px solid #999999;
 	padding-right:5px;
 }
@@ -75,7 +90,7 @@ div#menu h2 {
 }
 
 div#content {
-	width:626px;
+	width:728px;
 	padding-left:10px;
 	padding-right:10px;
 }
