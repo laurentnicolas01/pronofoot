@@ -6,6 +6,7 @@
 .hidden { display:none; }
 .clear { clear:both; }
 .center { text-align:center; }
+.strong { font-weight:bold; }
 
 /* messages de succès/erreur/info/avertissement ------------------------ */
 

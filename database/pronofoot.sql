@@ -102,14 +102,16 @@ CREATE TABLE `journee` (
   `date` int(11) NOT NULL,
   `numero` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
 
 --
 -- Contenu de la table `journee`
 --
 
 INSERT INTO `journee` (`id`, `date`, `numero`) VALUES
-(1, 1252782000, 5);
+(1, 1252774800, 5),
+(2, 1253379600, 6),
+(3, 1253984400, 7);
 
 -- --------------------------------------------------------
 
@@ -123,12 +125,18 @@ CREATE TABLE `match` (
   `score` varchar(5) COLLATE utf8_unicode_ci NOT NULL,
   `equipe1` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
   `equipe2` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
+  `idjournee` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
 
 --
 -- Contenu de la table `match`
 --
+
+INSERT INTO `match` (`id`, `score`, `equipe1`, `equipe2`, `idjournee`) VALUES
+(1, '', 'Le Mans', 'Marseilles', 1),
+(2, '', 'Lyon', 'Lorient', 1),
+(3, '', 'Nancy', 'Toulouse', 1);
 
 
 -- --------------------------------------------------------
