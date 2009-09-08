@@ -1,7 +1,7 @@
 <?php
 
 /*
-Gestion de la table `match`
+Gestion de la table `match` (attention confusion avec le mot-clé sql "match")
 
 */
 

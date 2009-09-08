@@ -2,12 +2,13 @@
 require_once('lib/journee.php');
 require_once('lib/match.php');
 require_once('lib/joueur.php');
+require_once('lib/prono.php');
 
 $futures_journees = journee_get_next($all = true);
 if(mysql_num_rows($futures_journees) > 1) {
 	echo '<p>Journée : ';
-	for($i = 1 ; $nextj = mysql_fetch_assoc($futures_journees) ; ++$i)
-		echo '<strong><a href="?p=pronos&journee='.$nextj['id'].'">'.$nextj['numero'].'</a></strong> ';
+	while($nextj = mysql_fetch_assoc($futures_journees))
+		echo '<strong><a href="?p=pronos&amp;journee='.$nextj['id'].'">'.$nextj['numero'].'</a></strong> ';
 	echo '<br /><br />';
 }
 
@@ -31,23 +32,49 @@ else {
 		echo '<p class="strong">Pronostiquer pour la journée '.$journee['numero'].' du '.time_to_str($journee['date']).'</p>';
 }
 
+if(isset($_POST['submit_pronos'])) {
+	$display = array('error' => '', 'success' => '');
+	foreach($_POST as $key => $score) {
+		$name = explode('_',$key);
+		if($name[0] == 'match' && $score != '') {
+			if(valid_score($score)) {
+				if(prono_exists($name[1], $_SESSION['id']))
+					prono_update($name[1], $_SESSION['id'], $score);
+				else
+					prono_record($name[1], $_SESSION['id'], $score);
+					
+				$display['success'] = '<span class="success">Les score correctement écrits ont été enregistrés et/ou mis à jour !</span>';
+			}
+			else
+				$display['error'] = '<span class="error">Un ou plusieurs scores n\'ont pas été enregistrés car la syntaxe était incorrecte</span>';
+		}
+	}
+	echo $display['success'];
+	echo $display['error'];
+}
+
+
+
 $matchs = match_get_by_journee($idjournee);
 if(mysql_num_rows($matchs)) {
 ?>
 <form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>">
 	<?php
-	
-		while($match = mysql_fetch_assoc($matchs)) {
-			echo '<p>'.$match['equipe1'].' - '.$match['equipe2'].'&nbsp;&nbsp;<input type="text" name="'.$match['id'].'" size="4" /></p>';
-		}
-	
+	while($match = mysql_fetch_assoc($matchs)) {
+		$value = prono_exists($match['id'], $_SESSION['id']) ? prono_get_score($match['id'], $_SESSION['id']) : '';
+		echo '<p><input type="text" name="match_'.$match['id'].'" value="'.$value.'" size="4" />&nbsp;&nbsp;'.$match['equipe1'].' - '.$match['equipe2'].'</p>';
+	}
 	?>
 	<br />
 	<p>
 		<input type="submit" name="submit_pronos" id="submit_pronos" value="Valider mes pronostics" />
 	</p>	
 </form>
-<p style="font-size:10px;">Les scores doivent être au format "Score1-Score2" (exemples : 3-2, 1-0, 5-1...)</p>
+<p style="font-size:10px;">
+Note :<br />
+Les scores doivent être au format "Score1-Score2" (exemples : 3-2, 1-0, 5-1...)<br />
+Vous n'êtes pas obligé de tout remplir en une fois. Vous pouvez modifier vos pronostics tant que le premier match de la journée n'a pas commencé.
+</p>
 <?php
 }
 
