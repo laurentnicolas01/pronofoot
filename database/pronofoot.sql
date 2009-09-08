@@ -136,7 +136,9 @@ CREATE TABLE `match` (
 INSERT INTO `match` (`id`, `score`, `equipe1`, `equipe2`, `idjournee`) VALUES
 (1, '', 'Le Mans', 'Marseilles', 1),
 (2, '', 'Lyon', 'Lorient', 1),
-(3, '', 'Nancy', 'Toulouse', 1);
+(3, '', 'Nancy', 'Toulouse', 1),
+(5, '', 'Monaco', 'Paris-SG', 1),
+(6, '', 'Bordeaux', 'Grenoble', 1);
 
 
 -- --------------------------------------------------------
@@ -157,24 +159,4 @@ CREATE TABLE `prono` (
 -- Contenu de la table `prono`
 --
 
-
--- --------------------------------------------------------
-
---
--- Structure de la table `stat`
---
-
-DROP TABLE IF EXISTS `stat`;
-CREATE TABLE `stat` (
-  `idjoueur` int(11) NOT NULL,
-  `idequipe` int(11) NOT NULL,
-  `victoires` int(11) NOT NULL,
-  `defaites` int(11) NOT NULL,
-  `nuls` int(11) NOT NULL,
-  PRIMARY KEY (`idjoueur`,`idequipe`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Contenu de la table `stat`
---
 
