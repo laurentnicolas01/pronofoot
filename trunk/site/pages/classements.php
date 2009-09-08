@@ -28,7 +28,7 @@ else {
 }
 
 if(mysql_num_rows($classement)) {
-	echo '<table class="table-contain"><th>Position</th><th>Pseudo</th><th>Points</th><th>Moyenne par journée</th>';
+	echo '<table class="table-contain"><th>Position</th><th>Pseudo</th><th>Points</th><th>Journées</th><th>Moyenne par journée</th>';
 	
 	for($i=1 ; $joueur = mysql_fetch_assoc($classement) ; ++$i) {
 		$average = $joueur['journees'] == 0 ? 0 : round($joueur['points']/$joueur['journees'], 1);
@@ -38,7 +38,8 @@ if(mysql_num_rows($classement)) {
 		<td>'.$position.'</td>
 		<td>'.$joueur['pseudo'].'</td>
 		<td>'.$joueur['points'].'</td>
-		<td>'.$average.'</td>		
+		<td>'.$joueur['journees'].'</td>
+		<td>'.$average.'</td>
 		</tr>';
 		
 		$old_score = $joueur['points'];

@@ -21,7 +21,7 @@ if(isset($_POST['submit_match'])) {
 
 if(isset($_POST['submit_journee'])) {
 	if($_POST['numero'] == '' || $_POST['dateheure'] == '')
-		echo '<span class="error">Pour ajouter une journée, il faut préciser le numéro et la date/heure du premeir match</span>';
+		echo '<span class="error">Pour ajouter une journée, il faut préciser le numéro et la date/heure du premier match</span>';
 	else {
 		$numero = intval($_POST['numero']);
 		$dh = explode('/',$_POST['dateheure']);

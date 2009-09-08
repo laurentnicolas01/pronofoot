@@ -124,6 +124,14 @@ function valid_postal_code($code)
 }
 
 /**
+ * Détermine si un score de match est correct (type x-y)
+ */
+function valid_score($score)
+{
+	return preg_match('/^[0-9]{1}-[0-9]{1}$/', $score);
+}
+
+/**
  * Détermine si une date est valide
  * @return true si date au format JJ/MM/AAAA
  */
