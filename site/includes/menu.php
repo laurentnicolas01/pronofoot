@@ -4,7 +4,8 @@
 		<li><a href="/pronofoot">Accueil</a></li>
 		<?php 
 		if($_SESSION['is_connect']) { ?>
-			<li><a href="?p=pronos">Mes pronos</a></li>
+			<li><a href="?p=mypronos">Mes pronos</a></li>
+			<li><a href="?p=pronos">Tous les pronos</a></li>
 			<li><a href="?p=classements">Classements</a></li>
 			
 				<?php 

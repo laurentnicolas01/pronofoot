@@ -314,3 +314,16 @@ function session_connect($email, $password)
 	return false;
 }
 
+
+/**
+ * Afficher un nombre au format 1er / 1ère / 3ème / 23ème...
+ * @param number: le nombre à afficher
+ * @param gender: f ou m, se rapporte quelque chose de féminin/masculin
+ */
+function display_number($number, $gender = 'f') {
+	if($number == 1)
+		return $gender == 'f' ? '1ère' : '1er';
+	else
+		return $number.'ème';
+}
+

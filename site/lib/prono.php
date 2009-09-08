@@ -40,3 +40,15 @@ function prono_get_score($idmatch, $idjoueur) {
 	return $score[0];
 }
 
+function prono_get_by_journee($idjournee) {
+	$sql = "SELECT p.score, j.pseudo, i.numero, m.equipe1, m.equipe2
+			FROM prono as p, `match` as m, joueur as j, journee as i
+			WHERE m.idjournee = '$idjournee'
+			AND i.id = '$idjournee'
+			AND p.idmatch = m.id
+			AND p.idjoueur = j.id
+			ORDER BY idjoueur;";
+	
+	return sql_query($sql);
+}
+
