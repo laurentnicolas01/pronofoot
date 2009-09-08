@@ -5,10 +5,12 @@ require_once('lib/joueur.php');
 
 if(isset($_POST['submit_match'])) {
 	$journee = intval($_POST['journee']);
-	$team1 = ucfirst(clean_str($_POST['team1']));
-	$team2 = ucfirst(clean_str($_POST['team2']));
+	$team1 = ucwords(clean_str($_POST['team1']));
+	$team2 = ucwords(clean_str($_POST['team2']));
 	
-	if(match_exists($journee, $team1, $team2))
+	if($team1 == '' || $team2 == '')
+		echo '<span class="error">Vous devez donner un nom pour chaque équipe</span>';
+	elseif(match_exists($journee, $team1, $team2))
 		echo '<span class="error">Le match que vous voulez ajouter existe déjà</span>';
 	else
 		if(match_add($journee, $team1, $team2))
@@ -18,17 +20,21 @@ if(isset($_POST['submit_match'])) {
 }
 
 if(isset($_POST['submit_journee'])) {
-	$numero = intval($_POST['numero']);
-	$dh = explode('/',$_POST['dateheure']);
-	$timestamp = mktime($dh[0],$dh[1],0,$dh[3],$dh[2],$dh[4]);
-	
-	if(journee_exists($numero, $timestamp))
-		echo '<span class="error">La journée que vous voulez ajouter existe déjà</span>';
-	else
-		if(journee_add($numero, $timestamp))
-			echo '<span class="success">Journée ajoutée avec succès : <strong>Journée '.$numero.' ('.time_to_str($timestamp).')</strong></span>';
+	if($_POST['numero'] == '' || $_POST['dateheure'] == '')
+		echo '<span class="error">Pour ajouter une journée, il faut préciser le numéro et la date/heure du premeir match</span>';
+	else {
+		$numero = intval($_POST['numero']);
+		$dh = explode('/',$_POST['dateheure']);
+		$timestamp = mktime($dh[0],$dh[1],0,$dh[3],$dh[2],$dh[4]);
+		
+		if(journee_exists('',$numero, $timestamp))
+			echo '<span class="error">La journée que vous voulez ajouter existe déjà</span>';
 		else
-			echo '<span class="error">Il y a eu une erreur lors de l\'ajout en base de données</span>';
+			if(journee_add($numero, $timestamp))
+				echo '<span class="success">Journée ajoutée avec succès : <strong>Journée '.$numero.' ('.time_to_str($timestamp).')</strong></span>';
+			else
+				echo '<span class="error">Il y a eu une erreur lors de l\'ajout en base de données</span>';
+	}
 }
 
 if(isset($_POST['submit_joueur'])) {
@@ -47,7 +53,7 @@ if(isset($_POST['submit_joueur'])) {
 			echo '<span class="error">Il y a eu une erreur lors de l\'ajout en base de données</span>';
 }
 
-$journees_actives = journee_get_active();
+$journees_actives = journee_get_next($all = true);
 ?>
 <form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>">
 	<p class="strong">Ajouter un match</p>

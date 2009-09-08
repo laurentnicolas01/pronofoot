@@ -79,7 +79,7 @@ elseif(isset($_GET['deconnexion'])) {
 				if(($page == 'add' || $page == 'maj') && (!$_SESSION['is_connect'] || $_SESSION['id'] != 1)) {
 					echo '<h1>Pronos Foot Arthur</h1><p class="error">Vous n\'êtes pas autorisé à consulter cette page</p>';
 				}				
-				elseif($page == 'accueil' || ($page != 'accueil' && $_SESSION['is_connect'] && file_exists($path))) {
+				elseif($page == 'accueil' || $page == 'contact' || ($page != 'accueil' && $_SESSION['is_connect'] && file_exists($path))) {
 					echo '<h1>Pronos Foot Arthur - '.ucfirst($page).'</h1>';
 					require_once($path);
 				}
