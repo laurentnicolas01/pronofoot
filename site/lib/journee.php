@@ -5,12 +5,13 @@ Gestion de la table journee
 
 */
 
-function journee_get_active() {
+function journee_get_next($all = false) {
 	$current_date = time();
 	$sql = "SELECT *
 			FROM journee
 			WHERE date > $current_date
-			ORDER BY date;";
+			";
+			if(!$all) $sql .= 'ORDER BY date LIMIT 1;';
 	return sql_query($sql);
 }
 
@@ -21,12 +22,32 @@ function journee_add($numero, $timestamp) {
 	return sql_query($sql);
 }
 
-function journee_exists($numero, $timestamp) {
+function journee_exists($id = '', $numero = 0, $timestamp = 0) {
 	$sql = "SELECT id
 			FROM journee
-			WHERE numero = $numero
-			AND date = $timestamp;";
+			";
+			if($id != '')
+				$sql .= "WHERE id = $id";
+			else
+				$sql .= "WHERE numero = $numero AND date = $timestamp;";
 	
 	return mysql_num_rows(sql_query($sql));
 }
+
+function journee_has_match($id) {
+	$sql = "SELECT id
+			FROM `match`
+			WHERE idjournee = '$id'";
+	
+	return mysql_num_rows(sql_query($sql));
+}
+
+function journee_get_by_id($id) {
+	$sql = "SELECT *
+			FROM journee
+			WHERE id = '$id'";
+	
+	return mysql_fetch_assoc(sql_query($sql));
+}
+
 

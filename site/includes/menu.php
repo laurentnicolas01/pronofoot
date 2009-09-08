@@ -6,7 +6,6 @@
 		if($_SESSION['is_connect']) { ?>
 			<li><a href="?p=pronos">Mes pronos</a></li>
 			<li><a href="?p=classements">Classements</a></li>
-			<li><a href="?p=stats">Mes stats</a></li>
 			
 				<?php 
 				if($_SESSION['id'] == 1) { ?>
