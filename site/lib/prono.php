@@ -52,3 +52,13 @@ function prono_get_by_journee($idjournee) {
 	return sql_query($sql);
 }
 
+function prono_calculate_result($score_j, $score_m) {
+	$temp = array_merge(explode('-',$score_j),explode('-',$score_m)); //debug : print_r($temp);
+	$j = array('left' => $temp[0], 'right' => $temp[1]);
+	$m = array('left' => $temp[2], 'right' => $temp[3]);
+	
+	if() {
+	
+	}
+}
+
