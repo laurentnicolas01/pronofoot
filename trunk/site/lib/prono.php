@@ -42,23 +42,23 @@ function prono_get_score($idmatch, $idjoueur) {
 
 function prono_get_by_journee($idjournee) {
 	$sql = "SELECT p.score, j.pseudo, i.numero, m.equipe1, m.equipe2
-			FROM prono as p, `match` as m, joueur as j, journee as i
+			FROM prono AS p, `match` AS m, joueur AS j, journee AS i
 			WHERE m.idjournee = '$idjournee'
 			AND i.id = '$idjournee'
 			AND p.idmatch = m.id
 			AND p.idjoueur = j.id
-			ORDER BY idjoueur;";
+			ORDER BY j.pseudo, m.id;";
 	
 	return sql_query($sql);
 }
 
 function prono_calculate_result($score_j, $score_m) {
-	$temp = array_merge(explode('-',$score_j),explode('-',$score_m)); //debug : print_r($temp);
+	$temp = array_merge(explode('-',$score_j),explode('-',$score_m));
 	$j = array('left' => $temp[0], 'right' => $temp[1]);
 	$m = array('left' => $temp[2], 'right' => $temp[3]);
 	
-	if() {
-	
+	if(true) {
+		return true;
 	}
 }
 

@@ -2,7 +2,7 @@
 require_once('lib/prono.php');
 require_once('lib/journee.php');
 
-$journee = mysql_fetch_assoc(journee_get_next());
+$journee = mysql_fetch_assoc(journee_get_current());
 $pronos = prono_get_by_journee($journee['id']);
 
 if(mysql_num_rows($pronos)) {

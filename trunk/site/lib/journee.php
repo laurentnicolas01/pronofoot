@@ -15,9 +15,40 @@ function journee_get_next($all = false) {
 	return sql_query($sql);
 }
 
+function journee_get_current() {
+	$sql = 'SELECT j.id
+			FROM journee j, `match` m
+			WHERE m.id = j.id
+			AND m.score = ""
+			ORDER BY date
+			LIMIT 1;';
+	return sql_query($sql);
+}
+
+function journee_get_waiting_results() {
+	$current_date = time();
+	$sql = "SELECT j.numero AS numjournee, m.id AS idmatch, m.score AS score_match, p.score AS score_joueur, p.idjoueur AS idjoueur
+			FROM journee AS j, `match` AS m, prono AS p
+			WHERE j.date < $current_date
+			AND m.idjournee = j.id
+			AND p.idmatch = m.id
+			AND m.score = ''
+			ORDER BY p.idjoueur;";
+			
+	return sql_query($sql);
+}
+
 function journee_add($numero, $timestamp) {
 	$sql = "INSERT INTO journee(numero, date)
 			VALUES($numero, $timestamp);";
+	
+	return sql_query($sql);
+}
+
+function journee_delete($id) {
+	$sql = "DELETE FROM `match` m, journee j
+			WHERE j.id = $id
+			AND m.idjournee = $id;";
 	
 	return sql_query($sql);
 }
