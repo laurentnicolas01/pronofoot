@@ -11,7 +11,8 @@
 				<?php 
 				if($_SESSION['id'] == 1) { ?>
 				<li><a href="?p=add">Création</a></li>
-				<li><a href="?p=maj">Mises à jour</a></li><?php
+				<li><a href="?p=maj">Mises à jour</a></li>
+				<li><a href="?p=scores">Saisie scores</a></li><?php
 				}
 				?>
 			

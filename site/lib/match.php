@@ -22,10 +22,28 @@ function match_add($idjournee, $team1, $team2) {
 	return sql_query($sql);
 }
 
+function match_delete($id) {
+	$sql = "DELETE FROM `match`
+			WHERE id = $id;";
+	
+	return sql_query($sql);
+}
+
 function match_get_by_journee($idjournee) {
 	$sql = "SELECT *
 			FROM `match`
 			WHERE idjournee = '$idjournee';";
+	
+	return sql_query($sql);
+}
+
+function match_get_allnext() {
+	$current_date = time();
+	$sql = "SELECT m.id, m.equipe1, m.equipe2, j.numero
+			FROM `match` as m, journee as j
+			WHERE m.idjournee = j.id
+			AND j.date > $current_date
+			ORDER BY j.numero, m.id;";
 	
 	return sql_query($sql);
 }
