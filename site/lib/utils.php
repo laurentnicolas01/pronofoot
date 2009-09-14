@@ -288,7 +288,7 @@ function generate_title($page, $rubrique)
 
 
 /**
- * Connecter un joueur
+ * Connecter une session
  * @param email: email servant de login
  * @param password: hash du mot de passe
  * @return true si connexion réussie, sinon false
@@ -325,5 +325,26 @@ function display_number($number, $gender = 'f') {
 		return $gender == 'f' ? '1ère' : '1er';
 	else
 		return $number.'ème';
+}
+
+/**
+ * Calculer le nombre de points obtenu pour un pronostic
+ * @param score_j: le score que le joueur a pronostiqué
+ * @param score_m: le score du match
+ * @return le nombre de points résultant du pronostic (0, 1 ou 3)
+ */
+function calculate_prono_result($score_j, $score_m) {
+	$temp = array_merge(explode('-',$score_j),explode('-',$score_m));
+	$j = array('left' => $temp[0], 'right' => $temp[1]);
+	$m = array('left' => $temp[2], 'right' => $temp[3]);
+	
+	if($score_j == $score_m)
+		return 3;
+	elseif(($j['left'] > $j['right'] && $m['left'] > $m['right'])
+		|| ($j['left'] < $j['right'] && $m['left'] < $m['right'])
+		|| ($j['left'] == $j['right'] && $m['left'] == $m['right']))
+		return 1;
+	else
+		return 0;
 }
 

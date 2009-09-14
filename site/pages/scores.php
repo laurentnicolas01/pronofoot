@@ -4,11 +4,15 @@ require_once('lib/match.php');
 require_once('lib/joueur.php');
 require_once('lib/prono.php');
 
-$futures_journees = journee_get_next($all = true);
-if(mysql_num_rows($futures_journees) > 1) {
+$waiting_journees = journee_get_waiting_results();
+if(mysql_num_rows($waiting_journees) > 1) {
 	echo '<p>Journée : ';
-	while($nextj = mysql_fetch_assoc($futures_journees))
-		echo '<strong><a href="?p=mypronos&amp;journee='.$nextj['id'].'">'.$nextj['numero'].'</a></strong> ';
+	$idj = '';
+	while($j = mysql_fetch_assoc($waiting_journees)) {
+		if($j['id'] != $idj)
+			echo '<strong><a href="?p=scores&amp;journee='.$j['id'].'">'.$j['numero'].'</a></strong> ';
+		$idj = $j['id'];
+	}
 	echo '<br /><br />';
 }
 
@@ -20,33 +24,32 @@ if(isset($_GET['journee'])) {
 		echo '<span class="error">Aucun match n\'est enregistré pour la journée demandée</span>';
 	else {
 		$journee = journee_get_by_id($idjournee);
-		echo '<p class="strong">Mes pronostics pour la '.display_number($journee['numero']).' journée (premier match le '.time_to_str($journee['date']).')</p>';
+		echo '<p class="strong">Saisie des scores pour la '.display_number($journee['numero']).' journée</p>';
 	}	
 }
 else {
-	$journee = mysql_fetch_assoc(journee_get_next());
+	$journee = mysql_fetch_assoc(journee_get_waiting_results());
 	$idjournee = $journee['id'];
 	if(!journee_has_match($idjournee))
 		echo '<span class="error">Aucun match n\'est enregistré pour la prochaine journée</span>';
 	else
-		echo '<p class="strong">Mes pronostics pour la '.display_number($journee['numero']).' journée (premier match le '.time_to_str($journee['date']).')</p>';
+		echo '<p class="strong">Saisie des scores pour la '.display_number($journee['numero']).' journée</p>';
 }
 
-if(isset($_POST['submit_pronos'])) {
+if(isset($_POST['submit_scores'])) {
 	$display = array('error' => '', 'success' => '');
+	$good = 0;
 	foreach($_POST as $key => $score) {
-		$name = explode('_',$key);
-		if($name[0] == 'match' && $score != '') {
+		$id = explode('_',$key);
+		if($id[0] == 'match' && $score != '') {
 			if(valid_score($score)) {
-				if(prono_exists($name[1], $_SESSION['id']))
-					prono_update($name[1], $_SESSION['id'], $score);
-				else
-					prono_record($name[1], $_SESSION['id'], $score);
-					
-				$display['success'] = '<span class="success">Les scores correctement écrits ont été enregistrés et/ou mis à jour !</span>';
+				if(match_set_score($id[1], $score)) {
+					$good += 1;
+					$display['success'] = '<span class="success">Les scores de <strong>'.$good.'</strong> match(s) ont été enregistrés !</span>';
+				}
 			}
 			else
-				$display['error'] = '<span class="error">Un ou plusieurs scores n\'ont pas été enregistrés car la syntaxe était incorrecte</span>';
+				$display['error'] = '<span class="error">Un ou plusieurs scores n\'ont pas été enregistrés, veuillez réessayer</span>';
 		}
 	}
 	echo $display['success'];
@@ -54,26 +57,24 @@ if(isset($_POST['submit_pronos'])) {
 }
 
 
-
-$matchs = match_get_by_journee($idjournee);
+$matchs = journee_get_waiting_results($idjournee);
 if(mysql_num_rows($matchs)) {
 ?>
 <form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>">
 	<?php
 	while($match = mysql_fetch_assoc($matchs)) {
-		$value = prono_exists($match['id'], $_SESSION['id']) ? prono_get_score($match['id'], $_SESSION['id']) : '';
-		echo '<p><input type="text" name="match_'.$match['id'].'" value="'.$value.'" size="4" />&nbsp;&nbsp;'.$match['equipe1'].' - '.$match['equipe2'].'</p>';
+		echo '<p><input type="text" name="match_'.$match['idmatch'].'" size="4" />&nbsp;&nbsp;'.$match['equipe1'].' - '.$match['equipe2'].'</p>';
 	}
 	?>
 	<br />
 	<p>
 		<input type="submit" name="submit_scores" id="submit_scores" value="Valider les scores" />
-	</p>	
+	</p>
 </form>
-<p style="font-size:10px;">
+<p class="smalltext">
 Note :<br />
 Les scores doivent être au format "Score1-Score2" (exemples : 3-2, 0-1, 5-1...)<br />
-Il faut remplir tous les scores en une seule fois, cela facilite la mise à jour des points et du classement.
+Vous n'êtes pas obligé de remplir tous les scores d'un coup, les points des joueurs se mettent à jour à chaque score donné.
 </p>
 <?php
 }

@@ -2,6 +2,7 @@
 require_once('lib/journee.php');
 require_once('lib/match.php');
 require_once('lib/joueur.php');
+require_once('lib/groupe.php');
 
 if(isset($_POST['submit_match'])) {
 	$journee = intval($_POST['journee']);
@@ -37,9 +38,22 @@ if(isset($_POST['submit_journee'])) {
 	}
 }
 
+if(isset($_POST['submit_groupe'])) {
+	$nom = clean_str($_POST['nom']);
+	
+	if(groupe_exists($nom))
+		echo '<span class="error">Un groupe portant le même nom existe déjà</span>';
+	else
+		if(groupe_add($nom))
+			echo '<span class="success">Groupe ajouté avec succès : <strong>'.$nom.'</strong></span>';
+		else
+			echo '<span class="error">Il y a eu une erreur lors de l\'ajout en base de données</span>';
+}
+
 if(isset($_POST['submit_joueur'])) {
 	$mail = clean_str($_POST['mail']);
 	$pseudo = clean_str($_POST['pseudo']);
+	$groupes = clean_str($_POST['groupes']);
 	$pass = clean_str($_POST['pass']);
 	
 	if(joueur_exists($mail))
@@ -47,7 +61,7 @@ if(isset($_POST['submit_joueur'])) {
 	elseif(!valid_email($mail))
 		echo '<span class="error">Le mail saisi n\'est pas valide</span>';
 	else
-		if(joueur_add($mail, $pseudo, crypt_password($pass)))
+		if(joueur_add($mail, $pseudo, crypt_password($pass), $groupes))
 			echo '<span class="success">Joueur ajouté avec succès : <strong>'.$pseudo.' ('.$mail.')</strong></span>';
 		else
 			echo '<span class="error">Il y a eu une erreur lors de l\'ajout en base de données</span>';
@@ -100,7 +114,28 @@ $journees_actives = journee_get_next($all = true);
 
 <br /><!-- ------------------------------------- -->
 <form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>">
+	<p class="strong">Ajouter un groupe</p>
+	<p>
+		<label>Nom : </label>
+		<input type="text" name="nom" id="nom" />
+	</p>
+	<p>
+		<input type="submit" name="submit_groupe" id="submit_groupe" value="Ajouter groupe" />
+	</p>	
+</form>
+
+<br /><!-- ------------------------------------- -->
+<form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>">
 	<p class="strong">Ajouter un joueur</p>
+	<p>
+		Groupes :<br />
+		<?php
+		$groupes = groupe_get_all();
+		while($groupe = mysql_fetch_assoc($groupes))
+			echo '('.$groupe['id'].') '.$groupe['nom'].'<br />';
+		?>
+		<span class="smalltext">(IDs à séparer par des virgules)</span>
+	</p>
 	<p>
 		<label>Mail : </label><br />
 		<input type="text" name="mail" id="mail" />
@@ -108,6 +143,9 @@ $journees_actives = journee_get_next($all = true);
 		<label>Pseudo : </label><br />
 		<input type="text" name="pseudo" id="pseudo" />
 		<br /><br />
+		<label>Groupe(s) : </label><br />
+		<input type="text" name="groupes" id="groupes" />
+		<br /><br />		
 		<label>Pass : </label><br />
 		<input type="password" name="pass" id="pass" />
 	</p>
