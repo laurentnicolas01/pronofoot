@@ -15,6 +15,14 @@ function match_exists($idjournee, $team1, $team2) {
 	return mysql_num_rows(sql_query($sql));
 }
 
+function match_set_score($id, $score) {
+	$sql = "UPDATE `match`
+			SET score = '$score'
+			WHERE id = $id;";
+			
+	return sql_query($sql);
+}
+
 function match_add($idjournee, $team1, $team2) {
 	$sql = "INSERT INTO `match`(equipe1, equipe2, idjournee)
 			VALUES('$team1', '$team2', '$idjournee');";

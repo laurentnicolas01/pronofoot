@@ -3,6 +3,7 @@ require_once('lib/journee.php');
 require_once('lib/match.php');
 require_once('lib/joueur.php');
 require_once('lib/prono.php');
+require_once('lib/groupe.php');
 
 if(isset($_POST['submit_pass'])) {
 	$id = intval($_POST['joueurs_e']);
@@ -22,6 +23,16 @@ if(isset($_POST['submit_delj'])) {
 	
 	if(joueur_delete($id))
 		echo '<span class="success">Le joueur <strong>'.$joueur['pseudo'].'</strong> a bien été supprimé</span>';
+	else
+		echo '<span class="error">Il y a eu une erreur lors de la suppression en base de données</span>';
+}
+
+if(isset($_POST['submit_delg'])) {
+	$id = intval($_POST['groupe']);
+	$nom = groupe_get_name($id);
+	
+	if(groupe_delete($id))
+		echo '<span class="success">Le groupe <strong>'.$nom.'</strong> a bien été supprimé</span>';
 	else
 		echo '<span class="error">Il y a eu une erreur lors de la suppression en base de données</span>';
 }
@@ -84,6 +95,24 @@ if(isset($_POST['submit_deli'])) {
 
 <br />
 <form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>">
+	<p class="strong">Supprimer groupe</p>
+	<p>
+		<label>Groupe : </label>
+		<?php
+		$groupes = groupe_get_all();
+		echo '<select name="groupe">';
+		while($groupe = mysql_fetch_assoc($groupes))
+			echo '<option value="'.$groupe['id'].'">'.$groupe['nom'].'&nbsp;&nbsp;</option>';
+		echo '</select>';
+		?>
+	</p>
+	<p>
+		<input type="submit" name="submit_delg" id="submit_delg" value="Supprimer" />
+	</p>	
+</form>
+
+<br />
+<form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>">
 	<p class="strong">Supprimer match</p>
 	<p>
 		<label>Match : </label>
@@ -103,7 +132,7 @@ if(isset($_POST['submit_deli'])) {
 <br />
 <form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>">
 	<p class="strong">Supprimer journée</p>
-	<p style="font-size:10px;">(Tous les matchs liés à cette journée seront supprimés)</p>
+	<p class="smalltext">(Tous les matchs liés à cette journée seront supprimés)</p>
 	<p>
 		<label>Journée : </label>
 		<?php

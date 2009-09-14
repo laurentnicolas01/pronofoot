@@ -76,7 +76,7 @@ elseif(isset($_GET['deconnexion'])) {
 				$page = isset($_GET['p']) ? $_GET['p'] : 'accueil';
 				$path = 'pages/'.$page.'.php';
 				
-				if(($page == 'add' || $page == 'maj') && (!$_SESSION['is_connect'] || $_SESSION['id'] != 1)) {
+				if(($page == 'add' || $page == 'maj' || $page == 'scores') && (!$_SESSION['is_connect'] || $_SESSION['id'] != 1)) {
 					echo '<h1>Pronos Foot Arthur</h1><p class="error">Vous n\'êtes pas autorisé à consulter cette page</p>';
 				}				
 				elseif($page == 'accueil' || $page == 'contact' || ($page != 'accueil' && $_SESSION['is_connect'] && file_exists($path))) {
