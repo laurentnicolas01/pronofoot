@@ -57,7 +57,13 @@ if(isset($_POST['submit_deli'])) {
 
 if(isset($_POST['submit_maj'])) {
 	//todo: maj points et journées jouées !!
-	echo '<span class="info">bouton maj pushed</span>';
+	$data = journee_get_last_unterminated();
+	if(mysql_num_rows($data)) {
+		$journee = mysql_fetch_assoc($data);
+		echo '<span class="info">bouton maj pushed : '.$journee['numero'].'</span>';
+	}
+	else
+		echo '<span class="erreur">Go to hell !</span>';
 }
 ?>
 <form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>">
@@ -73,7 +79,7 @@ if(isset($_POST['submit_maj'])) {
 		?>
 		<br /><br />
 		<label>Nouveau pass : </label>
-		<input type="text" name="pass" id="pass" />
+		<input type="password" name="pass" id="pass" />
 	</p>
 	<p>
 		<input type="submit" name="submit_pass" id="submit_pass" value="Modifier" />
