@@ -52,3 +52,10 @@ function prono_get_by_journee($idjournee) {
 	return sql_query($sql);
 }
 
+function prono_delete_by_idmatch($idmatch) {
+	$sql = "DELETE FROM prono
+			WHERE idmatch = $idmatch;";
+	
+	return sql_query($sql);
+}
+

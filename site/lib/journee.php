@@ -5,6 +5,9 @@ Gestion de la table journee
 
 */
 
+require_once('match.php');
+require_once('prono.php');
+
 function journee_get_next($all = false) {
 	$current_date = time();
 	$sql = "SELECT *
@@ -51,11 +54,24 @@ function journee_add($numero, $timestamp) {
 	return sql_query($sql);
 }
 
-function journee_delete($id) {
-	$sql = "DELETE FROM `match` AS m, journee AS j, prono AS p
-			WHERE j.id = $id
-			AND m.idjournee = $id
-			AND p.idmatch = m.id;";
+function journee_delete($id) {	
+	// Récupération de l'id des matchs à supprimer pour supprimer les pronos liés
+	$matchs = match_get_by_journee($id);
+	
+	// Suppression des pronos
+	while($match = mysql_fetch_assoc($matchs))
+		prono_delete_by_idmatch($match['id']);
+	
+	// Récupération de l'id des matchs à supprimer
+	$matchs = match_get_by_journee($id);
+	
+	// Suppression des matchs
+	while($match = mysql_fetch_assoc($matchs))
+		match_delete($match['id']);
+			
+	// Suppression de la journée
+	$sql = "DELETE FROM journee
+			WHERE id = $id;";
 	
 	return sql_query($sql);
 }
