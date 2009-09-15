@@ -28,6 +28,19 @@ function journee_get_current() {
 	return sql_query($sql);
 }
 
+function journee_get_last_unterminated() {
+	$current_date = time();
+	$sql = 'SELECT j.id, j.date, j.numero, m.id AS idmatch, m.equipe1, m.equipe2, m.score AS score_match
+			FROM journee j, `match` m
+			WHERE j.date < '.$current_date.'
+			AND m.id = j.id
+			AND j.terminated = 0
+			AND m.score != ""
+			ORDER BY date
+			LIMIT 1;';
+	return sql_query($sql);
+}
+
 function journee_get_waiting_results($idjournee = false) {
 	$current_date = time();
 	$sql = "SELECT j.id, j.date, j.numero, m.id AS idmatch, m.equipe1, m.equipe2, m.score AS score_match
