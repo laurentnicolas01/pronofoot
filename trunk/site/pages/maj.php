@@ -54,6 +54,11 @@ if(isset($_POST['submit_deli'])) {
 	else
 		echo '<span class="error">Il y a eu une erreur lors de la suppression en base de données</span>';
 }
+
+if(isset($_POST['submit_maj'])) {
+	//todo: maj points et journées jouées !!
+	echo '<span class="info">bouton maj pushed</span>';
+}
 ?>
 <form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>">
 	<p class="strong">Modifier pass joueur</p>
@@ -145,6 +150,15 @@ if(isset($_POST['submit_deli'])) {
 	</p>
 	<p>
 		<input type="submit" name="submit_deli" id="submit_deli" value="Supprimer" />
+	</p>	
+</form>
+
+<br />
+<form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>">
+	<p class="strong">Mettre à jour les points des joueurs et le classement</p>
+	<span class="warning">Les scores de la dernière journée doivent être saisis</span>
+	<p>
+		<input type="submit" name="submit_maj" id="submit_maj" value="Mise à jour" />
 	</p>	
 </form>
 

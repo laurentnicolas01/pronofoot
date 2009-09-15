@@ -5,6 +5,8 @@ Gestion de la table `match` (attention confusion avec le mot-clé sql "match")
 
 */
 
+require_once('prono.php');
+
 function match_exists($idjournee, $team1, $team2) {
 	$sql = "SELECT id
 			FROM `match`
@@ -34,7 +36,7 @@ function match_delete($id) {
 	$sql = "DELETE FROM `match`
 			WHERE id = $id;";
 	
-	return sql_query($sql);
+	return sql_query($sql) && prono_delete_by_idmatch($id);
 }
 
 function match_get_by_journee($idjournee) {
