@@ -56,14 +56,38 @@ if(isset($_POST['submit_deli'])) {
 }
 
 if(isset($_POST['submit_maj'])) {
-	//todo: maj points et journées jouées !!
-	$data = journee_get_last_unterminated();
-	if(mysql_num_rows($data)) {
-		$journee = mysql_fetch_assoc($data);
-		echo '<span class="info">bouton maj pushed : '.$journee['numero'].'</span>';
+	$datas = journee_get_last_unterminated();
+	if(mysql_num_rows($datas)) {
+		$id = '';
+		$nbpoints = 0;
+		while($row = mysql_fetch_assoc($datas)) {
+			if($id != '' && $id != $row['idjoueur']) {
+				// mise à jour des points et du nombre de journées jouées de chaque pronostiqueur
+				joueur_update_points($id, $nbpoints);
+				joueur_update_nbjournee($id);
+				
+				echo joueur_get_pseudo($id).' : +'.$nbpoints.' point(s)<br />';
+				$idjournee = $row['idjournee'];
+				$numjournee = $row['numero'];
+				$nbpoints = 0;
+				$nbpoints += calculate_prono_result($row['score_joueur'], $row['score_match']);
+			}
+			else {
+				$nbpoints += calculate_prono_result($row['score_joueur'], $row['score_match']);
+			}
+			$id = $row['idjoueur'];
+		}
+		joueur_update_points($id, $nbpoints);
+		joueur_update_nbjournee($id);
+		echo joueur_get_pseudo($id).' : +'.$nbpoints.' point(s)<br /><br />';
+		
+		if(journee_terminate($idjournee))
+			echo '<span class="success">Mise à jour effectuée : '.display_number($numjournee).' journée</span>';
+		else
+			echo '<span class="error">Une erreur s\'est produite, contactez le webmaster avant de faire une autre action</span>';
 	}
 	else
-		echo '<span class="erreur">Go to hell !</span>';
+		echo '<span class="error">Nothing to update ! Did you forget to update scores ? If not, please call an admin ;)</span>';
 }
 ?>
 <form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>">

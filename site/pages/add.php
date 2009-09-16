@@ -97,9 +97,10 @@ $journees_actives = journee_get_next($all = true);
 	<p>
 		<label>Numéro : </label>
 		<select name="numero">
+		<option value=""></option>
 		<?php
-		for($id = 1 ; $i < 39 ; ++$i)
-			echo '<option value="'.$i.'">'.$i.'&nbsp;&nbsp;&nbsp;</option>';
+		for($i = 1 ; $i < 39 ; ++$i)
+			echo '<option value="'.$i.'">'.$i.'&nbsp;&nbsp;&nbsp;</option>'."\n";
 		?>
 		</select>
 		<br /><br />
