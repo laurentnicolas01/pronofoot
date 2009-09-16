@@ -42,6 +42,15 @@ function joueur_get($exp) {
 	return sql_query($sql);
 }
 
+function joueur_get_pseudo($id) {
+	$sql = "SELECT pseudo
+			FROM joueur
+			WHERE id = $id;";
+	
+	$data = mysql_fetch_assoc(sql_query($sql));
+	return $data['pseudo'];
+}
+
 function joueur_exists($mail) {
 	$sql = "SELECT id
 			FROM joueur

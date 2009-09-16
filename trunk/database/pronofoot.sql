@@ -74,19 +74,20 @@ INSERT INTO `joueur` VALUES(8, 'j.paroche@gmail.com', 'faLco', 'e7342e6259084756
 
 DROP TABLE IF EXISTS `journee`;
 CREATE TABLE `journee` (
-  `id` int(11) NOT NULL auto_increment,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `date` int(11) NOT NULL,
   `numero` int(11) NOT NULL,
-  PRIMARY KEY  (`id`)
+  `terminated` tinyint(4) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `journee`
 --
 
-INSERT INTO `journee` VALUES(1, 1252774800, 5);
-INSERT INTO `journee` VALUES(2, 1253379600, 6);
-INSERT INTO `journee` VALUES(3, 1253984400, 7);
+INSERT INTO `journee` VALUES(1, 1252774800, 5, 0);
+INSERT INTO `journee` VALUES(2, 1253379600, 6, 0);
+INSERT INTO `journee` VALUES(3, 1253984400, 7, 0);
 
 -- --------------------------------------------------------
 

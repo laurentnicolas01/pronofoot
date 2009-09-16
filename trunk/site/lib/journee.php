@@ -21,7 +21,7 @@ function journee_get_next($all = false) {
 function journee_get_current() {
 	$sql = 'SELECT j.id
 			FROM journee j, `match` m
-			WHERE m.id = j.id
+			WHERE m.idjournee = j.id
 			AND m.score = ""
 			ORDER BY date
 			LIMIT 1;';
@@ -30,14 +30,14 @@ function journee_get_current() {
 
 function journee_get_last_unterminated() {
 	$current_date = time();
-	$sql = 'SELECT j.id, j.date, j.numero, m.id AS idmatch, m.equipe1, m.equipe2, m.score AS score_match
-			FROM journee j, `match` m
-			WHERE j.date < '.$current_date.'
-			AND m.id = j.id
+	$sql = "SELECT j.id AS idjournee, j.date, j.numero, m.id AS idmatch, m.score AS score_match, p.score AS score_joueur, p.idjoueur
+			FROM journee j, `match` m, prono p
+			WHERE j.date < $current_date
+			AND m.idjournee = j.id
+			AND p.idmatch = m.id
 			AND j.terminated = 0
-			AND m.score != ""
-			ORDER BY date
-			LIMIT 1;';
+			AND m.score != ''
+			ORDER BY date, idjoueur;";
 	return sql_query($sql);
 }
 
@@ -115,6 +115,14 @@ function journee_get_by_id($id) {
 			WHERE id = '$id'";
 	
 	return mysql_fetch_assoc(sql_query($sql));
+}
+
+function journee_terminate($id) {
+	$sql = "UPDATE journee
+			SET `terminated` = 1
+			WHERE id = $id";
+	
+	return sql_query($sql);
 }
 
 
