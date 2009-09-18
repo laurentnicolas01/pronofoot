@@ -33,6 +33,9 @@ elseif(isset($_GET['deconnexion'])) {
 	session_destroy();
 	$_SESSION['is_connect'] = false;
 }
+
+$idadmins = array(1,8);
+$restricted = array('add','maj','scores');
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr">
@@ -72,11 +75,11 @@ elseif(isset($_GET['deconnexion'])) {
 			<?php require_once('includes/menu.php'); ?>
 			
 			<div id="content" class="colonne">
-				<?php
+				<?php				
 				$page = isset($_GET['p']) ? $_GET['p'] : 'accueil';
 				$path = 'pages/'.$page.'.php';
 				
-				if(($page == 'add' || $page == 'maj' || $page == 'scores') && (!$_SESSION['is_connect'] || $_SESSION['id'] != 1)) {
+				if(in_array($page, $restricted) && (!$_SESSION['is_connect'] || !in_array($_SESSION['id'], $idadmins))) {
 					echo '<h1>Pronos Foot Arthur</h1><p class="error">Vous n\'êtes pas autorisé à consulter cette page</p>';
 				}				
 				elseif($page == 'accueil' || $page == 'contact' || ($page != 'accueil' && $_SESSION['is_connect'] && file_exists($path))) {

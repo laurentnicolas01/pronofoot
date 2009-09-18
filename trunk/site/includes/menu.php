@@ -9,7 +9,7 @@
 			<li><a href="?p=classements">Classements</a></li>
 			
 				<?php 
-				if($_SESSION['id'] == 1) { ?>
+				if(in_array($_SESSION['id'], $idadmins)) { ?>
 				<li><a href="?p=add">Création</a></li>
 				<li><a href="?p=maj">Mises à jour</a></li>
 				<li><a href="?p=scores">Saisie scores</a></li><?php
