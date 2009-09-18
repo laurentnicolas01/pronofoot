@@ -17,6 +17,18 @@ if(isset($_POST['submit_pass'])) {
 		echo '<span class="error">Il y a eu une erreur lors de la mise à jour en base de données</span>';
 }
 
+if(isset($_POST['submit_groupes'])) {
+	$id = intval($_POST['joueurs_g']);
+	$groupes = clean_str($_POST['groupes']);
+	
+	if(joueur_update_groupes($id, $groupes)) {
+		$joueur = mysql_fetch_assoc(joueur_get($id));
+		echo '<span class="success">Les groupes de <strong>'.$joueur['pseudo'].'</strong> ont été modifiés avec succès</span>';
+	}
+	else
+		echo '<span class="error">Il y a eu une erreur lors de la mise à jour en base de données</span>';
+}
+
 if(isset($_POST['submit_delj'])) {
 	$id = intval($_POST['joueurs_d']);
 	$joueur = mysql_fetch_assoc(joueur_get($id));
@@ -107,6 +119,36 @@ if(isset($_POST['submit_maj'])) {
 	</p>
 	<p>
 		<input type="submit" name="submit_pass" id="submit_pass" value="Modifier" />
+	</p>	
+</form>
+
+<br />
+<form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>">
+	<p class="strong">Modifier le/les groupe(s) d'un joueur</p>
+	<p>
+		Groupes :<br />
+		<?php
+		$groupes = groupe_get_all();
+		while($groupe = mysql_fetch_assoc($groupes))
+			echo '('.$groupe['id'].') '.$groupe['nom'].'<br />';
+		?>
+		<span class="smalltext">(IDs à séparer par des virgules)</span>
+	</p>
+	<p>
+		<label>Joueur : </label>
+		<?php
+		$joueurs = joueur_get('all');
+		echo '<select name="joueurs_g">';
+		while($joueur = mysql_fetch_assoc($joueurs))
+			echo '<option value="'.$joueur['id'].'">'.$joueur['pseudo'].'</option>';
+		echo '</select>';
+		?>
+		<br /><br />
+		<label>Nouveaux groupes : </label>
+		<input type="text" name="groupes" id="groupes" />
+	</p>
+	<p>
+		<input type="submit" name="submit_groupes" id="submit_groupes" value="Modifier" />
 	</p>	
 </form>
 

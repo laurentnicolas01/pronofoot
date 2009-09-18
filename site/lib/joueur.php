@@ -81,3 +81,11 @@ function joueur_update_pass($id, $pass) {
 	return sql_query($sql);
 }
 
+function joueur_update_groupes($id, $groupes) {
+	$sql = "UPDATE joueur
+			SET idgroups = '$groupes'
+			WHERE id = $id;";
+	
+	return sql_query($sql);
+}
+
