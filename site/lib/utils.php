@@ -229,9 +229,9 @@ function remove_updir($path)
 /**
  * Affiche un en-tête de tableau $name d'une colonne de tri
  * La colonne a la classe "sorted" si $self_row est $sorted_row
- * Icône flèche bas si le tri est $is_desc, sinon flèche haut
+ * Icône flèche bas si le tri est $is_asc, sinon flèche haut
  */
-function print_sorted_th($name, $self_row, $sorted_row, $is_desc, $uri = NULL)
+function print_sorted_th($name, $self_row, $sorted_row, $is_asc, $uri = NULL)
 {
     $sorted = $self_row == $sorted_row;
     echo '<th';
@@ -242,25 +242,25 @@ function print_sorted_th($name, $self_row, $sorted_row, $is_desc, $uri = NULL)
     }
     echo '>
         <a href="'.$_SERVER['PHP_SELF'].'?'.$uri.'&amp;sort='.$self_row;
-    if (!$is_desc and $sorted)
+    if (!$is_asc and $sorted)
     {
         // si le tri est ascendant, le lien propose le tri descendant
         // sinon, le tri est déjà ascendant par défaut dans le lien
-        echo '&amp;desc';
+        echo '&amp;asc';
     }
     echo '">'.$name.'  '; // fin <a>
-    if (!$is_desc and $sorted)
+    if (!$is_asc and $sorted)
     {
         // seule la colonne triée permet d'alterner ascendant/descendant
         // -> le seul cas on l'on affiche un lien de tri descendant est
         // lorsque le lien appartient à la colonne triée ET qu'elle n'est pas
         // déjà en desc
-       echo '<img src="images/up.png" alt="^" />';
+       echo '<img src="images/bullet_arrow_down.png" alt="^" />';
     }
     else
     {
         // les autres colonnes proposent toujours le tri ascendant par défaut
-        echo '<img src="images/down.png" alt="v" />';
+        echo '<img src="images/bullet_arrow_up.png" alt="v" />';
     }
     echo '</a>
         </th>';

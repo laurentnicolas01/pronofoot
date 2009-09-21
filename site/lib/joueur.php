@@ -21,14 +21,17 @@ function joueur_update_nbjournee($id) {
 	return sql_query($sql);
 }
 
-function joueur_get_classement($groupe = 0) {
-	$sql = 'SELECT *
+function joueur_get_classement($groupe = 0, $sort, $is_asc) {
+	$order = $is_asc ? 'ASC' : 'DESC';
+
+	$sql = 'SELECT points/journees AS avg, pseudo, points, journees
 			FROM joueur
 			';
 			
 	if($groupe) $sql .= "WHERE idgroups LIKE '%$groupe%'\n";
 			
-	$sql .= 'ORDER BY points DESC, pseudo ASC;';
+	// $order doit être égal à 'points' ou 'avg'
+	$sql .= "ORDER BY $sort $order, pseudo ASC;";
 	
 	return sql_query($sql);
 }
