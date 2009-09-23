@@ -80,17 +80,17 @@ $restricted = array('add','maj','scores');
 				$path = 'pages/'.$page.'.php';
 				
 				if(in_array($page, $restricted) && (!$_SESSION['is_connect'] || !in_array($_SESSION['id'], $idadmins))) {
-					echo '<h1>Pronos Foot Arthur</h1><p class="error">Vous n\'êtes pas autorisé à consulter cette page</p>';
+					echo '<h1></h1><p class="error">Vous n\'êtes pas autorisé à consulter cette page</p>';
 				}				
 				elseif($page == 'accueil' || $page == 'contact' || ($page != 'accueil' && $_SESSION['is_connect'] && file_exists($path))) {
-					echo '<h1>Pronos Foot Arthur - '.ucfirst($page).'</h1>';
+					echo '<h1><div>'.ucfirst($page).'</div></h1>';
 					require_once($path);
 				}
 				elseif(!file_exists($path)) {
-					echo '<h1>Pronos Foot Arthur</h1><p class="error">La page demandée n\'existe pas</p>';
+					echo '<h1></h1><p class="error">La page demandée n\'existe pas</p>';
 				}
 				else {
-					echo '<h1>Pronos Foot Arthur</h1><p class="error">Vous n\'êtes pas autorisé à consulter cette page</p>';
+					echo '<h1></h1><p class="error">Vous n\'êtes pas autorisé à consulter cette page</p>';
 				}
 				?>
 			</div>

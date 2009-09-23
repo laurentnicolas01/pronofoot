@@ -75,8 +75,14 @@ div#global  {
 }
 
 div#global h1 {
-	height:78px;
-	background:url('../images/banarth.jpg') no-repeat;
+	height:80px;
+	background:url('../images/ban.png') no-repeat;
+	color:white;
+}
+
+div#global h1 > div {
+	text-indent:160px;
+	padding-top:45px;
 }
 
 div#global div#container {
