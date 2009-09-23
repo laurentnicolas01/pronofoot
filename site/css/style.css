@@ -55,7 +55,7 @@ table.table-contain th {
 }
 
 table.table-contain th.sorted {
-	background:#C7E3F2 !important;
+	background:#C7E3F2;
 }
 
 table.table-contain th a {
@@ -72,6 +72,11 @@ div#global  {
 	margin:10px auto;
 	border:1px solid #999999;
 	background:#F2F2F2;
+}
+
+div#global h1 {
+	height:78px;
+	background:url('../images/banarth.jpg') no-repeat;
 }
 
 div#global div#container {
