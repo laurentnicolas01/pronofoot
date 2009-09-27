@@ -125,4 +125,13 @@ function journee_terminate($id) {
 	return sql_query($sql);
 }
 
+function journee_locked($id) {
+	$sql = "SELECT date AS timestamp
+			FROM journee
+			WHERE id = $id";
+	
+	$date = mysql_fetch_assoc(sql_query($sql));
+	return $date['timestamp'] < time();
+}
+
 

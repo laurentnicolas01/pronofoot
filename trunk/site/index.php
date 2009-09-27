@@ -43,6 +43,7 @@ $restricted = array('add','maj','scores');
 	<title><?php echo TITLE; ?></title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<meta name="author" content="Julien Paroche, Arthur Foucher" />
+	<meta name="robots" content="noindex, nofollow" />
 
 	<!-- css -->
 	<link rel="stylesheet" media="screen" type="text/css" href="css/style.css" />
@@ -75,29 +76,34 @@ $restricted = array('add','maj','scores');
 			<?php require_once('includes/menu.php'); ?>
 			
 			<div id="content" class="colonne">
-				<?php				
+				<?php
+				$title = 'Pronos « Big Five » Ligue 1';
+				
 				$page = isset($_GET['p']) ? $_GET['p'] : 'accueil';
 				$path = 'pages/'.$page.'.php';
 				
 				if(in_array($page, $restricted) && (!$_SESSION['is_connect'] || !in_array($_SESSION['id'], $idadmins))) {
-					echo '<h1></h1><p class="error">Vous n\'êtes pas autorisé à consulter cette page</p>';
+					echo '<h1>'.$title.'</h1><p class="error">Vous n\'êtes pas autorisé à consulter cette page</p>';
 				}				
 				elseif($page == 'accueil' || $page == 'contact' || ($page != 'accueil' && $_SESSION['is_connect'] && file_exists($path))) {
-					echo '<h1><div>'.ucfirst($page).'</div></h1>';
+					echo '<h1>'.$title.'<br />'.ucfirst($page).'</h1>';
 					require_once($path);
 				}
 				elseif(!file_exists($path)) {
-					echo '<h1></h1><p class="error">La page demandée n\'existe pas</p>';
+					echo '<h1>'.$title.'</h1><p class="error">La page demandée n\'existe pas</p>';
 				}
 				else {
-					echo '<h1></h1><p class="error">Vous n\'êtes pas autorisé à consulter cette page</p>';
+					echo '<h1>'.$title.'</h1><p class="error">Vous n\'êtes pas autorisé à consulter cette page</p>';
 				}
 				?>
 			</div>
 			
 		</div>
 		
-		<?php require_once('includes/footer.php'); ?>
+		<?php
+			include_once('includes/footer.php');
+			include_once('javascript/google-analytics.js');
+		?>
 	</div>
 </body>
 </html>
