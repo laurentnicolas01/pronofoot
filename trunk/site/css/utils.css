@@ -112,7 +112,6 @@ ul.listmenu li a:hover {
 	background-image: url('images/blue_trans.png');
 	color: white;
 	border: 1px solid #1C3B5C;
-	-moz-border-radius: 10px;
 }
 
 .tooltip-right span {
