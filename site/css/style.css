@@ -68,7 +68,7 @@ table.table-contain th a:hover {
 }
 
 div#global  {
-	width:900px;
+	width:950px;
 	margin:10px auto;
 	border:1px solid #999999;
 	background:#F2F2F2;
@@ -85,7 +85,7 @@ div#menu {
 	padding-right:5px;
 }
 
-div#menu h2 {
+div#menu h2, div#chatbox h2 {
 	font-weight:bold;
 	margin:0 0 15px 0;
 	text-align:center;
@@ -103,18 +103,35 @@ div#menu h2 {
 }
 
 div#content {
-	width:728px;
+	width:560px;
 	padding-left:10px;
 	padding-right:10px;
 }
 
-div#menu, div#content {
+div#menu, div#content, div#chatbox {
 	float:left;
 	margin-top:5px;
 	margin-left:5px;
 	margin-right:5px;
 	padding-top:10px;
 }
+
+div#chatbox {
+	width:200px;
+	border-left:1px solid #999999;
+	padding-left:5px;
+}
+
+div#chatbox ul li.message {
+	display:block;
+	margin:10px 0 0 0;
+	color:black;
+}
+
+div#chatbox ul li.message:first-child { margin-top:15px; }
+div#chatbox ul li.message .mess_auteur { font-weight:bold; }
+div#chatbox ul li.message .mess_date { font-size:10px; color:grey; }
+div#chatbox ul li.message .mess_texte { line-height:1.5; }
 
 div#footer {
 	margin:5px;
@@ -127,13 +144,18 @@ div#footer {
 	text-align:center;
 }
 
-div#global div#content h1 {
+div#global div#content div#ban {
 	margin:5px 0 15px 0;
-	padding:18px 0 0 110px;
 	height:80px;
 	background:url('../images/ban.png') no-repeat;
-	color:white;
-	line-height:20px;
+}
+
+div#global div#content h1 {
+	border-bottom:1px solid grey;
+	font-size:12px;
+	padding-bottom:5px;
+	margin:25px 0;
+	font-weight:normal;
 }
 
 div#global div#content p {

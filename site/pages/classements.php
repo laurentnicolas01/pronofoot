@@ -32,8 +32,8 @@ else {
 	$uri = 'p=classements';
 }
 
-if(mysql_num_rows($classement)) {	
-	echo '<table class="table-contain"><th>Position</th><th>Pseudo</th><th>Journées</th>';
+if(mysql_num_rows($classement)) {
+	echo '<table class="table-contain"><th>Position</th><th>Pseudo</th><th>Matchs</th>';
 	print_sorted_th('Points', 'points', $sorted_row, $is_asc, $uri);
 	print_sorted_th('Moyenne', 'avg', $sorted_row, $is_asc, $uri);
 	
@@ -46,9 +46,9 @@ if(mysql_num_rows($classement)) {
 		echo '<tr>
 		<td>'.$position.'</td>
 		<td>'.$joueur['pseudo'].'</td>
-		<td>'.$joueur['journees'].'</td>
+		<td>'.$joueur['nbmatchs'].'</td>
 		<td>'.$joueur['points'].'</td>
-		<td>'.round($joueur['avg'], 1).'</td>
+		<td>'.round($joueur['avg'], 2).'</td>
 		</tr>';
 		
 		$old_value = $avg ? $joueur['avg'] : $joueur['points'];

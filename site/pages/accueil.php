@@ -23,7 +23,7 @@ if(!$_SESSION['is_connect']) {
 }
 else {
 	echo '<span class="success">Vous êtes connecté sous le pseudonyme <strong>'.$_SESSION['pseudo'].'</strong></span>
-		  <p>Vous pouvez maintenant utiliser le menu à gauche</p>';
+		  <p>Vous pouvez maintenant utiliser le menu à gauche et le chat à droite</p>';
 }
 ?>
 

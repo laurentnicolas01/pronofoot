@@ -48,22 +48,6 @@ $restricted = array('add','maj','scores');
 	<!-- css -->
 	<link rel="stylesheet" media="screen" type="text/css" href="css/style.css" />
 	<link rel="stylesheet" media="screen" type="text/css" href="css/utils.css" />
-
-	<!-- jquery libs - deployed -->
-	<!--
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js" type="text/javascript"></script>
-	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.1/jquery-ui.min.js" type="text/javascript"></script>
-	-->
-	
-	<!-- jquery libs - dev -->
-	<script src="javascript/jquery-1.3.2.min.js" type="text/javascript"></script>
-	<script src="javascript/jquery-ui-1.7.1.custom.min.js" type="text/javascript"></script>
-
-	<script type="text/javascript" src="javascript/utils.js"></script>
-	<script type="text/javascript" src="javascript/toolbar.js"></script>
-	
-	<!-- rss feed link -->
-	<link rel="alternate" type="application/rss+xml" href="resources/xml/feed.xml" title="Adrénaline - Actualités" />
 	
 	<!-- website mini-icon -->
 	<link rel="icon" href="images/icons/sport_soccer.png" type="image/png" />
@@ -76,34 +60,53 @@ $restricted = array('add','maj','scores');
 			<?php require_once('includes/menu.php'); ?>
 			
 			<div id="content" class="colonne">
-				<?php
-				$title = 'Pronos « Big Five » Ligue 1';
-				
+				<div id="ban"></div>
+				<?php				
 				$page = isset($_GET['p']) ? $_GET['p'] : 'accueil';
 				$path = 'pages/'.$page.'.php';
 				
 				if(in_array($page, $restricted) && (!$_SESSION['is_connect'] || !in_array($_SESSION['id'], $idadmins))) {
-					echo '<h1>'.$title.'</h1><p class="error">Vous n\'êtes pas autorisé à consulter cette page</p>';
+					echo '<p class="error">Vous n\'êtes pas autorisé à consulter cette page</p>';
 				}				
-				elseif($page == 'accueil' || $page == 'contact' || ($page != 'accueil' && $_SESSION['is_connect'] && file_exists($path))) {
-					echo '<h1>'.$title.'<br />'.ucfirst($page).'</h1>';
+				elseif($page == 'accueil' || $page == 'contact' || ($_SESSION['is_connect'] && file_exists($path))) {
+					echo '<h1>Vous êtes sur la page : <strong>'.ucfirst($page).'</strong></h1>';
 					require_once($path);
 				}
 				elseif(!file_exists($path)) {
-					echo '<h1>'.$title.'</h1><p class="error">La page demandée n\'existe pas</p>';
+					echo '<p class="error">La page demandée n\'existe pas</p>';
 				}
 				else {
-					echo '<h1>'.$title.'</h1><p class="error">Vous n\'êtes pas autorisé à consulter cette page</p>';
+					echo '<p class="error">Vous n\'êtes pas autorisé à consulter cette page</p>';
 				}
 				?>
 			</div>
+			
+			<?php require_once('includes/chatbox.php'); ?>
 			
 		</div>
 		
 		<?php
 			include_once('includes/footer.php');
-			include_once('javascript/google-analytics.js');
 		?>
 	</div>
+	
+	<!-- jquery libs - deployed -->
+	<script src="http://www.google.com/jsapi" type="text/javascript"></script>
+	<script type="text/javascript">
+		google.load("jquery", "1.3.2");
+	</script>
+	
+	<!-- jquery libs - dev -->
+	<!--
+	<script src="javascript/jquery-1.3.2.min.js" type="text/javascript"></script>
+	<script src="javascript/jquery-ui-1.7.1.custom.min.js" type="text/javascript"></script>
+	-->
+	
+	<script type="text/javascript" src="javascript/chat.js"></script>
+	<script type="text/javascript">
+		update();
+	</script>
+	
+	<script type="text/javascript" src="javascript/google-analytics.js"></script>
 </body>
 </html>
