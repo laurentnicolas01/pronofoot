@@ -13,9 +13,9 @@ function joueur_update_points($id, $value) {
 	return sql_query($sql);
 }
 
-function joueur_update_nbjournee($id) {
+function joueur_update_nbmatchs($id, $nbmatchs) {
 	$sql = "UPDATE joueur
-			SET journees = journees + 1
+			SET nbmatchs = nbmatchs + $nbmatchs
 			WHERE id = $id;";
 	
 	return sql_query($sql);
@@ -24,7 +24,7 @@ function joueur_update_nbjournee($id) {
 function joueur_get_classement($groupe = 0, $sort, $is_asc) {
 	$order = $is_asc ? 'ASC' : 'DESC';
 
-	$sql = 'SELECT points/journees AS avg, pseudo, points, journees
+	$sql = 'SELECT points/nbmatchs AS avg, pseudo, points, nbmatchs
 			FROM joueur
 			';
 			
@@ -58,6 +58,14 @@ function joueur_exists($mail) {
 	$sql = "SELECT id
 			FROM joueur
 			WHERE email = '$mail';";
+	
+	return mysql_num_rows(sql_query($sql));
+}
+
+function joueur_id_exists($id) {
+	$sql = "SELECT id
+			FROM joueur
+			WHERE id = $id;";
 	
 	return mysql_num_rows(sql_query($sql));
 }

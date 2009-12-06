@@ -72,25 +72,28 @@ if(isset($_POST['submit_maj'])) {
 	if(mysql_num_rows($datas)) {
 		$id = '';
 		$nbpoints = 0;
+		$nbmatchs = 1;
 		while($row = mysql_fetch_assoc($datas)) {
 			if($id != '' && $id != $row['idjoueur']) {
-				// mise à jour des points et du nombre de journées jouées de chaque pronostiqueur
+				// mise à jour des points et du nombre de matchs joués de chaque pronostiqueur
 				joueur_update_points($id, $nbpoints);
-				joueur_update_nbjournee($id);
+				joueur_update_nbmatchs($id, $nbmatchs);
 				
 				echo joueur_get_pseudo($id).' : +'.$nbpoints.' point(s)<br />';
 				$idjournee = $row['idjournee'];
 				$numjournee = $row['numero'];
 				$nbpoints = 0;
 				$nbpoints += calculate_prono_result($row['score_joueur'], $row['score_match']);
+				$nbmatchs = 1;
 			}
 			else {
 				$nbpoints += calculate_prono_result($row['score_joueur'], $row['score_match']);
+				$nbmatchs += 1;
 			}
 			$id = $row['idjoueur'];
 		}
 		joueur_update_points($id, $nbpoints);
-		joueur_update_nbjournee($id);
+		joueur_update_nbmatchs($id, $nbmatchs);
 		echo joueur_get_pseudo($id).' : +'.$nbpoints.' point(s)<br /><br />';
 		
 		if(journee_terminate($idjournee))
