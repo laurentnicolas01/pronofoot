@@ -13,8 +13,9 @@ function journee_get_next($all = false) {
 	$sql = "SELECT *
 			FROM journee
 			WHERE date > $current_date
+			ORDER BY date
 			";
-			if(!$all) $sql .= 'ORDER BY date LIMIT 1;';
+			if(!$all) $sql .= 'LIMIT 1;';
 	return sql_query($sql);
 }
 

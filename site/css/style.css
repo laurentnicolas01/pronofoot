@@ -132,6 +132,7 @@ div#chatbox ul li.message:first-child { margin-top:15px; }
 div#chatbox ul li.message .mess_auteur { font-weight:bold; }
 div#chatbox ul li.message .mess_date { font-size:10px; color:grey; }
 div#chatbox ul li.message .mess_texte { line-height:1.5; }
+div#chatbox  div#selectnb { line-height:2; margin:10px 0 0 0; }
 
 div#footer {
 	margin:5px;

@@ -23,17 +23,19 @@ function message_create($texte, $idjoueur) {
 }
 
 function message_get_list($nb) {
-	$sql = "SELECT date, texte, idjoueur
-			FROM message
-			ORDER BY date DESC
+	$sql = "SELECT m.date, m.texte, j.pseudo
+			FROM message m
+			LEFT JOIN joueur j
+			ON j.id = m.idjoueur
+			ORDER BY m.date DESC
 			LIMIT $nb;";
 			
 	return sql_query($sql);
 }
 
-function message_print($idjoueur, $date, $texte) {
+function message_print($pseudo, $date, $texte) {
 	echo '<li class="message">
-			<span class="mess_auteur">'.joueur_get_pseudo($idjoueur).'</span>
+			<span class="mess_auteur">'.$pseudo.'</span>
 			<span class="mess_date">'.time_to_str($date).'</span><br />
 			<span class="mess_texte">'.$texte.'</span>
 		</li>';
@@ -44,10 +46,10 @@ if(isset($_POST['action']) && $_POST['action'] != '') {
 	switch(clean_str($_POST['action'])) {
 		case 'insert':
 			$texte = mysql_real_escape_string(clean_str($_POST['message']));
-			$auteur = intval($_POST['id']);
-			if($texte != '' && joueur_id_exists($auteur) && message_create($texte,$auteur)) {
+			$idjoueur = intval($_POST['id']);
+			if($texte != '' && joueur_id_exists($idjoueur) && message_create($texte,$idjoueur)) {
 				echo 'ok&&&';
-				message_print($auteur, time(), $texte);
+				message_print(joueur_get_pseudo($idjoueur), time(), $texte);
 			}
 			else
 				echo 'pas ok&&&';
@@ -56,7 +58,7 @@ if(isset($_POST['action']) && $_POST['action'] != '') {
 		case 'update':
 			$messages = message_get_list(intval($_POST['nb']));
 			while($message = mysql_fetch_assoc($messages))
-				message_print($message['idjoueur'], $message['date'], $message['texte']);
+				message_print($message['pseudo'], $message['date'], $message['texte']);
 			break;
 	}
 }

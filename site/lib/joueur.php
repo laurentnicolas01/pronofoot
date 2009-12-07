@@ -40,7 +40,7 @@ function joueur_get($exp) {
 	$sql = "SELECT *
 			FROM joueur\n";
 	
-	$sql .= $exp == 'all' ? ';' : 'WHERE id = '.$exp;
+	$sql .= $exp == 'all' ? ';' : 'WHERE id = '.$exp.' LIMIT 1;';
 	
 	return sql_query($sql);
 }
@@ -48,7 +48,8 @@ function joueur_get($exp) {
 function joueur_get_pseudo($id) {
 	$sql = "SELECT pseudo
 			FROM joueur
-			WHERE id = $id;";
+			WHERE id = $id
+			LIMIT 1;";
 	
 	$data = mysql_fetch_assoc(sql_query($sql));
 	return $data['pseudo'];
@@ -57,7 +58,8 @@ function joueur_get_pseudo($id) {
 function joueur_exists($mail) {
 	$sql = "SELECT id
 			FROM joueur
-			WHERE email = '$mail';";
+			WHERE email = '$mail'
+			LIMIT 1;";
 	
 	return mysql_num_rows(sql_query($sql));
 }
@@ -65,7 +67,8 @@ function joueur_exists($mail) {
 function joueur_id_exists($id) {
 	$sql = "SELECT id
 			FROM joueur
-			WHERE id = $id;";
+			WHERE id = $id
+			LIMIT 1;";
 	
 	return mysql_num_rows(sql_query($sql));
 }
