@@ -102,10 +102,8 @@ $restricted = array('add','maj','scores');
 	<script src="javascript/jquery-ui-1.7.1.custom.min.js" type="text/javascript"></script>
 	-->
 	
+	<script type="text/javascript" src="javascript/jquery.timers-1.2.js"></script>
 	<script type="text/javascript" src="javascript/chat.js"></script>
-	<script type="text/javascript">
-		update();
-	</script>
 	
 	<script type="text/javascript" src="javascript/google-analytics.js"></script>
 </body>
