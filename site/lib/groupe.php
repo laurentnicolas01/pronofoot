@@ -8,18 +8,19 @@ Gestion de la table groupe
 */
 
 function groupe_get_name($id) {
-	$data = mysql_fetch_assoc(sql_query("SELECT nom FROM groupe WHERE id = $id;"));
+	$data = mysql_fetch_assoc(sql_query("SELECT nom FROM groupe WHERE id = $id LIMIT 1;"));
 	return $data['nom'];
 }
 
 function groupe_get_all() {
-	return sql_query("SELECT * FROM groupe;");
+	return sql_query("SELECT id, nom FROM groupe;");
 }
 
 function groupe_exists($nom) {
 	$sql = "SELECT id
 			FROM groupe
-			WHERE nom = '$nom';";
+			WHERE nom = '$nom'
+			LIMIT 1;";
 	
 	return mysql_num_rows(sql_query($sql));
 }

@@ -7,6 +7,7 @@
 .clear { clear:both; }
 .center { text-align:center; }
 .strong { font-weight:bold; }
+.block { display:block; }
 .smalltext { font-size:10px !important; }
 
 /* messages de succès/erreur/info/avertissement ------------------------ */
@@ -126,7 +127,7 @@ ul.listmenu li a:hover {
 
 /* Liens flèches et autres icones ---------------------------------- */
 
-.back, .go, .connect, .color, .pic, .add, .delete, .edit, .refresh {
+.back, .go, .connect, .disconnect, .color, .pic, .add, .delete, .edit, .refresh, .user, .lock {
 	padding-left: 20px;
 	min-height: 16px;
 }
@@ -136,6 +137,9 @@ ul.listmenu li a:hover {
 .connect {
 	background: url('../images/icons/lock.png') no-repeat;
 	padding-left: 25px !important;
+}
+.disconnect {
+	background: url('../images/icons/disconnect.png') no-repeat;
 }
 .back	{ background:url('../images/icons/arrow_left.png') no-repeat; }
 .go		{ background:url('../images/icons/arrow_right.png') no-repeat; }
@@ -149,4 +153,5 @@ ul.listmenu li a:hover {
 .tick	{ background:url('../images/icons/tick.png') no-repeat 0 center; }
 .time	{ background:url('../images/icons/time.png') no-repeat 0 center; }
 .table	{ background:url('../images/icons/table.png') no-repeat 0 center; }
+.user	{ background:url('../images/icons/user.png') no-repeat 0 center; }
 

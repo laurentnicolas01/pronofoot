@@ -18,7 +18,5 @@ if(mysql_num_rows($pronos)) {
 	}
 }
 else {
-	echo '<p class="strong">Les pronostics de tout le monde pour la journée en cours</p>';
 	echo '<span class="error">Il n\'y a pas encore de pronostics effectués pour la journée en cours</span>';
 }
-

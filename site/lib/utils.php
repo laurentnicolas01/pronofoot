@@ -40,6 +40,18 @@ function get_previous_link()
 }
 
 /**
+ * Retour le lien avec l'id "current" s'il correspond à la page active
+ */
+function show_link($link, $name)
+{
+	echo '<a href="'.$link.'"';	
+	if (isset($_SERVER['REDIRECT_URL']) && $link == basename($_SERVER['REDIRECT_URL'])) {
+		echo' id="current"';
+	}
+	echo '>'.$name.'</a>';
+}
+
+/**
  * Nettoyer une chaîne de caractères issue d'un formulaire
  */
 function clean_str($str)
@@ -70,7 +82,7 @@ function clean_str_preserve_tags($str)
  */
 function time_to_str($timestamp)
 {
-	return date('d/m/Y à H:i', $timestamp);
+	return date('d/m  H:i', $timestamp);
 }
 
 function date_to_str($timestamp)

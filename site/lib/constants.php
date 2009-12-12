@@ -3,13 +3,13 @@
 /* Fichier PHP regroupant des constantes usuelles  */
 /***************************************************/
 
-define('TITLE', 'Pronos Foot Arthur');
+define('TITLE', 'Prono Foot');
 
 define('TIMEZONE', 'Europe/Paris');
 
 define('DEFAULT_MAIL', 'arthurfoucher@hotmail.com');
 
-define('WEBLINK', 'http://');
+define('WEBLINK', 'http://pronofoot.julienp.fr');
 
 // durée des cookies
 define('COOKIE_EXPIRE', time() + 365 * 24 * 3600); // 1 an

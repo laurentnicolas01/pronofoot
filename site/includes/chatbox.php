@@ -1,22 +1,18 @@
-<div id="chatbox" class="colonne">
-	<h2>Chatbox</h2>
-	<?php if($_SESSION['is_connect']) { ?>
-	
-	<form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>">
+<?php if($_SESSION['is_connect']) { ?>
+	<p id="submess">
 		<input type="hidden" name="idj" id="idj" value="<?php echo $_SESSION['id']*2; ?>" />
 		<input type="text" name="message" id="message" />
-		<input type="submit" name="submit_message" id="submit_message" value="Envoyer" />
-	</form>
-	
-	<div id="selectnb">
-		Afficher 
-		<select name="nbmess" id="nbmess">
-			<?php for($i=10;$i<51;$i+=10) echo '<option value='.$i.'>'.$i.'&nbsp</option>'; ?>
-		</select> 
-		messages <span id="chat_loading"></span>
-	</div>
-	
-	<ul id="message_list"></ul>
-	
-	<?php } else echo '<p class="warning center">Déconnecté</span>'; ?>
-</div>
+		<a href="javascript:void();" id="submit_message"><img src="images/icons/add.png" alt="Envoyer" /></a>
+		<span id="chat_loading"></span>
+	</p>
+<?php } ?>
+
+<p id="selectnb">
+	Afficher 
+	<select name="nbmess" id="nbmess">
+		<?php for($i=10;$i<100;$i+=20) echo '<option value='.$i.'>'.$i.'&nbsp</option>'; ?>
+	</select> 
+	derniers messages
+</p>
+
+<div id="message_list"></div>

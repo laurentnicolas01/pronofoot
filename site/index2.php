@@ -47,84 +47,62 @@ $restricted = array('add','maj','scores');
 
 	<!-- css -->
 	<link rel="stylesheet" media="screen" type="text/css" href="css/style.css" />
-	<link rel="stylesheet" media="screen" type="text/css" href="css/jquery.css" />
 	<link rel="stylesheet" media="screen" type="text/css" href="css/utils.css" />
 	
 	<!-- website mini-icon -->
 	<link rel="icon" href="images/icons/sport_soccer.png" type="image/png" />
 </head>
+
 <body>
-	<div id="title">
-		<h1 class="ui-helper-hidden">pronofoot.julienp.fr</h1>
-		<a href="/"><img src="images/ban-weblink.png" alt="pronofoot.julienp.fr" /></a>
-	</div>
 	<div id="global">
-		<!-- head -->
-		<div id="ban"></div>
-		<div id="menu" class="ui-widget ui-widget-header">
-			<input id="href" type="hidden" value="<?php echo $_SERVER['REQUEST_URI']; ?>" />
-			<?php include_once('includes/menu.php'); ?>
-		</div>
-		
-		<!-- middle -->
-		<div id="content">
-			<?php				
-			$page = isset($_GET['p']) ? $_GET['p'] : 'accueil';
-			$path = 'pages/'.$page.'.php';
+		<div id="container">
 			
-			if(in_array($page, $restricted) && (!$_SESSION['is_connect'] || !in_array($_SESSION['id'], $idadmins))) {
-				echo '<p class="error">Vous n\'êtes pas autorisé à consulter cette page</p>';
-			}				
-			elseif($page == 'accueil' || $page == 'contact' || ($_SESSION['is_connect'] && file_exists($path))) {
-				echo '<h2>'.ucfirst($page).'</h2>';
-				require_once($path);
-			}
-			elseif(!file_exists($path)) {
-				echo '<p class="error">La page demandée n\'existe pas</p>';
-			}
-			else {
-				echo '<p class="error">Vous n\'êtes pas autorisé à consulter cette page</p>';
-			}
-			?>
-		</div>
-		<div id="member" class="ui-dialog ui-widget ui-widget-content ui-corner-all">
-			<div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix">Membre</div>
-			<div class="ui-dialog-content ui-widget-content">
-				<?php include_once('includes/member.php'); ?>
+			<?php require_once('includes/menu.php'); ?>
+			
+			<div id="content" class="colonne">
+				<div id="ban"></div>
+				<?php				
+				$page = isset($_GET['p']) ? $_GET['p'] : 'accueil';
+				$path = 'pages/'.$page.'.php';
+				
+				if(in_array($page, $restricted) && (!$_SESSION['is_connect'] || !in_array($_SESSION['id'], $idadmins))) {
+					echo '<p class="error">Vous n\'êtes pas autorisé à consulter cette page</p>';
+				}				
+				elseif($page == 'accueil' || $page == 'contact' || ($_SESSION['is_connect'] && file_exists($path))) {
+					echo '<h1>Vous êtes sur la page : <strong>'.ucfirst($page).'</strong></h1>';
+					require_once($path);
+				}
+				elseif(!file_exists($path)) {
+					echo '<p class="error">La page demandée n\'existe pas</p>';
+				}
+				else {
+					echo '<p class="error">Vous n\'êtes pas autorisé à consulter cette page</p>';
+				}
+				?>
 			</div>
-		</div>
-		<div id="chatbox" class="ui-dialog ui-widget ui-widget-content ui-corner-all">
-			<div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix">Chatbox</div>
-			<div class="ui-dialog-content ui-widget-content">
-				<?php include_once('includes/chatbox.php'); ?>
-			</div>
+			
+			<?php require_once('includes/chatbox.php'); ?>
+			
 		</div>
 		
-		<!-- bottom -->
-		<div id="pub">adsense</div>
-		<div id="footer" class="ui-widget-header">
-			<?php include_once('includes/footer.php'); ?>
-		</div>
+		<?php include_once('includes/footer.php'); ?>
 	</div>
 	
-	<!-- jQuery Libs - deployed -->
-	<!--
+	<!-- jquery libs - deployed -->
 	<script src="http://www.google.com/jsapi" type="text/javascript"></script>
 	<script type="text/javascript">
 		google.load("jquery", "1.3.2");
 	</script>
-	-->
 	
-	<!-- jQuery Libs - dev -->
+	<!-- jquery libs - dev -->
+	<!--
 	<script src="javascript/jquery-1.3.2.min.js" type="text/javascript"></script>
 	<script src="javascript/jquery-ui-1.7.1.custom.min.js" type="text/javascript"></script>
+	-->
 	
-	<!-- jQuery add-ons & perso -->
-	<script type="text/javascript" src="javascript/utils.js"></script>
 	<script type="text/javascript" src="javascript/jquery.timers-1.2.js"></script>
 	<script type="text/javascript" src="javascript/chat.js"></script>
 	
-	<!-- Stats Google -->
 	<script type="text/javascript" src="javascript/google-analytics.js"></script>
 </body>
 </html>

@@ -34,11 +34,11 @@ function message_get_list($nb) {
 }
 
 function message_print($pseudo, $date, $texte) {
-	echo '<li class="message">
+	echo '<div class="message">
 			<span class="mess_auteur">'.$pseudo.'</span>
 			<span class="mess_date">'.time_to_str($date).'</span><br />
 			<span class="mess_texte">'.$texte.'</span>
-		</li>';
+		</div>';
 }
 
 // AJAX
