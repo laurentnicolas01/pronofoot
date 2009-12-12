@@ -8,7 +8,7 @@ $futures_journees = journee_get_next($all = true);
 if(mysql_num_rows($futures_journees) > 1) {
 	echo '<p>Journée : ';
 	while($nextj = mysql_fetch_assoc($futures_journees))
-		echo '<strong><a href="?p=mypronos&amp;journee='.$nextj['id'].'">'.$nextj['numero'].'</a></strong> ';
+		echo '<strong><a href="?p=mypronos&amp;journee='.$nextj['id'].'" class="ui-state-default">'.$nextj['numero'].'</a></strong> ';
 	echo '<br /><br />';
 }
 
@@ -75,7 +75,8 @@ if(mysql_num_rows($matchs) && !journee_locked($idjournee)) {
 <p class="smalltext">
 Note :<br />
 Les scores doivent être au format "Score1-Score2" (exemples : 3-2, 0-1, 5-1...)<br />
-Vous n'êtes pas obligé de tout remplir en une fois. Vous pouvez modifier vos pronostics tant que le premier match de la journée n'a pas commencé.
+Vous n'êtes pas obligé de tout remplir en une fois.<br />
+Vous pouvez modifier vos pronostics tant que le premier match de la journée n'a pas commencé.
 </p>
 <?php
 }
