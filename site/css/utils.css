@@ -10,6 +10,28 @@
 .block { display:block; }
 .smalltext { font-size:10px !important; }
 
+/* tableaux */
+
+table.table-contain {
+        border-collapse:collapse;
+}
+
+table.table-contain td, table.table-contain th {
+        border:1px solid #999;
+        padding:.6em 10px;
+        text-align:left;
+        vertical-align:middle;
+}
+
+table.table-contain th a {
+        color:black;
+        text-decoration:none;
+}
+
+table.table-contain th a:hover {
+        color:gray;
+}
+
 /* messages de succès/erreur/info/avertissement ------------------------ */
 
 div.success, div.info, div.error, div.warning, p.success, p.info, p.error, p.warning {

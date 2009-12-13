@@ -5,7 +5,7 @@ require_once('lib/joueur.php');
 require_once('lib/prono.php');
 
 $waiting_journees = journee_get_waiting_results();
-if(mysql_num_rows($waiting_journees) > 1) {
+if(mysql_num_rows(journee_get_nbunterminate()) > 1) {
 	echo '<p>Journée : ';
 	$idj = '';
 	while($j = mysql_fetch_assoc($waiting_journees)) {

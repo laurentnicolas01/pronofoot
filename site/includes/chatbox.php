@@ -15,4 +15,4 @@
 	derniers messages
 </p>
 
-<div id="message_list"></div>
+<div id="message_list"><?php include_once('pages/ajax_update.php'); ?></div>

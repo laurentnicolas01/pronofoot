@@ -250,10 +250,10 @@ function print_sorted_th($name, $self_row, $sorted_row, $is_asc, $uri = NULL)
     // si colonne de tri
     if ($sorted)
     {
-        echo ' class="sorted"';
+        echo ' class="ui-state-active"';
     }
     echo '>
-        <a href="'.$_SERVER['PHP_SELF'].'?'.$uri.'&amp;sort='.$self_row;
+        <a href="?'.$uri.'&amp;sort='.$self_row;
     if (!$is_asc and $sorted)
     {
         // si le tri est ascendant, le lien propose le tri descendant
