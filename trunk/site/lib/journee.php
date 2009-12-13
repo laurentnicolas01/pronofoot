@@ -61,6 +61,11 @@ function journee_get_waiting_results($idjournee = false) {
 	return sql_query($sql);
 }
 
+function journee_get_nbunterminate() {
+	$current_date = time();
+	return sql_query("SELECT id FROM journee WHERE date < $current_date AND `terminated` = 0;");
+}
+
 function journee_add($numero, $timestamp) {
 	$sql = "INSERT INTO journee(numero, date)
 			VALUES($numero, $timestamp);";

@@ -21,6 +21,14 @@ a:hover {
 	text-decoration:underline;
 }
 
+a.ui-state-default {
+	padding:0 4px;
+}
+
+a.ui-state-default:hover {
+	text-decoration:none;
+}
+
 input[type=submit] {
 	padding:0 5px;
 }
@@ -50,7 +58,6 @@ body {
 
 #global {
 	clear:both;
-	border:1px solid #999999;
 	min-height:600px;
 	background:white;
 	-moz-border-radius:7px;
@@ -71,10 +78,11 @@ body {
 }
 
 #content {
-	width:625px;
+	width:620px;
 	min-height:400px;
 	float:left;
-	margin:0 15px 0 10px;
+	margin:0 15px 0 15px;
+	padding-bottom:20px;
 	font-size:1.1em;
 }
 
@@ -83,6 +91,10 @@ body {
 	padding:0 0 5px 0;
 	margin:5px 0 20px 0;
 	text-indent:10px;
+}
+
+#content h3 {
+	margin:20px 0 15px 0;
 }
 
 #content p, #chatbox p {
@@ -171,5 +183,10 @@ body {
 
 #footer p {
 	text-align:center;
-	vertical-align:middle;
+}
+
+/* rustines jquery */
+
+.table-contain th.ui-state-active {
+	font-weight:bold;
 }

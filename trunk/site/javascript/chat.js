@@ -15,7 +15,7 @@ $(function() {
 		
 		$.ajax({
 			type: "POST",
-			url: "lib/chat.php",
+			url: "pages/ajax_insert.php",
 			data: "action=insert"
 				+ "&id=" + id
 				+ "&message=" + message,
@@ -36,7 +36,7 @@ $(function() {
 	// Nécéssite le plug-in "jquery timers"
 	if(div.is(':visible')) {		
 		$(div).everyTime('5s', function() {
-			div.load('lib/chat.php', {action:'update', nb:nbmess.val()}, function(result) {
+			div.load('pages/ajax_update.php', {action:'update', nb:nbmess.val()}, function(result) {
 				div.html(result);
 				loading.html('');
 			});

@@ -1,5 +1,5 @@
 <ul>
-	<li><a href="/">Accueil</a></li>
+	<li><a href="?p=accueil">Accueil</a></li>
 	<?php 
 	if($_SESSION['is_connect']) { ?>
 		<li><a href="?p=mypronos">Mes pronos</a></li>
