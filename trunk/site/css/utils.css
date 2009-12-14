@@ -68,6 +68,7 @@ div.error, p.error {
 
 .error ul.list li {
 	background: url('../images/icons/bullet_red.png') no-repeat;
+	padding-left:22px;
 }
 
 span.success, span.info, span.warning, span.error, span.save, span.list {

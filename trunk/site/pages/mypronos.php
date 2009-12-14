@@ -8,7 +8,7 @@ $futures_journees = journee_get_next($all = true);
 if(mysql_num_rows($futures_journees) > 1) {
 	echo '<p>Journée : ';
 	while($nextj = mysql_fetch_assoc($futures_journees))
-		echo '<strong><a href="?p=mypronos&amp;journee='.$nextj['id'].'" class="ui-state-default">'.$nextj['numero'].'</a></strong> ';
+		echo '<strong><a href="mypronos-'.$nextj['id'].'" class="ui-state-default">'.$nextj['numero'].'</a></strong> ';
 	echo '<br /><br />';
 }
 

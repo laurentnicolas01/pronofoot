@@ -73,7 +73,7 @@ else {
 	$message = '';
 	?>
 	<p>
-	Si vous avez des suggestions, un problème ou tout simplement besoin d'informations complémentaires veuillez nous contacter à l'aide de ce formulaire :
+	Si vous avez des suggestions, un problème ou tout simplement besoin d'un compte, veuillez nous contacter à l'aide de ce formulaire :
 	</p><?php
 }
 ?>

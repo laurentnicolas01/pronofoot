@@ -10,26 +10,26 @@ $groups = explode(',', $_SESSION['groups']);
 if(isset($_GET['groupe'])) {
 	$groupe = intval($_GET['groupe']);
 	
-	echo '<p>Afficher le classement : <strong><a href="?p=classements" class="ui-state-default">Général</a></strong> ';
+	echo '<p>Afficher le classement : <strong><a href="classements" class="ui-state-default">Général</a></strong> ';
 	foreach($groups as $group) {
 		if($group != $groupe)
-			echo '<strong><a href="?p=classements&groupe='.$group.'" class="ui-state-default">'.groupe_get_name($group).'</a></strong> ';
+			echo '<strong><a href="classements-'.$group.'" class="ui-state-default">'.groupe_get_name($group).'</a></strong> ';
 	}
 	echo '</p>';
 
 	echo '<h3>Classement pour le groupe '.groupe_get_name($groupe).'</h3>';
 	
 	$classement = joueur_get_classement($groupe,$sorted_row,$is_asc);
-	$uri = 'p=classements&groupe='.$groupe;
+	$uri = 'classements-'.$groupe;
 }
 else {
 	echo '<p>Afficher le classement : ';
-	foreach($groups as $group) echo '<strong><a href="?p=classements&groupe='.$group.'" class="ui-state-default">'.groupe_get_name($group).'</a></strong> ';
+	foreach($groups as $group) echo '<strong><a href="classements-'.$group.'" class="ui-state-default">'.groupe_get_name($group).'</a></strong> ';
 	echo '</p>';
 	echo '<h3>Classement général</h3>';
 
 	$classement = joueur_get_classement(0,$sorted_row,$is_asc);
-	$uri = 'p=classements';
+	$uri = 'classements';
 }
 
 if(mysql_num_rows($classement)) {
