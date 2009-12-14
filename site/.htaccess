@@ -1,0 +1,12 @@
+Options +FollowSymlinks
+RewriteEngine On
+RewriteRule ^deconnexion$ index.php?deconnexion [L]
+RewriteRule ^accueil$ index.php [L]
+RewriteRule ^([a-zA-Z0-9_]+)$ index.php?p=$1 [L]
+RewriteRule ^mypronos-([0-9]+)$ index.php?p=mypronos&journee=$2 [L]
+RewriteRule ^classements-([0-9]+)$ index.php?p=classements&groupe=$1 [L]
+RewriteRule ^classements-([a-zA-Z0-9_]+)$ index.php?p=classements&sort=$1 [L]
+RewriteRule ^classements-([0-9]+)-([a-zA-Z0-9_]+)$ index.php?p=classements&groupe=$1&sort=$2 [L]
+RewriteRule ^classements-([0-9]+)-asc$ index.php?p=classements&groupe=$1&asc [L]
+RewriteRule ^classements-([a-zA-Z0-9_]+)-asc$ index.php?p=classements&sort=$1&asc [L]
+RewriteRule ^classements-([0-9]+)-([a-zA-Z0-9_]+)-asc$ index.php?p=classements&groupe=$1&sort=$2&asc

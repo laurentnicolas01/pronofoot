@@ -5,8 +5,7 @@ $(function() {
 	
 	set_sub();
 
-	href = $('input#href').val().split('/');
-	href = href[href.length-1];
+	href = $('input#href').val();
 	$('#menu a').each(function() {
 		if($(this).attr('href') == href)
 			$(this).removeClass().css('border', 'none').css('font-weight', 'bold').addClass('ui-state-active');

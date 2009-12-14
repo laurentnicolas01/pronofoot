@@ -4,7 +4,7 @@ $(function() {
 		nbmess = $('select#nbmess');
 
 	$('select#nbmess').change(function() {
-		loading.html('&nbsp<img src="images/ajax-loader.gif" alt="Chargement..."');
+		loading.html('&nbsp<img src="images/ajax-loader.gif" alt="Load..."');
 	});
 
 	$('#submit_message').click(function() {

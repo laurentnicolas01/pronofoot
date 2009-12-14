@@ -20,6 +20,22 @@ function contains($exp, $string)
 }
 
 /**
+ * Obtenir la valeur du premier paramètre d'une URL
+ * @param uri: l'url à analyser au format /folder/folder/../param1-param2-param3
+ * @return la valeur du premier paramètre. "/site/pronos-4-asc" retourne "pronos"
+ */
+function get_pageval($uri) {
+	$uri = explode('/', $uri);
+	$uri = $uri[sizeOf($uri)-1];
+	if(contains('-', $uri)) {
+		$uri = explode('-', $uri);
+		return $uri[0];
+	}
+	else
+		return $uri;
+}
+
+/**
  * Génération d'un password aléatoire
  * @param size: la taille désirée pour le password (6 par défaut)
  * @return une chaîne de caractères composées de chiffres et lettres minuscules de N caractères (N = size)
@@ -253,12 +269,12 @@ function print_sorted_th($name, $self_row, $sorted_row, $is_asc, $uri = NULL)
         echo ' class="ui-state-active"';
     }
     echo '>
-        <a href="?'.$uri.'&amp;sort='.$self_row;
+        <a href="'.$uri.'-'.$self_row;
     if (!$is_asc and $sorted)
     {
         // si le tri est ascendant, le lien propose le tri descendant
         // sinon, le tri est déjà ascendant par défaut dans le lien
-        echo '&amp;asc';
+        echo '-asc';
     }
     echo '">'.$name.'  '; // fin <a>
     if (!$is_asc and $sorted)

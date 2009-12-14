@@ -62,7 +62,7 @@ $restricted = array('add','maj','scores');
 		<!-- head -->
 		<div id="ban"></div>
 		<div id="menu" class="ui-widget ui-widget-header">
-			<input id="href" type="hidden" value="<?php echo $_SERVER['REQUEST_URI']; ?>" />
+			<input id="href" type="hidden" value="<?php echo get_pageval($_SERVER['REQUEST_URI']); ?>" />
 			<?php include_once('includes/menu.php'); ?>
 		</div>
 		
