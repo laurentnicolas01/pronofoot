@@ -31,11 +31,12 @@ function journee_get_current() {
 
 function journee_get_last_unterminated() {
 	$current_date = time();
-	$sql = "SELECT j.id AS idjournee, j.date, j.numero, m.id AS idmatch, m.score AS score_match, p.score AS score_joueur, p.idjoueur
-			FROM journee j, `match` m, prono p
+	$sql = "SELECT j.id AS idjournee, j.date, j.numero, m.id AS idmatch, m.score AS score_match, p.score AS score_joueur, p.idjoueur, jr.pseudo AS pseudo
+			FROM journee j, `match` m, prono p, joueur jr
 			WHERE j.date < $current_date
 			AND m.idjournee = j.id
 			AND p.idmatch = m.id
+			AND p.idjoueur = jr.id
 			AND j.terminated = 0
 			AND m.score != ''
 			ORDER BY date, idjoueur;";
