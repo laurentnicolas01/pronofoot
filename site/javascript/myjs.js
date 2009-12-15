@@ -6,12 +6,14 @@ $(function() {
 	
 	set_sub();
 
-	href = $('input#href').val();
+	var href = $('input#href').val();
 	$('#menu a').each(function() {
 		if($(this).attr('href') == href)
 			$(this).removeClass().css('border', 'none').css('font-weight', 'bold').addClass('ui-state-active');
 	});
-
+	
+	var active = false,
+		sub = false;
 	$('#menu a').hover(function() {
 		active = $(this).hasClass('ui-state-active');
 		sub = $(this).hasClass('sub');

@@ -2,7 +2,7 @@
 	<p id="inputmess">
 		<input type="hidden" name="idj" id="idj" value="<?php echo $_SESSION['id']*2; ?>" />
 		<input type="text" name="message" id="message" class="ui-widget-content ui-corner-all" />
-		<a href="javascript:void();" id="submit_message"><img src="images/icons/add.png" alt="Envoyer" /></a>
+		<a href="javascript:;" id="submit_message"><img src="images/icons/add.png" alt="Envoyer" /></a>
 		<span id="chat_loading"></span>
 	</p>
 	
