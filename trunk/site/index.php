@@ -46,8 +46,8 @@ $restricted = array('add','maj','scores');
 	<meta name="robots" content="noindex, nofollow" />
 
 	<!-- css -->
-	<link rel="stylesheet" media="screen" type="text/css" href="css/style.css" />
 	<link rel="stylesheet" media="screen" type="text/css" href="css/jquery.css" />
+	<link rel="stylesheet" media="screen" type="text/css" href="css/style.css" />
 	<link rel="stylesheet" media="screen" type="text/css" href="css/utils.css" />
 	
 	<!-- website mini-icon -->
@@ -120,9 +120,8 @@ $restricted = array('add','maj','scores');
 	<script src="javascript/jquery-ui-1.7.1.custom.min.js" type="text/javascript"></script>
 	
 	<!-- jQuery add-ons & perso -->
-	<script type="text/javascript" src="javascript/utils.js"></script>
 	<script type="text/javascript" src="javascript/jquery.timers-1.2.js"></script>
-	<script type="text/javascript" src="javascript/chat.js"></script>
+	<script type="text/javascript" src="javascript/myjs.js"></script>
 	
 	<!-- Stats Google -->
 	<script type="text/javascript" src="javascript/google-analytics.js"></script>

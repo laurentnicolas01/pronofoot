@@ -13,18 +13,14 @@ function joueur_update_points($id, $value) {
 	return sql_query($sql);
 }
 
-function joueur_update_nbmatchs($id, $nbmatchs) {
-	$sql = "UPDATE joueur
-			SET nbmatchs = nbmatchs + $nbmatchs
-			WHERE id = $id;";
-	
-	return sql_query($sql);
+function joueur_update_nbmatchs() {
+	return sql_query('CALL update_nbmatchs();');
 }
 
 function joueur_get_classement($groupe = 0, $sort, $is_asc) {
 	$order = $is_asc ? 'ASC' : 'DESC';
 
-	$sql = 'SELECT points/nbmatchs AS avg, pseudo, points, nbmatchs
+	$sql = 'SELECT ROUND(points/nbmatchs, 2) AS avg, pseudo, points, nbmatchs
 			FROM joueur
 			';
 			
@@ -34,6 +30,10 @@ function joueur_get_classement($groupe = 0, $sort, $is_asc) {
 	$sql .= "ORDER BY $sort $order, pseudo ASC;";
 	
 	return sql_query($sql);
+}
+
+function joueur_get_stringscore($pseudo, $nbpoints) {
+	return $pseudo.' : +'.$nbpoints.' point(s)<br />';
 }
 
 function joueur_get($exp) {

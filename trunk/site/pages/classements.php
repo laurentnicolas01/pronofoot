@@ -49,7 +49,7 @@ if(mysql_num_rows($classement)) {
 		<td>'.$joueur['pseudo'].'</td>
 		<td>'.$joueur['nbmatchs'].'</td>
 		<td>'.$joueur['points'].'</td>
-		<td>'.round($joueur['avg'], 2).'</td>
+		<td>'.$joueur['avg'].'</td>
 		</tr>';
 		
 		$old_value = $avg ? $joueur['avg'] : $joueur['points'];

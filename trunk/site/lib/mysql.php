@@ -2,10 +2,18 @@
 
 // identifiants MySQL
 
+/* DEV */
 define('SQL_HOST', 'localhost');
 define('SQL_USER', 'root');
 define('SQL_PASS', '');
 define('SQL_NAME', 'pronofoot');
+
+/* PROD
+define('SQL_HOST', 'mysql5-4.perso');
+define('SQL_USER', 'julienp_prono');
+define('SQL_PASS', '68r4cnq6');
+define('SQL_NAME', 'julienp_prono');
+*/
 
 
 /**

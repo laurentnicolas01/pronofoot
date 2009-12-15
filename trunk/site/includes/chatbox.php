@@ -1,5 +1,5 @@
 <?php if($_SESSION['is_connect']) { ?>
-	<p id="submess">
+	<p id="inputmess">
 		<input type="hidden" name="idj" id="idj" value="<?php echo $_SESSION['id']*2; ?>" />
 		<input type="text" name="message" id="message" class="ui-widget-content ui-corner-all" />
 		<a href="javascript:void();" id="submit_message"><img src="images/icons/add.png" alt="Envoyer" /></a>
@@ -9,7 +9,7 @@
 	<p id="selectnb">
 		Afficher 
 		<select name="nbmess" id="nbmess" class="ui-widget-content">
-			<?php for($i=10;$i<100;$i+=20) echo '<option value='.$i.'>'.$i.'&nbsp&nbsp</option>'; ?>
+			<?php for($i=10;$i<100;$i+=20) echo '<option value="'.$i.'">'.$i.'&nbsp&nbsp</option>'; ?>
 		</select> 
 		derniers messages
 	</p>	
