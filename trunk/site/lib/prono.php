@@ -41,7 +41,7 @@ function prono_get_score($idmatch, $idjoueur) {
 }
 
 function prono_get_by_journee($idjournee) {
-	$sql = "SELECT p.score, j.id AS idjoueur, j.pseudo, i.numero, m.equipe1, m.equipe2
+	$sql = "SELECT p.score, j.id AS idjoueur, j.pseudo, i.numero
 			FROM prono AS p, `match` AS m, joueur AS j, journee AS i
 			WHERE m.idjournee = '$idjournee'
 			AND i.id = '$idjournee'

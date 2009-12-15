@@ -108,16 +108,16 @@ $restricted = array('add','maj','scores');
 	</div>
 	
 	<!-- jQuery Libs - deployed -->
-	<!--
 	<script src="http://www.google.com/jsapi" type="text/javascript"></script>
 	<script type="text/javascript">
 		google.load("jquery", "1.3.2");
 	</script>
-	-->
 	
 	<!-- jQuery Libs - dev -->
+	<!--
 	<script src="javascript/jquery-1.3.2.min.js" type="text/javascript"></script>
 	<script src="javascript/jquery-ui-1.7.1.custom.min.js" type="text/javascript"></script>
+	-->
 	
 	<!-- jQuery add-ons & perso -->
 	<script type="text/javascript" src="javascript/jquery.timers-1.2.js"></script>

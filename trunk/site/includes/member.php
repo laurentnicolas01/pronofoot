@@ -15,5 +15,5 @@
 <?php } else { ?>
 	<span class="success">Vous êtes connecté</span>
 	<p class="user"><?php echo $_SESSION['pseudo']; ?> (<a href="profil">mon profil</a>)</p>
-	<p class="disconnect"><a href="?deconnexion">Déconnexion</a></p>
+	<p class="disconnect"><a href="/?deconnexion">Déconnexion</a></p>
 <?php } ?>
