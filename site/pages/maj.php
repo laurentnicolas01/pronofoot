@@ -67,6 +67,7 @@ if(isset($_POST['submit_deli'])) {
 		echo '<span class="error">Il y a eu une erreur lors de la suppression en base de données</span>';
 }
 
+/*
 if(isset($_POST['submit_maj'])) {
 	$datas = journee_get_last_unterminated();
 	if(mysql_num_rows($datas)) {
@@ -106,6 +107,7 @@ if(isset($_POST['submit_maj'])) {
 	else
 		echo '<span class="error">Nothing to update ! Did you forget to update scores ? If not, please call an admin ;)</span>';
 }
+*/
 ?>
 <form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>">
 	<p class="strong">Modifier pass joueur</p>
