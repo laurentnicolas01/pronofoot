@@ -36,7 +36,7 @@ $(function() {
 		loading.html('&nbsp<img src="images/ajax-loader.gif" alt="Load..."');
 	});
 
-	$('#submit_message').click(function() {
+	$('#submit_message, #hidden_submit').click(function() {
 		$('select#nbmess').change();
 	
 		var message = $('input#message').val(),
@@ -70,4 +70,10 @@ $(function() {
 			});
 		}, 0);
 	}
+	
+	/* Notifications */
+	$('input#submit_maj').click(function() {
+		alert('La mise à jour est désactivée !');
+		return false;
+	});
 });
