@@ -62,6 +62,20 @@ function journee_get_waiting_results($idjournee = false) {
 	return sql_query($sql);
 }
 
+/**
+ * ATTENTION : Bricolage fonction all-in-one, à utiliser avec précaution
+ * Renvoie toutes les journées terminées dans l'ordre croissant si param=true,
+ * sinon renvoie uniquement la plus récente terminée
+ */
+function journee_get_all_terminated($is_asc) {
+	$order = $is_asc ? 'ASC' : 'DESC LIMIT 1';
+	$sql = 'SELECT id, numero
+			FROM journee
+			WHERE `terminated` = 1
+			ORDER BY numero '.$order.';';
+	return $is_asc ? sql_query($sql) : mysql_fetch_assoc(sql_query($sql));
+}
+
 function journee_get_nbunterminate() {
 	$current_date = time();
 	return sql_query("SELECT id FROM journee WHERE date < $current_date AND `terminated` = 0;");

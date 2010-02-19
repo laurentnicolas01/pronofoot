@@ -4,6 +4,7 @@
 	if($_SESSION['is_connect']) { ?>
 		<li><a href="mypronos">Mes pronos</a></li>
 		<li><a href="pronos">Tous les pronos</a></li>
+		<li><a href="historique">Historique</a></li>
 		<li><a href="classements">Classements</a></li>
 		
 			<?php 

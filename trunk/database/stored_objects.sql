@@ -1,5 +1,5 @@
 DELIMITER //
-DROP PROCEDURE IF EXISTS update_nbmatchs;
+DROP PROCEDURE IF EXISTS `update_nbmatchs`//
 CREATE PROCEDURE update_nbmatchs()
 BEGIN
 	-- Init
@@ -33,7 +33,7 @@ DELIMITER ;
 
 -- Trigger score_match : se déclenche quand le score d'un match est inséré pour mettre à jour les points des joueurs
 DELIMITER //
-DROP TRIGGER IF EXISTS score_match;
+DROP TRIGGER IF EXISTS `score_match`//
 CREATE TRIGGER score_match
 AFTER UPDATE ON `match`
 FOR EACH ROW
@@ -52,7 +52,7 @@ DELIMITER ;
 
 -- Fonction prono_result : calcule le nombre de points obtenu pour un prono
 DELIMITER //
-DROP FUNCTION IF EXISTS prono_result;
+DROP FUNCTION IF EXISTS `prono_result`//
 CREATE FUNCTION prono_result(scorem CHAR(3), scorej CHAR(3))
 RETURNS INTEGER
 DETERMINISTIC
