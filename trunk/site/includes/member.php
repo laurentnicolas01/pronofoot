@@ -1,4 +1,7 @@
-<?php if(!$_SESSION['is_connect']) { ?>
+<?php if(!$_SESSION['is_connect']) {
+	if(isset($_POST['submit-connection'])) {
+		echo '<span class="error">Identifiants incorrects</span>';
+	} ?>
 	<form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>">
 		<p>
 			<label class="user block">Email</label>
@@ -15,5 +18,5 @@
 <?php } else { ?>
 	<span class="success">Vous êtes connecté</span>
 	<p class="user"><?php echo $_SESSION['pseudo']; ?> (<a href="profil">mon profil</a>)</p>
-	<p class="disconnect"><a href="/?deconnexion">Déconnexion</a></p>
+	<p class="disconnect"><a href="deconnexion">Déconnexion</a></p>
 <?php } ?>

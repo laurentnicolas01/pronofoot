@@ -55,10 +55,27 @@ function joueur_get_pseudo($id) {
 	return $data['pseudo'];
 }
 
+function joueur_get_emails() {
+	// Eventuellement rajouter un filtre sur les groupes
+	$sql = 'SELECT email
+			FROM joueur;';
+			
+	return sql_query($sql);
+}
+
 function joueur_exists($mail) {
 	$sql = "SELECT id
 			FROM joueur
 			WHERE email = '$mail'
+			LIMIT 1;";
+	
+	return mysql_num_rows(sql_query($sql));
+}
+
+function joueur_pseudo_exists($pseudo) {
+	$sql = "SELECT id
+			FROM joueur
+			WHERE pseudo = '$pseudo'
 			LIMIT 1;";
 	
 	return mysql_num_rows(sql_query($sql));
