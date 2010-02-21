@@ -18,5 +18,8 @@
 					</ul>
 				</li><?php
 			}
+	}
+	else { ?>
+		<li><a href="inscription">S'inscrire</a></li><?php
 	} ?>
 </ul>

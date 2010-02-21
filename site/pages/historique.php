@@ -5,11 +5,10 @@ require_once('lib/match.php');
 
 $journees = journee_get_all_terminated($asc = true);
 
-echo '<p>Afficher l\'historique de la journée : ';
+echo '<p class="">Afficher l\'historique de la journée :</p>';
 while($journee = mysql_fetch_assoc($journees)) {
 	echo '<strong><a href="historique-'.$journee['id'].'" class="ui-state-default">'.$journee['numero'].'</a></strong> ';
 }
-echo '</p>';
 
 $journee = isset($_GET['j']) && journee_exists($_GET['j']) ? journee_get_by_id($_GET['j']) : journee_get_all_terminated($asc = false);
 
@@ -22,7 +21,7 @@ if(mysql_num_rows($pronos)) {
 	$nbmatchs = mysql_num_rows($matchs);
 	while($prono = mysql_fetch_assoc($pronos)) {
 		if($pseudo == '') {
-			echo '<h3>Historique des pronostics pour la '.display_number($prono['numero']).' journée</H3>
+			echo '<h3>Historique des pronostics pour la '.display_number($prono['numero']).' journée</h3>
 				  <table class="table-contain"><thead class="ui-state-default"><th></th>';
 			while($match = mysql_fetch_assoc($matchs))
 				echo '<th>'.$match['equipe1'].' - '.$match['equipe2'].'</th>';

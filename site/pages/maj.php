@@ -5,17 +5,6 @@ require_once('lib/joueur.php');
 require_once('lib/prono.php');
 require_once('lib/groupe.php');
 
-if(isset($_POST['submit_pass'])) {
-	$id = intval($_POST['joueurs_e']);
-	$pass = clean_str($_POST['pass']);
-	
-	if(joueur_update_pass($id, crypt_password($pass))) {
-		$joueur = mysql_fetch_assoc(joueur_get($id));
-		echo '<span class="success">Le pass de <strong>'.$joueur['pseudo'].'</strong> a été modifié avec succès</span>';
-	}
-	else
-		echo '<span class="error">Il y a eu une erreur lors de la mise à jour en base de données</span>';
-}
 
 if(isset($_POST['submit_groupes'])) {
 	$id = intval($_POST['joueurs_g']);
@@ -109,27 +98,6 @@ if(isset($_POST['submit_maj'])) {
 }
 */
 ?>
-<form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>">
-	<p class="strong">Modifier pass joueur</p>
-	<p>
-		<label>Joueur : </label>
-		<?php
-		$joueurs = joueur_get('all');
-		echo '<select name="joueurs_e">';
-		while($joueur = mysql_fetch_assoc($joueurs))
-			echo '<option value="'.$joueur['id'].'">'.$joueur['pseudo'].'</option>';
-		echo '</select>';
-		?>
-		<br /><br />
-		<label>Nouveau pass : </label>
-		<input type="password" name="pass" id="pass" />
-	</p>
-	<p>
-		<input type="submit" name="submit_pass" id="submit_pass" value="Modifier" />
-	</p>	
-</form>
-
-<br />
 <form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>">
 	<p class="strong">Modifier le/les groupe(s) d'un joueur</p>
 	<p>

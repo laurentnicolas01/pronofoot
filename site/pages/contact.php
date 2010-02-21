@@ -12,7 +12,7 @@ require_once('lib/constants.php');
 function send_contact_mail($email, $names, $message)
 {
 	// préparation envoyeur et destinataire
-	$contact = '(Adrénaline) '.$names;
+	$contact = '(PronoFoot) '.$names;
 	$sender = $email;
 	$receiver = DEFAULT_MAIL;
 	
@@ -24,7 +24,7 @@ function send_contact_mail($email, $names, $message)
     $headers .= 'Content-Transfer-Encoding: 8bit';
 	
 	// preparation de l'objet
-	$object = 'Message depuis le formulaire de contact Adrénaline';
+	$object = 'Message depuis le formulaire de contact Prono Foot';
 	
 	// préparation du contenu du mail
 	$content  = $message;
@@ -54,7 +54,7 @@ if(isset($_POST['send'])) {
 	
 	if (count($errors) == 0) {
 		if(send_contact_mail($email, $names, $message))
-			echo '<p class="success">Votre message a bien été envoyé à l\'équipe Adrénaline</p>';
+			echo '<p class="success">Votre message a bien été envoyé à l\'équipe Prono Foot</p>';
 		else
 			echo '<p class="error">L\'envoi du message n\'a pas fonctionné</p>';
 	}
@@ -73,7 +73,7 @@ else {
 	$message = '';
 	?>
 	<p>
-	Si vous avez des suggestions, un problème ou tout simplement besoin d'un compte, veuillez nous contacter à l'aide de ce formulaire :
+	Si vous avez des suggestions ou un problème, veuillez nous contacter à l'aide de ce formulaire :
 	</p><?php
 }
 ?>

@@ -43,10 +43,9 @@ BEGIN
 		SET points = points + (SELECT prono_result(NEW.score, p.score)
 							   FROM prono p
 							   WHERE p.idmatch = NEW.id
-							   AND p.idjoueur = j.id);
+							   AND p.idjoueur = j.id),
+			nbmatchs = nbmatchs + 1;
 	END IF;
-	
-	CALL update_nbmatchs();
 END//
 DELIMITER ;
 

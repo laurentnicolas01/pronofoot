@@ -13,7 +13,8 @@
 <p id="selectnb"<?php echo $is_hidden; ?>>
 	Afficher 
 	<select name="nbmess" id="nbmess" class="ui-widget-content">
-		<?php for($i=10;$i<100;$i+=20) echo '<option value="'.$i.'">'.$i.'&nbsp&nbsp</option>'; ?>
+		<?php for($i=10;$i<100;$i+=20) echo '<option value="'.$i.'">'.$i.'</option>'; ?>
+		<option value="0">Tous</option>
 	</select> 
 	derniers messages
 </p>

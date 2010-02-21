@@ -17,12 +17,13 @@ function message_create($texte, $idjoueur) {
 }
 
 function message_get_list($nb) {
-	$sql = "SELECT m.date, m.texte, j.pseudo
+	$sql = 'SELECT m.date, m.texte, j.pseudo
 			FROM message m
 			LEFT JOIN joueur j
 			ON j.id = m.idjoueur
-			ORDER BY m.date DESC
-			LIMIT $nb;";
+			ORDER BY m.date DESC';
+			
+	$sql .= $nb != 0 ? " LIMIT $nb;" : ';';
 			
 	return sql_query($sql);
 }

@@ -7,7 +7,7 @@ define('TITLE', 'Prono Foot');
 
 define('TIMEZONE', 'Europe/Paris');
 
-define('DEFAULT_MAIL', 'arthurfoucher@hotmail.com');
+define('DEFAULT_MAIL', 'pronofoot@julienp.fr');
 
 define('WEBLINK', 'http://pronofoot.julienp.fr');
 

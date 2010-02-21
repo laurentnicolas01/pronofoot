@@ -35,7 +35,8 @@ elseif(isset($_GET['deconnexion'])) {
 }
 
 $idadmins = array(1,8);
-$restricted = array('add','maj','scores');
+$restricted = array('add','maj','scores','mailing');
+$open = array('accueil','contact','inscription');
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr">
@@ -75,7 +76,7 @@ $restricted = array('add','maj','scores');
 			if(in_array($page, $restricted) && (!$_SESSION['is_connect'] || !in_array($_SESSION['id'], $idadmins))) {
 				echo '<p class="error">Vous n\'êtes pas autorisé à consulter cette page</p>';
 			}				
-			elseif($page == 'accueil' || $page == 'contact' || ($_SESSION['is_connect'] && file_exists($path))) {
+			elseif(in_array($page, $open) || ($_SESSION['is_connect'] && file_exists($path))) {
 				echo '<h2>'.ucfirst($page).'</h2>';
 				require_once($path);
 			}
@@ -101,7 +102,7 @@ $restricted = array('add','maj','scores');
 		</div>
 		
 		<!-- bottom -->
-		<div id="pub">adsense</div>
+		<!-- <div id="pub">adsense</div> -->
 		<div id="footer" class="ui-widget-header">
 			<?php include_once('includes/footer.php'); ?>
 		</div>
@@ -110,12 +111,12 @@ $restricted = array('add','maj','scores');
 	<!-- jQuery Libs - deployed -->
 	<script src="http://www.google.com/jsapi" type="text/javascript"></script>
 	<script type="text/javascript">
-		google.load("jquery", "1.3.2");
+		google.load("jquery", "1.4.2");
 	</script>
 	
 	<!-- jQuery Libs - dev -->
 	<!--
-	<script src="javascript/jquery-1.3.2.min.js" type="text/javascript"></script>
+	<script src="javascript/jquery-1.4.2.min.js" type="text/javascript"></script>
 	<script src="javascript/jquery-ui-1.7.1.custom.min.js" type="text/javascript"></script>
 	-->
 	
