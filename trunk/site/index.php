@@ -43,7 +43,7 @@ $open = array('accueil','contact','inscription');
 <head>
 	<title><?php echo TITLE; ?></title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<meta name="author" content="Julien Paroche, Arthur Foucher" />
+	<meta name="author" content="Julien P., Arthur F." />
 	<meta name="robots" content="noindex, nofollow" />
 
 	<!-- css -->

@@ -8,21 +8,21 @@ $matchs = match_get_by_journee($journee['id']);
 $pronos = prono_get_by_journee($journee['id']);
 
 if(mysql_num_rows($pronos)) {
-	$pseudo = '';
+	$nickname = ''; // Impossible d'utiliser $pseudo, cela créer un conflit avec la session en prod
 	$count = 0;
 	$nbmatchs = mysql_num_rows($matchs);
 	while($prono = mysql_fetch_assoc($pronos)) {
-		if($pseudo == '') {
+		if($nickname == '') {
 			echo '<h3>Tous les pronostics pour la '.display_number($prono['numero']).' journée</h3>
 				  <table class="table-contain"><thead class="ui-state-default"><th></th>';
 			while($match = mysql_fetch_assoc($matchs))
 				echo '<th>'.$match['equipe1'].' - '.$match['equipe2'].'</th>';
 			echo '</thead><tbody><tr><td class="strong">'.$prono['pseudo'].'</td><td>'.$prono['score'].'</td>';
-			$pseudo = $prono['pseudo'];
+			$nickname = $prono['pseudo'];
 			++$count;
 			continue;
 		}
-		if($prono['pseudo'] != $pseudo) {
+		if($prono['pseudo'] != $nickname) {
 			if($count < $nbmatchs) {
 				for($i = $count ; $i < $nbmatchs ; ++$i)
 					echo '<td>X</td>';
@@ -34,7 +34,7 @@ if(mysql_num_rows($pronos)) {
 			echo '<td>'.$prono['score'].'</td>';
 			++$count;
 		}
-		$pseudo = $prono['pseudo'];
+		$nickname = $prono['pseudo'];
 	}
 	echo '</tr></tbody></table>';
 }

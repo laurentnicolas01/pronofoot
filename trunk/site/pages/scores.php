@@ -40,12 +40,14 @@ if(isset($_POST['submit_scores'])) {
 	$display = array('error' => '', 'success' => '');
 	$good = 0;
 	foreach($_POST as $key => $score) {
-		$id = explode('_',$key);
-		if($id[0] == 'match' && $score != '') {
+		$idm = explode('_',$key);
+		if($idm[0] == 'match' && $score != '') {
 			if(valid_score($score)) {
-				if(match_set_score($id[1], $score)) {
+				if(match_set_score($idm[1], $score)) { /* maj des <points;nbmatchs> ici */
+					$idj = match_get_journee($idm[1]);
+					if(!journee_remain_match($idj)) journee_terminate($idj);
 					$good += 1;
-					$display['success'] = '<span class="success">Les scores de <strong>'.$good.'</strong> match(s) ont été enregistrés !</span>';
+					$display['success'] = '<span class="success">Les scores de <strong>'.$good.'</strong> match(s) ont été enregistrés et les joueur mis à jour !</span>';
 				}
 			}
 			else

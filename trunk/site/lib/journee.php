@@ -66,6 +66,7 @@ function journee_get_waiting_results($idjournee = false) {
  * ATTENTION : Bricolage fonction all-in-one, à utiliser avec précaution
  * Renvoie toutes les journées terminées dans l'ordre croissant si param=true,
  * sinon renvoie uniquement la plus récente terminée
+ * Utilisée pour l'historique
  */
 function journee_get_all_terminated($is_asc) {
 	$order = $is_asc ? 'ASC' : 'DESC LIMIT 1';
@@ -127,6 +128,19 @@ function journee_has_match($id) {
 			FROM `match`
 			WHERE idjournee = '$id'";
 	
+	return mysql_num_rows(sql_query($sql));
+}
+
+/**
+ * Similaire à la précédente mais nécessaire pour éviter de retoucher du code qui marche
+ */
+function journee_remain_match($id) {
+	$sql = "SELECT id
+			FROM `match`
+			WHERE idjournee = '$id'
+			AND score = ''
+			LIMIT 1";
+			
 	return mysql_num_rows(sql_query($sql));
 }
 

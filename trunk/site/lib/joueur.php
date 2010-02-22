@@ -63,6 +63,24 @@ function joueur_get_emails() {
 	return sql_query($sql);
 }
 
+function joueur_wants_reminder($id) {
+	$sql = "SELECT reminder
+			FROM joueur
+			WHERE id = $id
+			AND reminder = 1;";
+			
+	return mysql_num_rows(sql_query($sql));
+}
+
+function joueur_update_reminder($id, $wants_reminder) {
+	$reminder = $wants_reminder ? 1 : 0;
+	$sql = "UPDATE joueur
+			SET reminder = $reminder
+			WHERE id=$id;";
+			
+	return sql_query($sql);
+}
+
 function joueur_exists($mail) {
 	$sql = "SELECT id
 			FROM joueur

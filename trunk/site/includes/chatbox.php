@@ -13,10 +13,10 @@
 <p id="selectnb"<?php echo $is_hidden; ?>>
 	Afficher 
 	<select name="nbmess" id="nbmess" class="ui-widget-content">
-		<?php for($i=10;$i<100;$i+=20) echo '<option value="'.$i.'">'.$i.'</option>'; ?>
-		<option value="0">Tous</option>
+		<?php for($i=10;$i<100;$i+=20) echo '<option value="'.$i.'">'.$i.'&nbsp;</option>'; ?>
+		<option value="0">tous&nbsp;</option>
 	</select> 
-	derniers messages
+	messages
 </p>
 
 <div id="message_list"><?php include_once('pages/ajax_update.php'); ?></div>
