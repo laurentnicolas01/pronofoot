@@ -41,10 +41,14 @@ p {
 	margin:5px 0;
 }
 
+p.verdana {
+	font-family:"Verdana","Arial","Helvetica","sans-serif";
+}
+
 body {
 	background:#F2F2F2 url('../images/bg-deg.png') repeat-x;
 	font-size:10px;
-	font-family:"Arial","Helvetica","Verdana","sans-serif";
+	font-family:"Arial","Verdana","Helvetica","sans-serif";
 }
 
 #global, #title {

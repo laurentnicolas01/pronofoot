@@ -12,6 +12,10 @@ function groupe_get_name($id) {
 	return $data['nom'];
 }
 
+function groupe_get_list($group_list) {
+	return sql_query("SELECT id, nom FROM groupe WHERE id IN ($group_list);");
+}
+
 function groupe_get_all() {
 	return sql_query("SELECT id, nom FROM groupe;");
 }

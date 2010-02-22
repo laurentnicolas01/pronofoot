@@ -10,8 +10,9 @@ sql_connect();
 
 // Fonctions
 function message_create($texte, $idjoueur) {
+	$date = time();
 	$sql = "INSERT INTO message(date,texte,idjoueur)
-			VALUES(".time().",'$texte',$idjoueur);";
+			VALUES($date,'$texte',$idjoueur);";
 			
 	return sql_query($sql);
 }

@@ -63,7 +63,7 @@ $(function() {
 	
 	// Nécéssite le plug-in "jquery timers"
 	if(div.is(':visible')) {		
-		$(div).everyTime('15s', function() {
+		$(div).everyTime('5s', function() {
 			div.load('pages/ajax_update.php', {nb:nbmess.val()}, function(result) {
 				div.html(result);
 				loading.html('');

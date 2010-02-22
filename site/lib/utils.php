@@ -327,7 +327,8 @@ function session_connect($email, $password)
 	
 	$sql = 'SELECT id, email, pseudo, idgroups
 	        FROM joueur
-	        WHERE email = "'.$email.'" AND pass = "'.$password.'";';
+	        WHERE email = "'.$email.'"
+			AND pass = "'.$password.'";';
 	
 	$data = sql_query($sql);
 	if($row = mysql_fetch_assoc($data)) {
@@ -346,7 +347,7 @@ function session_connect($email, $password)
 /**
  * Afficher un nombre au format 1er / 1ère / 3ème / 23ème...
  * @param number: le nombre à afficher
- * @param gender: f ou m, se rapporte quelque chose de féminin/masculin
+ * @param gender: f ou m, se rapporte à quelque chose de féminin/masculin
  */
 function display_number($number, $gender = 'f') {
 	if($number == 1)

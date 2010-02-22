@@ -106,11 +106,11 @@ else {
 		<input type="text" name="email" id="email" size="30" value="<?php echo $email ?>" />
 	</p>
 	<p>
-		<label for="pass">Votre mot de pass :</label><br />
+		<label for="pass">Votre mot de passe :</label><br />
 		<input type="password" name="pass" id="pass" size="30" value="" />
 	</p>
 	<p>
-		<label for="pass2">Confirmez le pass :</label><br />
+		<label for="pass2">Confirmez le passe :</label><br />
 		<input type="password" name="pass2" id="pass2" size="30" value="" />
 	</p>
 	<p>

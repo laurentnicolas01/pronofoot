@@ -17,12 +17,27 @@ function match_exists($idjournee, $team1, $team2) {
 	return mysql_num_rows(sql_query($sql));
 }
 
+/**
+ * Fonction coeur
+ * Met à jour le score d'un match ET aussi les <points;nbmatchs> des joueurs ayant pronostiqué sur ce match
+ */
 function match_set_score($id, $score) {
 	$sql = "UPDATE `match`
 			SET score = '$score'
 			WHERE id = $id;";
 			
-	return sql_query($sql);
+	$lsq = "UPDATE joueur j
+			SET nbmatchs = nbmatchs + 1,
+				points = points + (SELECT prono_result('$score', p.score)
+								   FROM prono p
+								   WHERE p.idmatch = $id
+								   AND p.idjoueur = j.id)
+			WHERE EXISTS (SELECT p.score
+					      FROM prono p
+					      WHERE p.idmatch = $id
+					      AND p.idjoueur = j.id);";
+			
+	return sql_query($sql) && sql_query($lsq);
 }
 
 function match_add($idjournee, $team1, $team2) {
@@ -45,6 +60,15 @@ function match_get_by_journee($idjournee) {
 			WHERE idjournee = '$idjournee';";
 	
 	return sql_query($sql);
+}
+
+function match_get_journee($id) {
+	$sql = "SELECT idjournee
+			FROM `match`
+			WHERE id = $id;";
+	
+	$idj = mysql_fetch_row(sql_query($sql));
+	return $idj[0];
 }
 
 function match_get_allnext() {
