@@ -1,5 +1,10 @@
 <?php
 /* A ajouter dans la lib de fonctions 'joueur.php' */
+require_once('constants.php');
+require_once('utils.php');
+require_once('joueur.php');
+require_once('journee.php');
+
 function joueur_reminder($id, $activated) {
 	$val = $activated ? 1 : 0;
 	
@@ -33,8 +38,9 @@ function journee_get_next_date() {
 			WHERE `terminated` = 0
 			ORDER BY `date` ASC
 			LIMIT 1;";
-			
-	$date = mysql_fetch_row(sql_query($sql));
+	
+	$result = sql_query($sql);
+	$date = mysql_num_rows($result) ? mysql_fetch_row($result) : array(0);
 	return $date[0];
 }
 
@@ -59,13 +65,20 @@ if(!$nb)
 
 // Arrivé ici, on peut envoyer les mails de rappel à ceux qui sont abonnés et qui n'ont pas encore pronostiqué
 $sender = 'pronofoot@julienp.fr';
-$object = 'Prono Foot';
+$object = 'Rappel aux pronostiqueurs en retard';
 
-$message = "Allez prono ! Pour ne plus recevoir ces messages, allez sur le site vous connectez et modifier le paramètre dans la section mon profil (module à droite)."; // A ajouter : telle journée, qui commence tel jour à tel heure...
+// A ajouter : telle journée, qui commence tel jour à tel heure...
+$message = <<<EOT
+Allez prono !
+Pour ne plus recevoir ces messages,
+allez sur le site vous connectez et
+modifiez le paramètre dans la section
+mon profil (module à droite).
+EOT;
 
 while($email = mysql_fetch_row($emails)) {
-	xmail($sender, $email[0] /* email de chaque joueur à reminder */, $object, $message)
+	send_mail($sender, $email[0] /* email de chaque joueur à reminder */, 'Prono Foot', $object, $message)
 }
 
-xmail($sender, 'j.paroche@gmail.com', $object, "Un mail de rappel à été envoyé à $nb personnes le ".time_to_str(time()).'.');
+send_mail($sender, DEFAULT_MAIL, 'Prono Foot', $object, "Un mail de rappel à été envoyé à $nb personnes le ".time_to_str(time()).'.');
 

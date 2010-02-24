@@ -58,7 +58,6 @@ if(isset($_POST['submit_scores'])) {
 	echo $display['error'];
 }
 
-
 $matchs = journee_get_waiting_results($idjournee);
 if(mysql_num_rows($matchs)) {
 ?>

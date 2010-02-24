@@ -249,6 +249,11 @@ function plural($name, $count)
 	return $name;
 }
 
+function pourcent($nb, $total) {
+	$result = round($nb/$total,2)*100;
+	return $result.'%';
+}
+
 function remove_updir($path)
 {
 	return str_replace('..', '.', $path);
@@ -356,6 +361,7 @@ function display_number($number, $gender = 'f') {
 		return $number.'ème';
 }
 
+
 /**
  * Calculer le nombre de points obtenu pour un pronostic
  * @param score_j: le score que le joueur a pronostiqué
@@ -375,5 +381,39 @@ function calculate_prono_result($score_j, $score_m) {
 		return 1;
 	else
 		return 0;
+}
+
+
+/**
+ * Envoie d'un mail
+ * @param s: l'email de l'expéditeur
+ * @param r: l'email du destinataire
+ * @param n: la chaine qui sera affichée pour l'expéditeur (ex: Prenom Nom)
+ * @param o: l'objet de l'email qui sera envoyé
+ * @param message: le message à envoyer à l'équipe adrénaline
+ * @return true si le mail a bien été envoyé, false sinon
+ */
+function send_mail($s, $r, $n, $o, $m)
+{
+	// préparation envoyeur et destinataire
+	$contact = $n;
+	$sender = $s;
+	$receiver = $r;
+	
+	// en-têtes
+	$headers  = 'MIME-Version: 1.0'."\n";
+    $headers .= 'From: "'.$contact.'"<'.$sender.'>'."\n";
+    $headers .= 'Reply-To: '.$sender."\n";
+    $headers .= 'Content-Type: text/plain; charset="utf-8"'."\n";
+    $headers .= 'Content-Transfer-Encoding: 8bit';
+	
+	// preparation de l'objet
+	$object = $o;
+	
+	// préparation du contenu du mail
+	$content  = $m;
+	
+	// envoi du mail et retour du résultat (true ou false)
+	return mail($receiver, $object, $content, $headers);
 }
 

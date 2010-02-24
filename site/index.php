@@ -36,7 +36,7 @@ elseif(isset($_GET['deconnexion'])) {
 
 $idadmins = array(1,8);
 $restricted = array('add','maj','scores','mailing');
-$open = array('accueil','contact','inscription');
+$authorized = array('accueil','contact','inscription');
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr">
@@ -76,7 +76,8 @@ $open = array('accueil','contact','inscription');
 			if(in_array($page, $restricted) && (!$_SESSION['is_connect'] || !in_array($_SESSION['id'], $idadmins))) {
 				echo '<p class="error">Vous n\'êtes pas autorisé à consulter cette page</p>';
 			}				
-			elseif(in_array($page, $open) || ($_SESSION['is_connect'] && file_exists($path))) {
+			elseif(in_array($page, $authorized) || ($_SESSION['is_connect'] && file_exists($path))) {
+				if($page == 'mypronos') $page = 'mes Pronos'; // ~~~~~~
 				echo '<h2>'.ucfirst($page).'</h2>';
 				require_once($path);
 			}

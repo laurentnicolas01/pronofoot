@@ -92,7 +92,7 @@ else {
 	<p>
 	Les demandes de nouveau compte sont verifiées avant d'être validées. Le délai d'attente 
 	de validation est d'environ 24h.<br />
-	Pour compléter votre demande, merci de remplir le formaulaire suivant :
+	Pour compléter votre demande, merci de remplir le formulaire suivant :
 	</p><?php
 }
 ?>

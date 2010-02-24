@@ -1,3 +1,18 @@
+-- Affiche une ligne avec les résultats du sondage "idparam" sur une ligne
+DELIMITER //
+DROP PROCEDURE IF EXISTS get_sondage_reponses//
+CREATE PROCEDURE get_sondage_reponses(idparam VARCHAR(32))
+BEGIN
+	SELECT COUNT(s.idsondage) total_rep, COUNT(so.idjoueur) oui, COUNT(son.idjoueur) non
+	FROM sondage s
+	LEFT JOIN sondage so ON so.reponse = 'oui'
+	LEFT JOIN sondage son ON son.reponse = 'non'
+	WHERE s.idsondage = idparam
+	LIMIT 1;
+END//
+DELIMITER ;
+
+-- Recalcul et met à jour tous les "nbmatchs" des joueurs
 DELIMITER //
 DROP PROCEDURE IF EXISTS update_nbmatchs//
 CREATE PROCEDURE update_nbmatchs()
@@ -87,7 +102,11 @@ SELECT  prono_result('3-2', '3-2'),
 		prono_result('7-0', '1-0'),
 		prono_result('1-2', '3-3');
 		
-		
+
+
+---------------
+-- OTHER
+---------------		
 -- Récupérer les pronos de la journée précédente
 SELECT j.pseudo, m.equipe1, m.equipe2, p.score
 FROM `prono` p, `joueur` j, `match` m

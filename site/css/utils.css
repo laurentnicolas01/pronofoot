@@ -12,6 +12,11 @@
 
 /* tableaux */
 
+table tr td.valign {
+	vertical-align:middle;
+	padding:2px;
+}
+
 table.table-contain {
         border-collapse:collapse;
 }
