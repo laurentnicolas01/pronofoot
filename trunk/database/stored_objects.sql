@@ -75,6 +75,10 @@ BEGIN
 	DECLARE sml, smr, sjl, sjr INTEGER;
 	
 	-- Calcul du nombre de points obtenu avec les deux scores
+	IF scorem = '' OR scorej = '' THEN
+		RETURN 0;
+	END IF;
+	
 	IF scorem = scorej THEN
 		RETURN 3;
 	ELSE
@@ -101,7 +105,41 @@ SELECT  prono_result('3-2', '3-2'),
 		prono_result('1-2', '1-2'),
 		prono_result('7-0', '1-0'),
 		prono_result('1-2', '3-3');
-		
+
+
+-- Fonction journee_result : calcule le nombre de points obtenu par un joueur pour une journee
+DELIMITER //
+DROP FUNCTION IF EXISTS journee_result//
+CREATE FUNCTION journee_result(param_idjoueur INTEGER, param_idjournee INTEGER)
+RETURNS INTEGER
+DETERMINISTIC
+BEGIN
+	-- Variables locales et curseur (contenant les points gagnés pour chaque match)
+	DECLARE points, temp, done INTEGER DEFAULT 0;
+	DECLARE mycurs CURSOR FOR   SELECT prono_result(m.score, p.score)
+								FROM `match` m
+							
+								LEFT JOIN `prono` p
+								ON p.idjoueur = param_idjoueur
+								AND p.idmatch = m.id
+								
+								WHERE m.score <> ''
+								AND m.idjournee =  param_idjournee;
+	DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = 1;
+	
+	-- Calcul du nombre de points pour la journee en cours
+	OPEN mycurs;
+	
+	REPEAT
+		FETCH mycurs INTO temp;
+		SET points = points + temp;
+	UNTIL done END REPEAT;
+	
+	CLOSE mycurs;
+	
+	RETURN points;
+END//
+DELIMITER ;		
 
 
 ---------------

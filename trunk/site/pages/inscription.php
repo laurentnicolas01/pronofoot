@@ -37,9 +37,9 @@ function send_contact_mail($email)
 }
 
 if(isset($_POST['send'])) {
-	$pseudo = clean_str($_POST['pseudo']);
-	$email = clean_str($_POST['email']);
-	$pass = clean_str($_POST['pass']);
+	$new_pseudo = clean_str($_POST['new_pseudo']);
+	$new_email = clean_str($_POST['new_email']);
+	$pass = clean_str($_POST['pass1']);
 	$pass2 = clean_str($_POST['pass2']);
 	$idgroup = intval($_POST['groupe']);
 	$new_groupe = clean_str($_POST['new_groupe']);
@@ -48,10 +48,10 @@ if(isset($_POST['send'])) {
 	
 	$errors = array();
 	
-	if(joueur_pseudo_exists($pseudo) || demande_pseudo_exists($pseudo)) {
+	if(joueur_pseudo_exists($new_pseudo) || demande_pseudo_exists($new_pseudo)) {
 		$errors[] = 'Ce pseudo est déjà utilisé pour un compte ou une demande en cours';
 	}
-	if(!valid_email($email)) {
+	if(!valid_email($new_email)) {
 		$errors[] = 'L\'e-mail que vous avez entré est invalide';
 	}
 	if($pass == '') {
@@ -60,7 +60,7 @@ if(isset($_POST['send'])) {
 	if($pass != $pass2) {
 		$errors[] = 'Les deux mots de passe ne correspondent pas';
 	}
-	if(joueur_exists($email) || demande_exists($email)) {
+	if(joueur_exists($new_email) || demande_exists($new_email)) {
 		$errors[] = 'Cet email est déjà utilisé pour un compte ou une demande en cours';
 	}
 	if($confirm != $rand) {
@@ -68,8 +68,8 @@ if(isset($_POST['send'])) {
 	}
 	
 	if (count($errors) == 0) {
-		if(demande_add($email, $pseudo, crypt_password($pass), $idgroup, $new_groupe)) {
-			send_contact_mail($email);
+		if(demande_add($new_email, $new_pseudo, crypt_password($pass), $idgroup, $new_groupe)) {
+			send_contact_mail(DEFAULT_MAIL);
 			echo '<p class="success">Votre demande de compte a bien été enregistrée</p>';
 		}
 		else
@@ -85,8 +85,8 @@ if(isset($_POST['send'])) {
 	}
 }
 else {
-	$pseudo = '';
-	$email = '';
+	$new_pseudo = '';
+	$new_email = '';
 	$new_groupe = '';
 	?>
 	<p>
@@ -98,16 +98,16 @@ else {
 ?>
 <form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>">
 	<p>
-		<label for="pseudo">Votre pseudo :</label><br />
-		<input type="text" name="pseudo" id="pseudo" size="30" value="<?php echo $pseudo; ?>" />
+		<label for="new_pseudo">Votre pseudo :</label><br />
+		<input type="text" name="new_pseudo" id="new_pseudo" size="30" value="<?php echo $new_pseudo; ?>" />
 	</p>
 	<p>
-		<label for="email">Votre adresse e-mail :</label><br />
-		<input type="text" name="email" id="email" size="30" value="<?php echo $email ?>" />
+		<label for="new_email">Votre adresse e-mail :</label><br />
+		<input type="text" name="new_email" id="new_email" size="30" value="<?php echo $new_email ?>" />
 	</p>
 	<p>
-		<label for="pass">Votre mot de passe :</label><br />
-		<input type="password" name="pass" id="pass" size="30" value="" />
+		<label for="pass1">Votre mot de passe :</label><br />
+		<input type="password" name="pass1" id="pass1" size="30" value="" />
 	</p>
 	<p>
 		<label for="pass2">Confirmez le passe :</label><br />

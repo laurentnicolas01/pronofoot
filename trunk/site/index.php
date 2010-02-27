@@ -22,7 +22,7 @@ if(!isset($_SESSION['is_connect'])) {
 if(!$_SESSION['is_connect']) {
 	// connexion depuis le formulaire
 	if(isset($_POST['submit-connection'])) {
-		$email = clean_str($_POST['email']);
+		$email = clean_str($_POST['log_email']);
 		$password = crypt_password($_POST['pass']);
 	
 		session_connect($email, $password);

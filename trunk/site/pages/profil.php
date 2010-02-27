@@ -19,6 +19,7 @@ if(isset($_POST['submit_pass'])) {
 		else
 			echo '<span class="error">Il y a eu une erreur lors de la mise à jour en base de données</span>';
 	}
+	echo '<br />';
 }
 
 if(isset($_POST['submit_save'])) {
@@ -28,10 +29,11 @@ if(isset($_POST['submit_save'])) {
 		echo joueur_update_reminder($id, true) ? '<span class="success">Modifications enregistrées</span>' : '<span class="error">Erreur d\'enregistrement</span>';
 	else
 		echo joueur_update_reminder($id, false) ? '<span class="success">Modifications enregistrées</span>' : '<span class="error">Erreur d\'enregistrement</span>';
+	echo '<br />';
 }
 
 ?>
-<br />
+
 <form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>">
 	<p class="strong">Modification du mot de pass</p>
 	<p>

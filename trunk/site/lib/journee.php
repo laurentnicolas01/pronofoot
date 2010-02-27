@@ -152,7 +152,7 @@ function journee_get_by_id($id) {
 	return mysql_fetch_assoc(sql_query($sql));
 }
 
-function journee_terminate($id) {
+function journee_terminate($id) {	
 	$sql = "UPDATE journee
 			SET `terminated` = 1
 			WHERE id = $id";

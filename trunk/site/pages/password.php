@@ -9,7 +9,7 @@ require_once('lib/constants.php');
 require_once('lib/utils.php');
 
 if(isset($_POST['submit-mail'])) {
-	$mail = clean_str($_POST['mail']);
+	$mail = clean_str($_POST['lost_mail']);
 	
 	if(!joueur_exists($mail)) {
 		echo '<p class="error">Ce mail n\'existe pas dans la base de données</p>';
@@ -43,7 +43,7 @@ echo '<p>Veuillez entrer l\'adresse mail du compte pour lequel vous avez perdu l
 <form action="<?php echo $_SERVER['REQUEST_URI'] ?>" method="post">
 	<p>
 		<label>Email :</label>
-		<input type="text" name="mail" size="30" />
+		<input type="text" name="lost_mail" size="30" />
 	</p>
 	<p>
 		<input type="submit" name="submit-mail" value="Envoyer" />

@@ -65,6 +65,7 @@ body {
 	min-height:600px;
 	background:white;
 	-moz-border-radius:7px;
+	-webkit-border-radius:7px;
 	padding:5px;
 }
 
@@ -75,6 +76,7 @@ body {
 
 #ban, #footer {
 	-moz-border-radius:7px;
+	-webkit-border-radius:7px;
 }
 
 #menu, #pub {

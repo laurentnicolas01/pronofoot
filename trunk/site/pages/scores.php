@@ -3,6 +3,7 @@ require_once('lib/journee.php');
 require_once('lib/match.php');
 require_once('lib/joueur.php');
 require_once('lib/prono.php');
+require_once('lib/news.php');
 
 $waiting_journees = journee_get_waiting_results();
 if(mysql_num_rows(journee_get_nbunterminate()) > 1) {
@@ -45,7 +46,7 @@ if(isset($_POST['submit_scores'])) {
 			if(valid_score($score)) {
 				if(match_set_score($idm[1], $score)) { /* maj des <points;nbmatchs> ici */
 					$idj = match_get_journee($idm[1]);
-					if(!journee_remain_match($idj)) journee_terminate($idj);
+					if(!journee_remain_match($idj)) { news_make_results($idj); journee_terminate($idj); }
 					$good += 1;
 					$display['success'] = '<span class="success">Les scores de <strong>'.$good.'</strong> match(s) ont été enregistrés et les joueur mis à jour !</span>';
 				}
