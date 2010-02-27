@@ -94,13 +94,24 @@ function clean_str_preserve_tags($str)
 /**
  * Conversion d'un timestamp en chaîne de caractères
  * @param[in] timestamp: temps à convertir
- * @return 'JJ/MM/AAAA à HH:MM'
+ * @return 'jj/mm/aaaa à HH:MM'
+ */
+function std_time_to_str($timestamp)
+{
+	return date('d/m/Y à H:i', $timestamp);
+}
+
+/**
+ * @return 'jj/mm HH:MM'
  */
 function time_to_str($timestamp)
 {
 	return date('d/m  H:i', $timestamp);
 }
 
+/**
+ * @return 'jj/mm/aaaa'
+ */
 function date_to_str($timestamp)
 {
 	return date('d/m/Y', $timestamp);

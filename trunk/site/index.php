@@ -4,7 +4,7 @@ session_start();
 require_once('lib/constants.php');
 error_reporting(E_ALL | E_STRICT);
 
-// Définition du fuseau horaire 
+// Définition du fuseau horaire
 date_default_timezone_set(TIMEZONE);
 
 require_once('lib/utils.php');
@@ -36,7 +36,7 @@ elseif(isset($_GET['deconnexion'])) {
 
 $idadmins = array(1,8);
 $restricted = array('add','maj','scores','mailing');
-$authorized = array('accueil','contact','inscription');
+$authorized = array('accueil','contact','inscription','password');
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr">

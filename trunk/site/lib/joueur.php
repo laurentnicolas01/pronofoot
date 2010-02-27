@@ -63,6 +63,16 @@ function joueur_get_emails() {
 	return sql_query($sql);
 }
 
+function joueur_get_id($email) {
+	$sql = "SELECT id
+			FROM joueur
+			WHERE email = '$email'
+			LIMIT 1;";
+	
+	$result = mysql_fetch_row(sql_query($sql));
+	return $result[0];
+}
+
 function joueur_wants_reminder($id) {
 	$sql = "SELECT reminder
 			FROM joueur

@@ -12,12 +12,12 @@ ol, ul {
 	list-style:none;
 }
 
-a {
+a, #member p.key a {
 	color:gray;
 	text-decoration:none;
 }
 
-a:hover {
+a:hover, #member p.key a:hover {
 	text-decoration:underline;
 }
 
@@ -137,6 +137,21 @@ body {
 #message_list .message .mess_texte { line-height:1.5; clear:both; }
 #message_list  p#selectnb { line-height:2; margin:10px 0 0 0; }
 
+div.bienvenue p {
+	color:#999999;
+	font-size:28px;
+	padding:50px 10px 25px 155px !important;
+}
+
+div.bienvenue img {
+	float:left;
+	margin:20px 0px 70px 0px;
+}
+
+p.acc_dec {
+	margin-left:110px !important;
+}
+
 .news {
 	clear:both;
 	border:1px solid silver;
@@ -152,6 +167,7 @@ body {
 .news p.title span.title {
 	font-size:16px;
 	font-weight:bold;
+	color:#666666;
 }
 
 .news p.title span.date {
