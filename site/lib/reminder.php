@@ -54,17 +54,17 @@ function journee_get_next_date() {
 
 sql_connect();
 
-echo 'Script exécuté le '.std_time_to_str(time()).'<br />';
+$log = 'Prono Foot reminder script exécuté le '.std_time_to_str(time())."\n";
 
 // Si la prochaine journée est dans plus de 35 heures, on ne fait rien
 $date_next = journee_get_next_date();
 if(!$date_next || $date_next > time() + (3600 * 35)) {
-	echo 'Pas de journée programmée<br />';
+	$log .= "Pas de journée programmée\n";
 	exit;
 }
 
 $hours = round(($date_next - time()) / 3600, 2);
-echo 'Prochaine journée dans '.$hours.' heures<br />';
+$log .= "Prochaine journée dans $hours heures\n";
 
 // On récupère la liste éventuelle des abonnés n'ayant pas encore pronotiqué
 $emails = joueur_get_remindable();
@@ -72,11 +72,11 @@ $nb = mysql_num_rows($emails);
 
 // S'il n'y a aucun abonné qui n'a pas pronostiqué, on ne fait rien
 if(!$nb) {
-	echo 'Aucun joueur à rappeler, tout le monde a été sérieux<br />';
+	$log .= "Aucun joueur à rappeler, tout le monde a été sérieux\n";
 	exit;
 }
 
-echo 'Il y a '.$nb.' joueurs qui n\'ont pas pronotiqué<br />';
+$log .= "Il y a $nb joueurs qui n'ont pas pronotiqué\n";
 
 // Arrivé ici, on peut envoyer les mails de rappel à ceux qui sont abonnés et qui n'ont pas encore pronostiqué
 $sender = DEFAULT_MAIL;
@@ -98,9 +98,11 @@ $link
 EOT;
 
 // Envoie de l'email à chaque joueur à reminder
-echo 'Mail(s) des joueurs à rappeler :<br />';
+$log .= "Mail(s) des joueurs à rappeler :\n";
 while($email = mysql_fetch_row($emails)) {
-	echo $email[0].'<br />';
+	$log .= $email[0]."\n";
 	//send_mail($sender, $email[0], 'Prono Foot', $object, $message);
 }
-send_mail($sender, 'j.paroche@gmail.com', 'Prono Foot', $object, $message);//prod: a suppr
+
+// Envoie log d'exécution à l'administrateur
+send_mail($sender, 'j.paroche@gmail.com', 'Prono Foot', 'Log du reminder', $log);

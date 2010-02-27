@@ -17,6 +17,27 @@ function joueur_update_nbmatchs() {
 	return sql_query('CALL update_nbmatchs();');
 }
 
+/**
+ * Renvoie un set de <joueur;points> pour une journée donnée
+ * @param idjournee: l'id de la journée dont on veut le set de results
+ * Ne renvoie le résultat que pour les joueurs ayant au moins un prono pour la journée
+ */
+function joueur_get_resultset($idjournee) {
+	$sql = "SELECT j.pseudo, journee_result(j.id, $idjournee) points
+			FROM joueur j
+			WHERE EXISTS (
+				SELECT p.idjoueur
+				FROM prono p
+				INNER JOIN `match` m
+				ON p.idmatch = m.id
+				AND m.idjournee = $idjournee
+				WHERE p.idjoueur = j.id
+			)
+			ORDER BY pseudo;";
+	
+	return sql_query($sql);
+}
+
 function joueur_get_classement($groupe = 0, $sort, $is_asc) {
 	$order = $is_asc ? 'ASC' : 'DESC';
 
@@ -33,7 +54,7 @@ function joueur_get_classement($groupe = 0, $sort, $is_asc) {
 }
 
 function joueur_get_stringscore($pseudo, $nbpoints) {
-	return $pseudo.' : +'.$nbpoints.' point(s)<br />';
+	return $pseudo.' +'.$nbpoints.' '.plural('point', $nbpoints);
 }
 
 function joueur_get($exp) {

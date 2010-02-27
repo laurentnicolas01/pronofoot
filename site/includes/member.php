@@ -6,7 +6,7 @@ if(!$_SESSION['is_connect']) {
 	<form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>">
 		<p>
 			<label class="user block">Email</label>
-			<input type="text" name="email" id="email" size="25" />
+			<input type="text" name="log_email" id="log_email" size="25" />
 		</p>
 		<p>
 			<label class="connect block">Pass</label>
