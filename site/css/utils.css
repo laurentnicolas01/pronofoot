@@ -159,7 +159,7 @@ ul.listmenu li a:hover {
 	padding-left: 20px;
 	min-height: 16px;
 }
-.rss, .tick, .time, .table {
+.rss, .tick, .time, .table, .key {
 	padding: 5px 0 5px 23px;
 }
 .connect {
@@ -182,4 +182,5 @@ ul.listmenu li a:hover {
 .time	{ background:url('../images/icons/time.png') no-repeat 0 center; }
 .table	{ background:url('../images/icons/table.png') no-repeat 0 center; }
 .user	{ background:url('../images/icons/user.png') no-repeat 0 center; }
+.key	{ background:url('../images/icons/key.png') no-repeat 0 center; }
 

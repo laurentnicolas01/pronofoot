@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Serveur: mysql5-4.perso
--- Généré le : Dim 21 Février 2010 à 02:10
+-- Généré le : Sam 27 Février 2010 à 03:25
 -- Version du serveur: 5.0.90
 -- Version de PHP: 5.2.6-1+lenny4
 
@@ -77,7 +77,7 @@ CREATE TABLE `journee` (
   `numero` int(11) NOT NULL,
   `terminated` tinyint(4) NOT NULL default '0',
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=25 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=27 ;
 
 -- --------------------------------------------------------
 
@@ -93,7 +93,7 @@ CREATE TABLE `match` (
   `equipe2` varchar(32) collate utf8_unicode_ci NOT NULL,
   `idjournee` int(11) NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=102 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=111 ;
 
 -- --------------------------------------------------------
 
@@ -108,7 +108,7 @@ CREATE TABLE `message` (
   `texte` text collate utf8_unicode_ci NOT NULL,
   `idjoueur` int(11) NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=279 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=286 ;
 
 -- --------------------------------------------------------
 
@@ -122,10 +122,10 @@ CREATE TABLE `news` (
   `date` int(11) NOT NULL,
   `titre` varchar(128) collate utf8_unicode_ci NOT NULL,
   `contenu` text collate utf8_unicode_ci NOT NULL,
-  `image` varchar(32) collate utf8_unicode_ci NOT NULL default 'football.jpg',
+  `image` varchar(32) collate utf8_unicode_ci NOT NULL default 'pronofoot.jpg',
   `idjoueur` int(11) NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
 
 -- --------------------------------------------------------
 
@@ -141,57 +141,34 @@ CREATE TABLE `prono` (
   PRIMARY KEY  (`idmatch`,`idjoueur`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-DELIMITER $$
---
--- Procédures
---
-CREATE DEFINER=`julienp_prono`@`%` PROCEDURE `update_nbmatchs`()
-BEGIN
-		UPDATE joueur
-	SET nbmatchs = 0;
-
-		UPDATE joueur
-	SET nbmatchs = 19
-	WHERE id = 1;
-
-		UPDATE joueur
-	SET nbmatchs = 4
-	WHERE id = 6;
-
-		UPDATE joueur
-	SET nbmatchs = 24
-	WHERE id BETWEEN 2 AND 5;
-
-		UPDATE joueur j
-	SET nbmatchs =  nbmatchs + (SELECT COUNT(*)
-								FROM prono p, `match` m
-								WHERE p.idjoueur = j.id
-								AND p.idmatch = m.id
-								AND m.score <> '');
-END$$
+-- --------------------------------------------------------
 
 --
--- Fonctions
+-- Structure de la table `reponse`
 --
-CREATE DEFINER=`julienp_prono`@`%` FUNCTION `prono_result`(scorem CHAR(3), scorej CHAR(3)) RETURNS int(11)
-    DETERMINISTIC
-BEGIN
-		DECLARE	sml, smr, sjl, sjr INTEGER;
-	
-		IF scorem = scorej THEN
-		RETURN 3;
-	ELSE
-				SELECT CAST(LEFT(scorem,1) AS UNSIGNED) INTO sml;
-		SELECT CAST(RIGHT(scorem,1) AS UNSIGNED) INTO smr;
-		SELECT CAST(LEFT(scorej,1) AS UNSIGNED) INTO sjl;
-		SELECT CAST(RIGHT(scorej,1) AS UNSIGNED) INTO sjr;
-		
-		IF (sml < smr AND sjl < sjr) OR (sml > smr AND sjl > sjr) OR (sml = smr AND sjl = sjr) THEN
-			RETURN 1;
-		ELSE
-			RETURN 0;
-		END IF;
-	END IF;
-END$$
 
-DELIMITER ;
+DROP TABLE IF EXISTS `reponse`;
+CREATE TABLE `reponse` (
+  `idsondage` int(11) NOT NULL,
+  `idjoueur` int(11) NOT NULL,
+  `reponse` varchar(64) collate utf8_unicode_ci NOT NULL,
+  `autre_reponse` varchar(64) collate utf8_unicode_ci default NULL,
+  `date` int(11) NOT NULL,
+  PRIMARY KEY  (`idsondage`,`idjoueur`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `sondage`
+--
+
+DROP TABLE IF EXISTS `sondage`;
+CREATE TABLE `sondage` (
+  `id` int(11) NOT NULL auto_increment,
+  `nom` varchar(32) collate utf8_unicode_ci NOT NULL,
+  `question` text collate utf8_unicode_ci NOT NULL,
+  `reponse_set` varchar(128) collate utf8_unicode_ci NOT NULL,
+  `date` int(11) NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;

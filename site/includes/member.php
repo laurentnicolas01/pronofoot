@@ -15,6 +15,7 @@ if(!$_SESSION['is_connect']) {
 		<p>
 			<input type="submit" name="submit-connection" id="submit-connection" value="Connexion" />
 		</p>
+		<p class="key"><a href="password">Mot de passe oublié ?</a></p>
 	</form><?php 
 }
 else { ?>

@@ -31,9 +31,17 @@ $(function() {
 	var loading = $('span#chat_loading'),
 		div = $('div#message_list'),
 		nbmess = $('select#nbmess');
+		
+	function update_list(div) {
+		div.load('pages/ajax_update.php', {nb:nbmess.val()}, function(result) {
+			div.html(result);
+			loading.html('');
+		});	
+	}
 
 	$('select#nbmess').change(function() {
 		loading.html('&nbsp<img src="images/ajax-loader.gif" alt="Load..."');
+		update_list(div);
 	});
 
 	$('#submit_message, #hidden_submit').click(function() {
@@ -63,11 +71,8 @@ $(function() {
 	
 	// Nécéssite le plug-in "jquery timers"
 	if(div.is(':visible')) {		
-		$(div).everyTime('5s', function() {
-			div.load('pages/ajax_update.php', {nb:nbmess.val()}, function(result) {
-				div.html(result);
-				loading.html('');
-			});
+		$(div).everyTime('30s', function() {
+			update_list(div);
 		}, 0);
 	}
 	
