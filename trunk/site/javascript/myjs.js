@@ -70,7 +70,7 @@ $(function() {
 	});
 	
 	// Nécéssite le plug-in "jquery timers"
-	if(div.is(':visible')) {		
+	if(nbmess.is(':visible')) {
 		$(div).everyTime('30s', function() {
 			update_list(div);
 		}, 0);

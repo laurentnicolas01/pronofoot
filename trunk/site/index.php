@@ -47,9 +47,7 @@ $authorized = array('accueil','contact','inscription','password');
 	<meta name="robots" content="noindex, nofollow" />
 
 	<!-- css -->
-	<link rel="stylesheet" media="screen" type="text/css" href="css/jquery.css" />
 	<link rel="stylesheet" media="screen" type="text/css" href="css/style.css" />
-	<link rel="stylesheet" media="screen" type="text/css" href="css/utils.css" />
 	
 	<!-- website mini-icon -->
 	<link rel="icon" href="images/icons/sport_soccer.png" type="image/png" />

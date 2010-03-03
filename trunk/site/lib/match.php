@@ -62,6 +62,15 @@ function match_get_by_journee($idjournee) {
 	return sql_query($sql);
 }
 
+function match_get_scores($idjournee) {
+	$sql = "SELECT score
+			FROM `match`
+			WHERE idjournee = $idjournee
+			ORDER BY id;";
+	
+	return sql_query($sql);
+}
+
 function match_get_journee($id) {
 	$sql = "SELECT idjournee
 			FROM `match`

@@ -46,6 +46,23 @@ BEGIN
 END//
 DELIMITER ;
 
+-- Valide une demande de compte (passage de la table demande à joueur)
+DELIMITER //
+DROP PROCEDURE IF EXISTS validate_demande//
+CREATE PROCEDURE validate_demande(param_iddemande INTEGER)
+BEGIN
+	INSERT INTO `joueur`(email,pseudo,pass,idgroups)
+	(SELECT email, pseudo, pass, idgroups
+	FROM `demande`
+	WHERE id = param_iddemande
+	LIMIT 1);
+	
+	UPDATE `demande`
+	SET `validated` = 1
+	WHERE id = param_iddemande;
+END//
+DELIMITER ;
+
 -- Trigger score_match : se déclenche quand le score d'un match est inséré pour mettre à jour les points des joueurs
 DELIMITER //
 DROP TRIGGER IF EXISTS score_match//
@@ -132,14 +149,16 @@ BEGIN
 	
 	REPEAT
 		FETCH mycurs INTO temp;
-		SET points = points + temp;
+		IF NOT done THEN
+			SET points = points + temp;
+		END IF;
 	UNTIL done END REPEAT;
 	
 	CLOSE mycurs;
 	
 	RETURN points;
 END//
-DELIMITER ;		
+DELIMITER ;
 
 
 ---------------

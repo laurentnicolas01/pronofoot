@@ -17,7 +17,7 @@ if(mysql_num_rows($pronos)) {
 				  <table class="table-contain"><thead class="ui-state-default"><th></th>';
 			while($match = mysql_fetch_assoc($matchs))
 				echo '<th>'.$match['equipe1'].' - '.$match['equipe2'].'</th>';
-			echo '</thead><tbody><tr><td class="strong">'.$prono['pseudo'].'</td><td>'.$prono['score'].'</td>';
+			echo '</thead><tbody><tr><td class="strong left">'.$prono['pseudo'].'</td><td>'.$prono['score'].'</td>';
 			$nickname = $prono['pseudo'];
 			++$count;
 			continue;
@@ -27,7 +27,7 @@ if(mysql_num_rows($pronos)) {
 				for($i = $count ; $i < $nbmatchs ; ++$i)
 					echo '<td>X</td>';
 			}
-			echo '</tr><tr><td class="strong">'.$prono['pseudo'].'</td><td>'.$prono['score'].'</td>';
+			echo '</tr><tr><td class="strong left">'.$prono['pseudo'].'</td><td>'.$prono['score'].'</td>';
 			$count = 1;
 		}
 		else {

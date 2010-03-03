@@ -7,13 +7,27 @@ Gestion de la table news
 
 require_once('joueur.php');
 
-function news_get_all($nb) {
-	$sql = "SELECT *
+/**
+ * Retourne un set de news en permettant la pagination
+ * @param nbstart: début de la séléction
+ * @param nb: nombre de news souhaité
+ * @example: news_get(13,4) renvoie les news 13 à 16
+ */
+function news_get($nbstart,$nb) {
+	$sql = "SELECT image,titre,date,contenu
 			FROM news
 			ORDER BY date DESC
-			LIMIT $nb;";
+			LIMIT $nbstart,$nb;";
 			
 	return sql_query($sql);
+}
+
+function news_count() {
+	$sql = "SELECT count(*)
+			FROM news;";
+	
+	$result = mysql_fetch_row(sql_query($sql));
+	return $result[0];
 }
 
 function news_add($titre, $contenu, $idjoueur, $image = 'reload.png') {

@@ -1,6 +1,7 @@
 <?php
 require_once('lib/prono.php');
 require_once('lib/journee.php');
+require_once('lib/joueur.php');
 require_once('lib/match.php');
 
 $journees = journee_get_all_terminated($asc = true);
@@ -11,12 +12,14 @@ while($journee = mysql_fetch_assoc($journees)) {
 }
 
 $journee = isset($_GET['j']) && journee_exists($_GET['j']) ? journee_get_by_id($_GET['j']) : journee_get_all_terminated($asc = false);
+$idjournee = $journee['id'];
 
-$matchs = match_get_by_journee($journee['id']);
-$pronos = prono_get_by_journee($journee['id']);
+$matchs = match_get_by_journee($idjournee);
+$pronos = prono_get_by_journee($idjournee);
 
 if(mysql_num_rows($pronos)) {
 	$nickname = '';
+	$idj = 0;
 	$count = 0;
 	$nbmatchs = mysql_num_rows($matchs);
 	while($prono = mysql_fetch_assoc($pronos)) {
@@ -25,8 +28,9 @@ if(mysql_num_rows($pronos)) {
 				  <table class="table-contain"><thead class="ui-state-default"><th></th>';
 			while($match = mysql_fetch_assoc($matchs))
 				echo '<th>'.$match['equipe1'].' - '.$match['equipe2'].'</th>';
-			echo '</thead><tbody><tr><td class="strong">'.$prono['pseudo'].'</td><td>'.$prono['score'].'</td>';
+			echo '<th>*Points*</th></thead><tbody><tr><td class="strong left">'.$prono['pseudo'].'</td><td>'.$prono['score'].'</td>';
 			$nickname = $prono['pseudo'];
+			$idj = $prono['idjoueur'];
 			++$count;
 			continue;
 		}
@@ -35,7 +39,7 @@ if(mysql_num_rows($pronos)) {
 				for($i = $count ; $i < $nbmatchs ; ++$i)
 					echo '<td>X</td>';
 			}
-			echo '</tr><tr><td class="strong">'.$prono['pseudo'].'</td><td>'.$prono['score'].'</td>';
+			echo '<td class="strong">'.joueur_get_result($idj,$idjournee).'</td></tr><tr><td class="strong left">'.$prono['pseudo'].'</td><td>'.$prono['score'].'</td>';
 			$count = 1;
 		}
 		else {
@@ -43,7 +47,12 @@ if(mysql_num_rows($pronos)) {
 			++$count;
 		}
 		$nickname = $prono['pseudo'];
+		$idj = $prono['idjoueur'];
 	}
+	echo '<td class="strong">'.joueur_get_result($idj,$idjournee).'</td></tr><tr><td class="strong">*Scores*</td>';
+	$match_res = match_get_scores($idjournee);
+	while($m = mysql_fetch_assoc($match_res))
+		echo '<td class="strong">'.$m['score'].'</td>';
 	echo '</tr></tbody></table>';
 }
 else {
