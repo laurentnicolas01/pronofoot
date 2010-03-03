@@ -6,9 +6,12 @@
 .hidden { display:none; }
 .clear { clear:both; }
 .center { text-align:center; }
+.left { text-align:left !important; }
 .strong { font-weight:bold; }
 .block { display:block; }
 .smalltext { font-size:10px !important; }
+.fleft { float:left; }
+.fright { float:right; }
 
 /* tableaux */
 
@@ -26,6 +29,7 @@ table.table-contain td, table.table-contain th {
         padding:.6em 10px;
         text-align:left;
         vertical-align:middle;
+		text-align:center;
 }
 
 table.table-contain th a {
@@ -162,10 +166,6 @@ ul.listmenu li a:hover {
 .rss, .tick, .time, .table, .key {
 	padding: 5px 0 5px 23px;
 }
-.connect {
-	background: url('../images/icons/lock.png') no-repeat;
-	padding-left: 25px !important;
-}
 .disconnect {
 	background: url('../images/icons/disconnect.png') no-repeat;
 }
@@ -183,4 +183,5 @@ ul.listmenu li a:hover {
 .table	{ background:url('../images/icons/table.png') no-repeat 0 center; }
 .user	{ background:url('../images/icons/user.png') no-repeat 0 center; }
 .key	{ background:url('../images/icons/key.png') no-repeat 0 center; }
+.lock	{ background:url('../images/icons/lock.png') no-repeat 0 center; }
 

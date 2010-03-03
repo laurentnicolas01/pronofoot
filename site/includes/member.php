@@ -9,7 +9,7 @@ if(!$_SESSION['is_connect']) {
 			<input type="text" name="log_email" id="log_email" size="25" />
 		</p>
 		<p>
-			<label class="connect block">Pass</label>
+			<label class="lock block">Pass</label>
 			<input type="password" name="pass" id="pass" size="25" />
 		</p>
 		<p>

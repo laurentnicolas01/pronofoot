@@ -3,6 +3,7 @@ RewriteEngine On
 RewriteRule ^deconnexion$ index.php?deconnexion [L]
 RewriteRule ^accueil$ index.php [L]
 RewriteRule ^([a-zA-Z0-9_]+)$ index.php?p=$1 [L]
+RewriteRule ^accueil-([0-9]+)$ index.php?numpage=$1 [L]
 RewriteRule ^mypronos-([0-9]+)$ index.php?p=mypronos&journee=$1 [L]
 RewriteRule ^historique-([0-9]+)$ index.php?p=historique&j=$1 [L]
 RewriteRule ^sondages-([0-9]+)$ index.php?p=sondages&j=$1 [L]

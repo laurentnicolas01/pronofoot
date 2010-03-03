@@ -38,6 +38,16 @@ function joueur_get_resultset($idjournee) {
 	return sql_query($sql);
 }
 
+/**
+ * Renvoie le nombre de points obtenus par un joueur pour une journée
+ * @param idjoueur: l'id du joueur sont on veut le score
+ * @param idjournee: l'id de la journée dont on veut le resultat
+ */
+function joueur_get_result($idjoueur, $idjournee) {
+	$result = mysql_fetch_row(sql_query("SELECT journee_result($idjoueur, $idjournee);"));
+	return $result[0];
+}
+
 function joueur_get_classement($groupe = 0, $sort, $is_asc) {
 	$order = $is_asc ? 'ASC' : 'DESC';
 

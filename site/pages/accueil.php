@@ -12,12 +12,20 @@ if(!$_SESSION['is_connect']) { ?>
 else {
 	// News
 	require_once('lib/news.php');
-	$news = news_get_all(4);
+	$page = isset($_GET['numpage']) ? $_GET['numpage'] : 1;
+	$news = news_get($page*4-4,4);
+	
+
 	while($row = mysql_fetch_assoc($news))
 		echo '<div class="news">
 				<img src="images/news/'.$row['image'].'" alt="News" />
 				<p class="title"><span class="title">'.$row['titre'].'</span><br /><span class="date">'.time_to_str($row['date']).'</span></p><p class="content verdana">'.$row['contenu'].'</p>
 			</div>';
+			
+	if($page > 1)
+		echo '<a href="accueil-'.($page-1).'" class="fleft"><img src="images/icons/arrow_left.png" alt="< " /></a>';
+	if(news_count()/4 > $page)
+		echo '<a href="accueil-'.($page+1).'" class="fright"><img src="images/icons/arrow_right.png" alt=" >" /></a>';
+	
 }
-?>
 
