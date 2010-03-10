@@ -31,22 +31,30 @@ $(function() {
 	var loading = $('span#chat_loading'),
 		div = $('div#message_list'),
 		nbmess = $('select#nbmess');
-		
+	
+	function start_loading() {
+		loading.html('&nbsp<img src="images/ajax-loader.gif" alt="Load..."');
+	}
+	
+	function stop_loading() {
+		loading.html('');
+	}
+	
 	function update_list(div) {
 		div.load('pages/ajax_update.php', {nb:nbmess.val()}, function(result) {
 			div.html(result);
-			loading.html('');
+			stop_loading();
 		});	
 	}
 
 	$('select#nbmess').change(function() {
-		loading.html('&nbsp<img src="images/ajax-loader.gif" alt="Load..."');
+		start_loading();
 		update_list(div);
 	});
 
 	$('#submit_message, #hidden_submit').click(function() {
-		$('select#nbmess').change();
-	
+		start_loading();
+		
 		var message = $('input#message').val(),
 			id = $('input#idj').val() / 2;
 		
@@ -61,7 +69,7 @@ $(function() {
 				if(result[0] == 'ok') {
 					$('input#message').val('');
 					div.prepend(result[1]);
-					loading.html('');
+					stop_loading();
 				}
 			}
 		});
@@ -69,7 +77,7 @@ $(function() {
 		return false;
 	});
 	
-	// Nécéssite le plug-in "jquery timers"
+	/* Nécéssite le plug-in "jquery timers" */
 	if(nbmess.is(':visible')) {
 		$(div).everyTime('30s', function() {
 			update_list(div);

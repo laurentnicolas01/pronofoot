@@ -77,6 +77,7 @@ function joueur_get($exp) {
 }
 
 function joueur_get_pseudo($id) {
+	$id = intval($id);
 	$sql = "SELECT pseudo
 			FROM joueur
 			WHERE id = $id
@@ -95,6 +96,7 @@ function joueur_get_emails() {
 }
 
 function joueur_get_id($email) {
+	$email = mysql_real_escape_string($email);
 	$sql = "SELECT id
 			FROM joueur
 			WHERE email = '$email'
@@ -122,16 +124,18 @@ function joueur_update_reminder($id, $wants_reminder) {
 	return sql_query($sql);
 }
 
-function joueur_exists($mail) {
+function joueur_exists($email) {
+	$email = mysql_real_escape_string($email);
 	$sql = "SELECT id
 			FROM joueur
-			WHERE email = '$mail'
+			WHERE email = '$email'
 			LIMIT 1;";
 	
 	return mysql_num_rows(sql_query($sql));
 }
 
 function joueur_pseudo_exists($pseudo) {
+	$pseudo = mysql_real_escape_string($pseudo);
 	$sql = "SELECT id
 			FROM joueur
 			WHERE pseudo = '$pseudo'
@@ -141,6 +145,7 @@ function joueur_pseudo_exists($pseudo) {
 }
 
 function joueur_id_exists($id) {
+	$id = intval($id);
 	$sql = "SELECT id
 			FROM joueur
 			WHERE id = $id
@@ -150,6 +155,7 @@ function joueur_id_exists($id) {
 }
 
 function joueur_add($mail, $pseudo, $pass, $groupes) {
+	$pseudo = mysql_real_escape_string($pseudo);
 	$sql = "INSERT INTO joueur(email, pseudo, pass, idgroups)
 			VALUES('$mail', '$pseudo', '$pass', '$groupes');";
 	
@@ -157,6 +163,7 @@ function joueur_add($mail, $pseudo, $pass, $groupes) {
 }
 
 function joueur_delete($id) {
+	$id = intval($id);
 	$sql = "DELETE FROM joueur
 			WHERE id = $id;";
 	

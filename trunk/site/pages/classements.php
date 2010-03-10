@@ -33,10 +33,10 @@ else {
 }
 
 if(mysql_num_rows($classement)) {
-	echo '<table class="table-contain"><thead class="ui-state-default"><th>Position</th><th>Pseudo</th><th>Matchs</th>';
+	echo '<table class="table-contain"><thead class="ui-state-default"><tr><th>Position</th><th>Pseudo</th><th>Matchs</th>';
 	print_sorted_th('Points', 'points', $sorted_row, $is_asc, $uri);
 	print_sorted_th('Moyenne', 'avg', $sorted_row, $is_asc, $uri);
-	echo '</thead>';
+	echo '</tr></thead>';
 	
 	for($i=1 ; $joueur = mysql_fetch_assoc($classement) ; ++$i) {
 		if($avg)

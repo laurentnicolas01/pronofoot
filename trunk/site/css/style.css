@@ -156,6 +156,18 @@ p.acc_dec {
 	margin-left:110px !important;
 }
 
+div#answers {
+	margin:0 30px 0 0;
+	padding:0 10px 10px;
+	border:1px solid gray;
+	-moz-border-radius:7px;
+	-webkit-border-radius:7px;
+}
+
+p#question {
+	margin:10px 190px 10px 0;
+}
+
 .news {
 	clear:both;
 	border:1px solid silver;

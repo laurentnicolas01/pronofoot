@@ -14,10 +14,10 @@ if(mysql_num_rows($pronos)) {
 	while($prono = mysql_fetch_assoc($pronos)) {
 		if($nickname == '') {
 			echo '<h3>Tous les pronostics pour la '.display_number($prono['numero']).' journée</h3>
-				  <table class="table-contain"><thead class="ui-state-default"><th></th>';
+				  <table class="table-contain"><thead class="ui-state-default"><tr><th></th>';
 			while($match = mysql_fetch_assoc($matchs))
 				echo '<th>'.$match['equipe1'].' - '.$match['equipe2'].'</th>';
-			echo '</thead><tbody><tr><td class="strong left">'.$prono['pseudo'].'</td><td>'.$prono['score'].'</td>';
+			echo '</tr></thead><tbody><tr><td class="strong left">'.$prono['pseudo'].'</td><td>'.$prono['score'].'</td>';
 			$nickname = $prono['pseudo'];
 			++$count;
 			continue;

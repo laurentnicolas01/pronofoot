@@ -11,9 +11,10 @@ require_once('lib/utils.php');
 if(isset($_POST['submit-mail'])) {
 	$mail = clean_str($_POST['lost_mail']);
 	
-	if(!joueur_exists($mail)) {
+	if(!valid_email($mail))
+		echo '<p class="error">Le mail entré est invalide</p>';
+	elseif(!joueur_exists($mail))
 		echo '<p class="error">Ce mail n\'existe pas dans la base de données</p>';
-	}
 	else {
 		$new_pass = generate_password(8);
 	

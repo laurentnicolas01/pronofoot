@@ -1,4 +1,10 @@
 <?php
+if($_SESSION['is_connect']) {
+	// Redirection permettant de garder une certaine cohérence
+	include_once('accueil.php');
+}
+else {
+
 require_once('lib/utils.php');
 require_once('lib/constants.php');
 require_once('lib/groupe.php');
@@ -37,7 +43,7 @@ function send_contact_mail($email)
 }
 
 if(isset($_POST['send'])) {
-	$new_pseudo = clean_str($_POST['new_pseudo']);
+	$new_pseudo = ucfirst(clean_str($_POST['new_pseudo']));
 	$new_email = clean_str($_POST['new_email']);
 	$pass = clean_str($_POST['pass1']);
 	$pass2 = clean_str($_POST['pass2']);
@@ -51,20 +57,20 @@ if(isset($_POST['send'])) {
 	if(joueur_pseudo_exists($new_pseudo) || demande_pseudo_exists($new_pseudo)) {
 		$errors[] = 'Ce pseudo est déjà utilisé pour un compte ou une demande en cours';
 	}
-	if(!valid_email($new_email)) {
-		$errors[] = 'L\'e-mail que vous avez entré est invalide';
-	}
 	if($pass == '') {
 		$errors[] = 'Il faut préciser un mot de passe';
 	}
 	if($pass != $pass2) {
 		$errors[] = 'Les deux mots de passe ne correspondent pas';
 	}
-	if(joueur_exists($new_email) || demande_exists($new_email)) {
-		$errors[] = 'Cet email est déjà utilisé pour un compte ou une demande en cours';
-	}
 	if($confirm != $rand) {
 		$errors[] = 'Le code de confirmation ne correspond pas';
+	}
+	if(!valid_email($new_email)) {
+		$errors[] = 'L\'e-mail que vous avez entré est invalide';
+	}
+	elseif(joueur_exists($new_email) || demande_exists($new_email)) {
+		$errors[] = 'Cet email est déjà utilisé pour un compte ou une demande en cours';
 	}
 	
 	if (count($errors) == 0) {
@@ -106,6 +112,9 @@ else {
 		<input type="text" name="new_email" id="new_email" size="30" value="<?php echo $new_email ?>" />
 	</p>
 	<p>
+		<span class="info">Le mot de passe est directement crypté et donc inconnu des administrateurs</span>
+	</p>
+	<p>
 		<label for="pass1">Votre mot de passe :</label><br />
 		<input type="password" name="pass1" id="pass1" size="30" value="" />
 	</p>
@@ -117,10 +126,10 @@ else {
 		<span class="info">Les joueurs sont repartis par groupe, les choix ci-dessous ne sont pas définitifs et pourront changer sur simple demande</span>
 	</p>
 	<p>
-		<label for="group">Séléctionnez un groupe :</label><br />
+		<label for="groupe">Séléctionnez un groupe :</label><br />
 		<?php
 		$groups = groupe_get_all();
-		echo '<select name="groupe">';
+		echo '<select name="groupe" id="groupe">';
 		while($group = mysql_fetch_assoc($groups))
 			echo '<option value="'.$group['id'].'">'.$group['nom'].'&nbsp;&nbsp;</option>';
 		echo '</select>';
@@ -140,4 +149,4 @@ else {
 		<input type="submit" name="send" id="send" value="Valider" />
 	</p>
 </form>
-
+<?php }

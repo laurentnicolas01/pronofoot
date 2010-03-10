@@ -6,6 +6,7 @@
 .hidden { display:none; }
 .clear { clear:both; }
 .center { text-align:center; }
+.justify { text-align:justify; }
 .left { text-align:left !important; }
 .strong { font-weight:bold; }
 .block { display:block; }
