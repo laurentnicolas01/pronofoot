@@ -19,4 +19,4 @@
 	messages
 </p>
 
-<div id="message_list"><?php include_once('pages/ajax_update.php'); ?></div>
+<div id="message_list"><?php $_REQUEST['action'] = 'message_update'; include_once('pages/ajax.php'); ?></div>

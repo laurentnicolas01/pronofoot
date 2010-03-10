@@ -96,7 +96,7 @@ else {
 	$new_groupe = '';
 	?>
 	<p>
-	Les demandes de nouveau compte sont verifiées avant d'être validées. Le délai d'attente 
+	Les demandes de nouveaux comptes sont verifiées avant d'être validées. Le délai d'attente 
 	pour validation est d'environ 24h.<br />
 	Pour compléter votre demande, merci de remplir le formulaire suivant :
 	</p><?php
