@@ -41,7 +41,7 @@ $(function() {
 	}
 	
 	function update_list(div) {
-		div.load('pages/ajax_update.php', {nb:nbmess.val()}, function(result) {
+		div.load('pages/ajax.php', {action:'message_update',nb:nbmess.val()}, function(result) {
 			div.html(result);
 			stop_loading();
 		});	
@@ -60,8 +60,9 @@ $(function() {
 		
 		$.ajax({
 			type: "POST",
-			url: "pages/ajax_insert.php",
-			data: "&id=" + id
+			url: "pages/ajax.php",
+			data: "action=message_insert"
+				+ "&id=" + id
 				+ "&message=" + message,
 			
 			success: function(result) {
