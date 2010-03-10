@@ -56,10 +56,10 @@ sql_connect();
 
 $log = 'Prono Foot reminder script exécuté le '.std_time_to_str(time())."\n";
 
-// Si la prochaine journée est dans plus de 35 heures, on ne fait rien
+// Si la prochaine journée est dans plus de 35 heures ou si elle est commencée, on ne fait rien
 $date_next = journee_get_next_date();
-if(!$date_next || $date_next > time() + (3600 * 35)) {
-	$log .= "Pas de journée programmée\n";
+if(!$date_next || $date_next < time() || $date_next > time() + (3600 * 35)) {
+	echo "Pas de journée programmée\n";
 	exit;
 }
 
@@ -72,11 +72,11 @@ $nb = mysql_num_rows($emails);
 
 // S'il n'y a aucun abonné qui n'a pas pronostiqué, on ne fait rien
 if(!$nb) {
-	$log .= "Aucun joueur à rappeler, tout le monde a été sérieux\n";
+	echo "Aucun joueur à rappeler, tout le monde a été sérieux\n";
 	exit;
 }
 
-$log .= "Il y a $nb joueurs qui n'ont pas pronotiqué\n";
+$log .= "Il y a $nb joueurs qui n'ont pas pronostiqué\n";
 
 // Arrivé ici, on peut envoyer les mails de rappel à ceux qui sont abonnés et qui n'ont pas encore pronostiqué
 $sender = DEFAULT_MAIL;
@@ -101,7 +101,7 @@ EOT;
 $log .= "Mail(s) des joueurs à rappeler :\n";
 while($email = mysql_fetch_row($emails)) {
 	$log .= $email[0]."\n";
-	//send_mail($sender, $email[0], 'Prono Foot', $object, $message);
+	send_mail($sender, $email[0], 'Prono Foot', $object, $message);
 }
 
 // Envoie log d'exécution à l'administrateur

@@ -111,19 +111,20 @@ $authorized = array('accueil','contact','inscription','password');
 	<script src="http://www.google.com/jsapi" type="text/javascript"></script>
 	<script type="text/javascript">
 		google.load("jquery", "1.4.2");
+		// UI à mettre ici quand google le supportera
 	</script>
 	
 	<!-- jQuery Libs - dev -->
 	<!--
-	<script src="javascript/jquery-1.4.2.min.js" type="text/javascript"></script>
-	<script src="javascript/jquery-ui-1.7.1.custom.min.js" type="text/javascript"></script>
-	-->
+	<script src="javascript/jquery-1.4.2.min.js" type="text/javascript"></script>-->
+	<script src="javascript/jquery-ui-1.8.min.js" type="text/javascript"></script>
+	
 	
 	<!-- jQuery add-ons & perso -->
 	<script type="text/javascript" src="javascript/jquery.timers-1.2.js"></script>
 	<script type="text/javascript" src="javascript/myjs.js"></script>
 	
-	<!-- Stats Google -->
-	<script type="text/javascript" src="javascript/google-analytics.js"></script>
+	<!-- Stats Google
+	<script type="text/javascript" src="javascript/google-analytics.js"></script> -->
 </body>
 </html>
