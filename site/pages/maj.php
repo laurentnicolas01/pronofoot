@@ -55,48 +55,6 @@ if(isset($_POST['submit_deli'])) {
 	else
 		echo '<span class="error">Il y a eu une erreur lors de la suppression en base de données</span>';
 }
-
-/*
-if(isset($_POST['submit_maj'])) {
-	$datas = journee_get_last_unterminated();
-	if(mysql_num_rows($datas)) {
-		$news = '';
-		$id = '';
-		$nbpoints = 0;
-		while($row = mysql_fetch_assoc($datas)) {
-			if($id != '' && $id != $row['idjoueur']) {
-				// mise à jour des points de chaque pronostiqueur
-				joueur_update_points($id, $nbpoints);
-				$news .= joueur_get_stringscore($pseudo, $nbpoints);
-				
-				$idjournee = $row['idjournee'];
-				$numjournee = $row['numero'];
-				$nbpoints = 0;
-				$nbpoints += calculate_prono_result($row['score_joueur'], $row['score_match']);
-			}
-			else {
-				$nbpoints += calculate_prono_result($row['score_joueur'], $row['score_match']);
-			}
-			$id = $row['idjoueur'];
-			$pseudo = $row['pseudo'];
-		}
-		joueur_update_points($id, $nbpoints);
-		$news .= joueur_get_stringscore($pseudo, $nbpoints);
-		
-		echo $news;
-		
-		// Mise à jour du nombre de matchs joués de tous les joueurs
-		joueur_update_nbmatchs();
-		
-		if(journee_terminate($idjournee))
-			echo '<span class="success">Mise à jour effectuée : '.display_number($numjournee).' journée</span>';
-		else
-			echo '<span class="error">Une erreur s\'est produite, contactez le webmaster avant de faire une autre action</span>';
-	}
-	else
-		echo '<span class="error">Nothing to update ! Did you forget to update scores ? If not, please call an admin ;)</span>';
-}
-*/
 ?>
 <form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>">
 	<p class="strong">Modifier le/les groupe(s) d'un joueur</p>
@@ -197,15 +155,6 @@ if(isset($_POST['submit_maj'])) {
 	</p>
 	<p>
 		<input type="submit" name="submit_deli" id="submit_deli" value="Supprimer" />
-	</p>	
-</form>
-
-<br />
-<form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>">
-	<p class="strong">Mettre à jour les points des joueurs et le classement</p>
-	<span class="warning">Les scores de la dernière journée doivent être saisis</span>
-	<p>
-		<input type="submit" name="submit_maj" id="submit_maj" value="Mise à jour" />
 	</p>	
 </form>
 

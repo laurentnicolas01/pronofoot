@@ -1,6 +1,6 @@
 <?php
 /***************************/
-/* AJAX CLIENTS SCRIPTS	   */
+/* AJAX CLIENT SCRIPTS	   */
 /***************************/
 
 /**
@@ -13,6 +13,10 @@ function get_file($short_path) {
 	return file_exists($short_path)	&& substr_count($short_path, '..') < 50 ? $short_path : get_file('../'.$short_path);
 }
 
+// Définition du fuseau horaire
+require_once(get_file('lib/constants.php'));
+date_default_timezone_set(TIMEZONE);
+// Connexion à la base
 require_once(get_file('lib/mysql.php'));
 sql_connect();
 
