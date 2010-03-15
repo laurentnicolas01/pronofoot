@@ -4,15 +4,16 @@ require_once('lib/journee.php');
 require_once('lib/joueur.php');
 require_once('lib/match.php');
 
-$journees = journee_get_all_terminated($asc = true);
+$journees = journee_get_all_terminated($asc = false);
+$selected_journee = isset($_POST['idj_asked']) && journee_exists(intval($_POST['idj_asked'])) ? journee_get_by_id(intval($_POST['idj_asked'])) : journee_get_last_terminated();
+$idjournee = $selected_journee['id'];
 
-echo '<p class="">Afficher l\'historique de la journée :</p>';
+echo '<form method="post" action="'.$_SERVER['REQUEST_URI'].'"><p><label>Afficher l\'historique de la journée : </label><select name="idj_asked">';
 while($journee = mysql_fetch_assoc($journees)) {
-	echo '<strong><a href="historique-'.$journee['id'].'" class="ui-state-default">'.$journee['numero'].'</a></strong> ';
+	$selected = $journee['id'] == $idjournee ? ' selected="selected" ' : '';
+	echo '<option value="'.$journee['id'].'" '.$selected.'>'.$journee['numero'].'</option>';
 }
-
-$journee = isset($_GET['j']) && journee_exists($_GET['j']) ? journee_get_by_id($_GET['j']) : journee_get_all_terminated($asc = false);
-$idjournee = $journee['id'];
+echo '</select><input type="submit" name="submit_asked" value="GO" class="hidden" /></p></form>';
 
 $matchs = match_get_by_journee($idjournee);
 $pronos = prono_get_by_journee($idjournee);

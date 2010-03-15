@@ -68,10 +68,10 @@ $(function() {
 			success: function(result) {
 				result = result.split('&&&');
 				if(result[0] == 'ok') {
-					$('input#message').val('');
+					$('input#message').val(' ');
 					div.prepend(result[1]);
-					stop_loading();
 				}
+				stop_loading();
 			}
 		});
 		
@@ -85,9 +85,8 @@ $(function() {
 		}, 0);
 	}
 	
-	/* Notifications */
-	$('input#submit_maj').click(function() {
-		alert('La mise à jour est désactivée !');
-		return false;
+	/* Historique */
+	$('select[name=idj_asked]').change(function() {
+		$('input[name=submit_asked]').click();
 	});
 });
