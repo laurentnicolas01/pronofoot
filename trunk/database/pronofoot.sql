@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Serveur: mysql5-4.perso
--- Généré le : Jeu 04 Mars 2010 à 22:04
+-- Généré le : Mar 16 Mars 2010 à 20:44
 -- Version du serveur: 5.0.90
 -- Version de PHP: 5.2.6-1+lenny4
 
@@ -28,10 +28,10 @@ CREATE TABLE `demande` (
   `idgroups` varchar(11) collate utf8_unicode_ci default NULL,
   `autre_groupe` varchar(32) collate utf8_unicode_ci default NULL,
   `date` int(11) NOT NULL,
-  `validated` tinyint(4) NOT NULL default '0',
+  `validated` tinyint(1) NOT NULL default '0',
   PRIMARY KEY  (`id`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=12 ;
 
 -- --------------------------------------------------------
 
@@ -60,10 +60,12 @@ CREATE TABLE `joueur` (
   `pass` char(40) collate utf8_unicode_ci NOT NULL,
   `points` int(11) NOT NULL default '0',
   `nbmatchs` int(11) NOT NULL default '0',
-  `reminder` tinyint(4) NOT NULL default '1',
+  `reminder` tinyint(1) NOT NULL default '1',
+  `online` tinyint(1) NOT NULL default '0',
+  `last_connection` int(11) NOT NULL default '0',
   `idgroups` varchar(11) collate utf8_unicode_ci NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=19 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=25 ;
 
 -- --------------------------------------------------------
 
@@ -76,9 +78,9 @@ CREATE TABLE `journee` (
   `id` int(11) NOT NULL auto_increment,
   `date` int(11) NOT NULL,
   `numero` int(11) NOT NULL,
-  `terminated` tinyint(4) NOT NULL default '0',
+  `terminated` tinyint(1) NOT NULL default '0',
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=27 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=34 ;
 
 -- --------------------------------------------------------
 
@@ -94,7 +96,7 @@ CREATE TABLE `match` (
   `equipe2` varchar(32) collate utf8_unicode_ci NOT NULL,
   `idjournee` int(11) NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=111 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=135 ;
 
 -- --------------------------------------------------------
 
@@ -109,7 +111,7 @@ CREATE TABLE `message` (
   `texte` text collate utf8_unicode_ci NOT NULL,
   `idjoueur` int(11) NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=310 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=344 ;
 
 -- --------------------------------------------------------
 
@@ -126,7 +128,7 @@ CREATE TABLE `news` (
   `image` varchar(32) collate utf8_unicode_ci NOT NULL default 'bulle.png',
   `idjoueur` int(11) NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=7 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=11 ;
 
 -- --------------------------------------------------------
 
