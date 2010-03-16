@@ -1,4 +1,5 @@
 <?php
+require_once('constants.php');
 
 /*
 Gestion de la table joueur
@@ -186,3 +187,67 @@ function joueur_update_groupes($id, $groupes) {
 	return sql_query($sql);
 }
 
+/*********************************/
+/* Gestion des membres 'online'
+/*********************************/
+
+function joueur_is_online($id) {
+	$sql = "SELECT online
+			FROM joueur
+			WHERE id = $id
+			LIMIT 1;";
+			
+	$result = mysql_fetch_row(sql_query($sql))
+	return $result[0];
+}
+
+function joueur_refresh($id) {
+	$date = time();
+	$sql = "UPDATE joueur
+			SET online = 1,
+				last_connection = $date
+			WHERE id = $id
+			LIMIT 1;";
+			
+	return sql_query($sql);
+}
+
+function joueur_set_offline($id) {
+	$sql = "UPDATE joueur
+			SET online = 0,
+				last_connection = 0
+			WHERE id = $id
+			LIMIT 1;";
+			
+	return sql_query($sql);
+}
+
+function joueur_timeout() {
+	$date = time();
+	$timeout = TIMEOUT;
+	$sql = "UPDATE joueur
+			SET online = 0,
+				last_connection = 0
+			WHERE last_connection < $date-($timeout*60);";
+			
+	return sql_query($sql);
+}
+
+function joueur_get_nbconnect() {
+	$sql = "SELECT COUNT(id) nbconnect
+			FROM joueur
+			WHERE online = 1;";
+			
+	$result = mysql_fetch_row(sql_query($sql))
+	return $result[0];	
+}
+
+function joueur_get_listconnect() {
+	$sql = "SELECT pseudo
+			FROM joueur
+			WHERE online = 1
+			AND last_connection <> 0
+			ORDER BY pseudo;";
+	
+	return sql_query($sql);
+}
