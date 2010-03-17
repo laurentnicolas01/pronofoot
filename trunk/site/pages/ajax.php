@@ -33,8 +33,6 @@ switch($_REQUEST['action']) {
 		break;
 	
 	case 'message_insert':
-		require_once(get_file('lib/constants.php'));
-		require_once(get_file('lib/mysql.php'));
 		require_once(get_file('lib/utils.php'));
 		require_once(get_file('lib/message.php'));
 		require_once(get_file('lib/joueur.php'));
@@ -44,6 +42,22 @@ switch($_REQUEST['action']) {
 		if($texte != '' && joueur_id_exists($idjoueur) && message_create($texte,$idjoueur)) {
 			echo 'ok&&&';
 			message_print(joueur_get_pseudo($idjoueur), time(), stripslashes($texte));
+		}
+		else
+			echo 'pas ok&&&';
+		break;
+		
+	/* Member list ------------------------------- */
+	
+	case 'members_connected':
+		require_once(get_file('lib/utils.php'));
+		require_once(get_file('lib/joueur.php'));
+		
+		$list_connected = joueur_get_listconnect();
+		if(mysql_num_rows($list_connected)) {
+			echo 'ok&&&'.joueur_print_nbco(joueur_get_nbconnect()).'&&&<p class="strong table">Liste des membres connectés</p>';
+			while($co = mysql_fetch_row($list_connected))
+				echo '<p class="bgreen pseudo_co">'.$co[0].'</p>';
 		}
 		else
 			echo 'pas ok&&&';
