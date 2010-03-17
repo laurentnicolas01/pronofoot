@@ -18,8 +18,13 @@ if(!$_SESSION['is_connect']) {
 		<p class="key"><a href="password">Mot de passe oublié ?</a></p>
 	</form><?php 
 }
-else { ?>
+else { 
+	joueur_refresh($_SESSION['id']);
+	joueur_timeout();
+	$nb = joueur_get_nbconnect();
+	?>
 	<span class="success">Vous êtes connecté</span>
 	<p class="user"><?php echo $_SESSION['pseudo']; ?> (<a href="profil">mon profil</a>)</p>
+	<p class="group"><?php echo '<span id="nbco">'.joueur_print_nbco($nb).'</span> en ligne' ?> (<a id="see_list" href="javascript:;">voir liste</a>)</p>
 	<p class="disconnect"><a href="deconnexion">Déconnexion</a></p><?php
 }

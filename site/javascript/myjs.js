@@ -1,4 +1,13 @@
 $(function() {
+	/* General */
+	function start_loading(elem) {
+		elem.html('&nbsp<img src="images/ajax-loader.gif" alt="Load..." id="iload" />');
+	}
+	
+	function stop_loading() {
+		$('img#iload').remove();
+	}
+
 	/* Style */
 	function set_sub() {
 		$('#menu ul li ul li a').addClass('ui-widget-header').addClass('sub');
@@ -32,14 +41,6 @@ $(function() {
 		div = $('div#message_list'),
 		nbmess = $('select#nbmess');
 	
-	function start_loading() {
-		loading.html('&nbsp<img src="images/ajax-loader.gif" alt="Load..."');
-	}
-	
-	function stop_loading() {
-		loading.html('');
-	}
-	
 	function update_list(div) {
 		div.load('pages/ajax.php', {action:'message_update',nb:nbmess.val()}, function(result) {
 			div.html(result);
@@ -48,12 +49,12 @@ $(function() {
 	}
 
 	$('select#nbmess').change(function() {
-		start_loading();
+		start_loading(loading);
 		update_list(div);
 	});
 
 	$('#submit_message, #hidden_submit').click(function() {
-		start_loading();
+		start_loading(loading);
 		
 		var message = $('input#message').val(),
 			id = $('input#idj').val() / 2;
@@ -68,7 +69,7 @@ $(function() {
 			success: function(result) {
 				result = result.split('&&&');
 				if(result[0] == 'ok') {
-					$('input#message').val(' ');
+					$('input#message').val('');
 					div.prepend(result[1]);
 				}
 				stop_loading();
@@ -88,5 +89,41 @@ $(function() {
 	/* Historique */
 	$('select[name=idj_asked]').change(function() {
 		$('input[name=submit_asked]').click();
+	});
+	
+	/* Members */
+	$('body').append('<div id="connected_members" class="ui-helper-hidden"></div>');
+	
+	var div_co = $('div#connected_members'),
+		decalX = div_co.width() * -1.4,
+		decalY = 15;
+	
+	$('a#see_list').hover(function(e) {
+		div_co.css('top', e.pageY + decalY).css('left', e.pageX + decalX).show().load();
+	}, function() {
+		div_co.hide();
+	})
+	.mousemove(function(e) {
+		div_co.css('top', e.pageY + decalY).css('left', e.pageX + decalX);
+	});
+	
+	div_co.load(function() {
+		start_loading(div_co);
+		$.ajax({
+			type: "POST",
+			url: "pages/ajax.php",
+			data: "action=members_connected",
+			
+			success: function(result) {
+				result = result.split('&&&');
+				stop_loading();
+				if(result[0] == 'ok') {
+					$('span#nbco').html(result[1]);
+					div_co.html(result[2]);
+				}
+				else
+					div_co.html('<span class="error">Erreur de traitement</span>');				
+			}
+		});
 	});
 });

@@ -191,16 +191,6 @@ function joueur_update_groupes($id, $groupes) {
 /* Gestion des membres 'online'
 /*********************************/
 
-function joueur_is_online($id) {
-	$sql = "SELECT online
-			FROM joueur
-			WHERE id = $id
-			LIMIT 1;";
-			
-	$result = mysql_fetch_row(sql_query($sql))
-	return $result[0];
-}
-
 function joueur_refresh($id) {
 	$date = time();
 	$sql = "UPDATE joueur
@@ -238,7 +228,7 @@ function joueur_get_nbconnect() {
 			FROM joueur
 			WHERE online = 1;";
 			
-	$result = mysql_fetch_row(sql_query($sql))
+	$result = mysql_fetch_row(sql_query($sql));
 	return $result[0];	
 }
 
@@ -251,3 +241,8 @@ function joueur_get_listconnect() {
 	
 	return sql_query($sql);
 }
+
+function joueur_print_nbco($nb) {
+	return $nb.' '.plural('membre', $nb);
+}
+

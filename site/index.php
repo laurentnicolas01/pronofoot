@@ -30,6 +30,10 @@ if(!$_SESSION['is_connect']) {
 }
 elseif(isset($_GET['deconnexion'])) {
 	// demande de déconnexion
+	if(isset($_SESSION['id'])) {
+		$deco_id = intval($_SESSION['id']);
+		joueur_set_offline($deco_id);
+	}
 	session_destroy();
 	$_SESSION['is_connect'] = false;
 }
@@ -124,7 +128,7 @@ $authorized = array('accueil','contact','inscription','password');
 	<script type="text/javascript" src="javascript/jquery.timers-1.2.js"></script>
 	<script type="text/javascript" src="javascript/myjs.js"></script>
 	
-	<!-- Stats Google
-	<script type="text/javascript" src="javascript/google-analytics.js"></script> -->
+	<!-- Stats Google -->
+	<script type="text/javascript" src="javascript/google-analytics.js"></script>
 </body>
 </html>

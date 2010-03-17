@@ -108,11 +108,6 @@ span.error {
 	color: #D02626;
 }
 
-span.save {
-	background: url('../images/icons/disk.png') no-repeat;
-	color: black;
-}
-
 span.list {
 	background: url('../images/icons/bullet_blue.png') no-repeat;
 }
@@ -160,7 +155,9 @@ ul.listmenu li a:hover {
 
 /* Liens flèches et autres icones ---------------------------------- */
 
-.back, .go, .connect, .disconnect, .color, .pic, .add, .delete, .edit, .refresh, .user, .lock {
+.back, .go, .connect, .disconnect, .color,
+.pic, .add, .delete, .edit, .refresh, .user,
+.lock, .group, .save, .bgreen {
 	padding-left: 20px;
 	min-height: 16px;
 }
@@ -185,4 +182,7 @@ ul.listmenu li a:hover {
 .user	{ background:url('../images/icons/user.png') no-repeat 0 center; }
 .key	{ background:url('../images/icons/key.png') no-repeat 0 center; }
 .lock	{ background:url('../images/icons/lock.png') no-repeat 0 center; }
+.group	{ background:url('../images/icons/group.png') no-repeat 0 center; }
+.save	{ background:url('../images/icons/disk.png') no-repeat 0 center; }
+.bgreen	{ background:url('../images/icons/bullet_green.png') no-repeat 0 center; }
 

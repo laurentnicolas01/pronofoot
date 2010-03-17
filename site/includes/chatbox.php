@@ -2,7 +2,7 @@
 	<form action="<?php echo $_SERVER['REQUEST_URI']; ?>" method="post">
 	<p id="inputmess">
 		<input type="hidden" name="idj" id="idj" value="<?php echo $_SESSION['id']*2; ?>" />
-		<input type="text" name="message" id="message" class="ui-widget-content ui-corner-all" value=" " />
+		<input type="text" name="message" id="message" class="ui-widget-content ui-corner-all" />
 		<input type="submit" id="hidden_submit" class="ui-helper-hidden" />
 		<a href="javascript:;" id="submit_message"><img src="images/icons/add.png" alt="Envoyer" /></a>
 		<span id="chat_loading"></span>

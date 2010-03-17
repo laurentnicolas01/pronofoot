@@ -140,7 +140,7 @@ body {
 }
 
 #chatbox p#inputmess { line-height:1.5; }
-#chatbox p#inputmess input#message { width:160; height:22px; border:1px solid #A6C9E2; }
+#chatbox p#inputmess input#message { width:160; height:22px; border:1px solid #A6C9E2; padding-left:5px; }
 #chatbox p#inputmess img { position:relative; top:3px; }
 
 #chatbox #message_list .message { margin:7px 0; border-top:1px solid #CCCCCC; padding-top:5px; margin-right:10px; }
@@ -167,6 +167,20 @@ p.acc_dec {
 
 select[name=idj_asked] {
 	width:45px;
+}
+
+div#connected_members {
+	position:absolute;
+	background:white;
+	padding:5px 15px 10px 15px;
+	border:1px solid silver;
+	min-width:150px;
+	-moz-border-radius:7px;
+	-webkit-border-radius:7px;
+}
+
+div#connected_members p.pseudo_co {
+	font-size:12px;
 }
 
 div#answers {
