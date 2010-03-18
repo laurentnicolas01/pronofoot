@@ -1,3 +1,4 @@
+<h2>Mon profil</h2>
 <?php
 // Quelle équipe supportez vous ? Email publique ? Image ?
 require_once('lib/joueur.php');

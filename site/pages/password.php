@@ -1,9 +1,7 @@
+<h2>Récupération de mot de pass</h2>
 <?php
-if($_SESSION['is_connect']) {
-	// Redirection permettant de garder une certaine cohérence
-	include_once('accueil.php');
-}
-else {
+if($_SESSION['is_connect'])
+	header('location: accueil'); // Redirection de cohérence (status<->page)
 
 require_once('lib/constants.php');
 require_once('lib/utils.php');
@@ -49,5 +47,10 @@ echo '<p>Veuillez entrer l\'adresse mail du compte pour lequel vous avez perdu l
 	<p>
 		<input type="submit" name="submit-mail" value="Envoyer" />
 	</p>
+	<p>
+		Code de sécurité : &nbsp;<strong><?php echo $confirm=substr(md5(rand()), 3, 4); ?></strong><br />
+		<label for="confirm">Merci de recopier le code donné ci-dessus : </label>
+		<input type="text" name="confirm" id="confirm" maxlength="4" size="4" />
+		<input type="hidden" name="rand" id="rand" value="<?php echo $confirm; ?>" />
+	</p>
 </form>
-<?php } ?>

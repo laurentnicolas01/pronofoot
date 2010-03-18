@@ -135,7 +135,7 @@ body {
 #chatbox #message_list {
 	margin-top:12px;
 	width:244px;
-	max-height:400px;
+	max-height:420px;
 	overflow:auto;
 }
 
@@ -282,7 +282,8 @@ p#question {
 
 #footer p {
 	text-align:center;
-	padding-top:4px !important;
+	padding-top:3px !important;
+	font-size:11px;
 }
 
 /* rustines jquery */

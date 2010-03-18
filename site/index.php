@@ -1,6 +1,9 @@
 <?php
 session_start();
 
+// Tampon qui intercepte tous les output jusqu'à ob_end_flush
+ob_start();
+
 require_once('lib/constants.php');
 error_reporting(E_ALL | E_STRICT);
 
@@ -39,7 +42,7 @@ elseif(isset($_GET['deconnexion'])) {
 }
 
 $idadmins = array(1,8);
-$restricted = array('add','maj','scores','mailing');
+$restricted = array('add','maj','scores','mailing','demandes');
 $authorized = array('accueil','contact','inscription','password');
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -47,7 +50,7 @@ $authorized = array('accueil','contact','inscription','password');
 <head>
 	<title><?php echo TITLE; ?></title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<meta name="author" content="Julien P., Arthur F." />
+	<meta name="author" content="Julien P." />
 	<meta name="robots" content="noindex, nofollow" />
 
 	<!-- css -->
@@ -75,20 +78,16 @@ $authorized = array('accueil','contact','inscription','password');
 			$page = isset($_GET['p']) ? $_GET['p'] : 'accueil';
 			$path = 'pages/'.$page.'.php';
 			
-			if(in_array($page, $restricted) && (!$_SESSION['is_connect'] || !in_array($_SESSION['id'], $idadmins))) {
-				echo '<p class="error">Vous n\'êtes pas autorisé à consulter cette page</p>';
-			}				
-			elseif(in_array($page, $authorized) || ($_SESSION['is_connect'] && file_exists($path))) {
-				if($page == 'mypronos') $page = 'mes Pronos'; // ~~~~~~
-				echo '<h2>'.ucfirst($page).'</h2>';
+			if(in_array($page, $authorized))
 				require_once($path);
-			}
-			elseif(!file_exists($path)) {
+			elseif(in_array($page, $restricted) && (!$_SESSION['is_connect'] || !in_array($_SESSION['id'], $idadmins)))
+				echo '<p class="error">Vous n\'êtes pas autorisé à consulter cette page</p>';				
+			elseif(($_SESSION['is_connect'] && file_exists($path)))
+				require_once($path);
+			elseif(!file_exists($path))
 				echo '<p class="error">La page demandée n\'existe pas</p>';
-			}
-			else {
+			else
 				echo '<p class="error">Vous n\'êtes pas autorisé à consulter cette page</p>';
-			}
 			?>
 		</div>
 		<div id="member" class="ui-dialog ui-widget ui-widget-content ui-corner-all">
@@ -107,28 +106,30 @@ $authorized = array('accueil','contact','inscription','password');
 		<!-- bottom -->
 		<!-- <div id="pub">adsense</div> -->
 		<div id="footer" class="ui-widget-header">
-			<?php include_once('includes/footer.php'); ?>
+			<?php 
+				include_once('includes/footer.php');
+				ob_end_flush(); // Envoie sur la sortie le contenu du tampon et le vide
+			?>
 		</div>
 	</div>
 	
 	<!-- jQuery Libs - deployed -->
 	<script src="http://www.google.com/jsapi" type="text/javascript"></script>
 	<script type="text/javascript">
-		google.load("jquery", "1.4.2");
-		// UI à mettre ici quand google le supportera
+		google.load('jquery', '1.4.2');
 	</script>
 	
 	<!-- jQuery Libs - dev -->
 	<!--
-	<script src="javascript/jquery-1.4.2.min.js" type="text/javascript"></script>-->
+	<script src="javascript/jquery-1.4.2.min.js" type="text/javascript"></script>
 	<script src="javascript/jquery-ui-1.8.min.js" type="text/javascript"></script>
-	
+	-->
 	
 	<!-- jQuery add-ons & perso -->
 	<script type="text/javascript" src="javascript/jquery.timers-1.2.js"></script>
 	<script type="text/javascript" src="javascript/myjs.js"></script>
 	
-	<!-- Stats Google -->
-	<script type="text/javascript" src="javascript/google-analytics.js"></script>
+	<!-- Stats Google
+	<script type="text/javascript" src="javascript/google-analytics.js"></script> -->
 </body>
 </html>

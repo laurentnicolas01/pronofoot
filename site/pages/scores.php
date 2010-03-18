@@ -1,3 +1,4 @@
+<h2>Saisie des scores</h2>
 <?php
 require_once('lib/journee.php');
 require_once('lib/match.php');
