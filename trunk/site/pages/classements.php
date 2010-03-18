@@ -1,3 +1,4 @@
+<h2>Classements</h2>
 <?php
 require_once('lib/joueur.php');
 require_once('lib/groupe.php');

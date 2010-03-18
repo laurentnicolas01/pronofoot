@@ -1,3 +1,4 @@
+<h2>Contact</h2>
 <?php
 require_once('lib/utils.php');
 require_once('lib/constants.php');

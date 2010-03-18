@@ -1,9 +1,7 @@
+<h2>Demande de compte</h2>
 <?php
-if($_SESSION['is_connect']) {
-	// Redirection permettant de garder une certaine cohérence
-	include_once('accueil.php');
-}
-else {
+if($_SESSION['is_connect'])
+	header('location: accueil'); // Redirection de cohérence (status<->page)
 
 require_once('lib/utils.php');
 require_once('lib/constants.php');
@@ -126,7 +124,7 @@ else {
 		<span class="info">Les joueurs sont repartis par groupe, les choix ci-dessous ne sont pas définitifs et pourront changer sur simple demande</span>
 	</p>
 	<p>
-		<label for="groupe">Séléctionnez un groupe :</label><br />
+		<label for="groupe">Séléctionnez un groupe (facultatif) :</label><br />
 		<?php
 		$groups = groupe_get_all();
 		echo '<select name="groupe" id="groupe">';
@@ -136,7 +134,7 @@ else {
 		?>
 	</p>
 	<p>
-		<label for="new_groupe">Nouveau groupe (facultatif) :</label><br />
+		<label for="new_groupe">Ou proposez un nouveau groupe :</label><br />
 		<input type="text" name="new_groupe" id="new_groupe" size="30" value="<?php echo $new_groupe ?>" />
 	</p>
 	<p>
@@ -149,4 +147,3 @@ else {
 		<input type="submit" name="send" id="send" value="Valider" />
 	</p>
 </form>
-<?php }

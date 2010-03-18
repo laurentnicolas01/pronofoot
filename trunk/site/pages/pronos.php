@@ -1,3 +1,4 @@
+<h2>Tous les pronostics</h2>
 <?php
 require_once('lib/prono.php');
 require_once('lib/journee.php');

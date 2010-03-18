@@ -1,3 +1,4 @@
+<h2>Accueil</h2>
 <?php
 if(!$_SESSION['is_connect']) { ?>
 	<div class="bienvenue">

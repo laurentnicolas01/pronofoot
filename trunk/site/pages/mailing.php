@@ -1,3 +1,4 @@
+<h2>Envoi de mails aux membres</h2>
 <?php
 require_once('lib/utils.php');
 require_once('lib/constants.php');

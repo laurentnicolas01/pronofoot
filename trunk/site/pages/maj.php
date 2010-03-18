@@ -1,3 +1,4 @@
+<h2>Admin : mises à jour</h2>
 <?php
 require_once('lib/journee.php');
 require_once('lib/match.php');

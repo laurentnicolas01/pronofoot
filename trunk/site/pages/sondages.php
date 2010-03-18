@@ -1,3 +1,4 @@
+<h2>Sondage</h2>
 <?php
 require_once('lib/sondage.php');
 /******************/
