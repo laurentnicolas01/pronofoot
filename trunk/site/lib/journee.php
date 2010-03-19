@@ -172,4 +172,12 @@ function journee_locked($id) {
 	return $date['timestamp'] < time();
 }
 
+function journee_update_date($id,$timestamp) {
+	$sql = "UPDATE journee
+			SET date = $timestamp
+			WHERE id = $id
+			LIMIT 1;";
+	
+	return sql_query($sql);
+}
 
