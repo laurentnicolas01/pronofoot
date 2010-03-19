@@ -26,16 +26,18 @@ if(isset($_POST['submit_journee'])) {
 		echo '<span class="error">Pour ajouter une journée, il faut préciser le numéro et la date/heure du premier match</span>';
 	else {
 		$numero = intval($_POST['numero']);
-		$dh = explode('/',$_POST['dateheure']);
-		$timestamp = mktime($dh[0],$dh[1],0,$dh[3],$dh[2],$dh[4]);
+		$timestamp = get_timestamp($_POST['dateheure'],'/');
 		
-		if(journee_exists('',$numero, $timestamp))
-			echo '<span class="error">La journée que vous voulez ajouter existe déjà</span>';
-		else
-			if(journee_add($numero, $timestamp))
-				echo '<span class="success">Journée ajoutée avec succès : <strong>Journée '.$numero.' ('.time_to_str($timestamp).')</strong></span>';
+		if($timestamp) {
+			if(journee_exists('',$numero, $timestamp))
+				echo '<span class="error">La journée que vous voulez ajouter existe déjà</span>';
 			else
-				echo '<span class="error">Il y a eu une erreur lors de l\'ajout en base de données</span>';
+				if(journee_add($numero, $timestamp))
+					echo '<span class="success">Journée ajoutée avec succès : <strong>Journée '.$numero.' ('.time_to_str($timestamp).')</strong></span>';
+				else
+					echo '<span class="error">Il y a eu une erreur lors de l\'ajout en base de données</span>';
+		}
+		else echo '<span class="error">Le format de la date entrée est invalide</span>';
 	}
 }
 
@@ -105,9 +107,9 @@ $journees_actives = journee_get_next($all = true);
 		?>
 		</select>
 		<br /><br />
-		<label>Heure/Date premier match : </label>
+		<label>Date/Heure premier match : </label>
 		<input type="text" name="dateheure" id="dateheure" />
-		<p>(heure/minute/jour/mois/annee ; 20/30/12/09/2009)</p>
+		<p>(jour/mois/annee/heure/minute ; 25/11/2009/20/30)</p>
 	</p>
 	<p>
 		<input type="submit" name="submit_journee" id="submit_journee" value="Ajouter journée" />

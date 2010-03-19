@@ -428,3 +428,15 @@ function send_mail($s, $r, $n, $o, $m)
 	return mail($receiver, $object, $content, $headers);
 }
 
+
+/**
+ * Permet d'obtenir un timestamp à partir d'une chaine qui contient jour/mois/annee/heure/minute
+ * @param string : la chaine contenant les infos
+ * @param sep : le caractère séparateur des infos ('/' dans l'exemple ci-dessus)
+ * @return le timestamp correspondant à la chaine
+ */
+function get_timestamp($string, $sep) {
+	if(!preg_match('/^([0-9]{2}\/){2}([0-9]{4}\/){1}([0-9]{2}\/[0-9]{2})$/', $string)) return 0;
+	$dh = explode($sep,$string);
+	return mktime($dh[3],$dh[4],0,$dh[1],$dh[0],$dh[2]);
+}

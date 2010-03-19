@@ -56,6 +56,23 @@ if(isset($_POST['submit_deli'])) {
 	else
 		echo '<span class="error">Il y a eu une erreur lors de la suppression en base de données</span>';
 }
+
+if(isset($_POST['submit_modj'])) {
+	if($_POST['journees'] == '' || $_POST['dateheure'] == '')
+		echo '<span class="error">Pour mettre à jour une journée, il faut en choisir une dans la liste et préciser la date/heure du premier match</span>';
+	else {
+		$id = intval($_POST['journees']);
+		$timestamp = get_timestamp($_POST['dateheure'],'/');
+		
+		if($timestamp) {
+			if(journee_update_date($id,$timestamp))
+				echo '<span class="success">La date de la journée a bien été mise à jour</span>';
+			else
+				echo '<span class="error">Il y a eu une erreur lors de la mise à jour en base de données</span>';
+		}
+		else echo '<span class="error">Le format de la date entrée est invalide</span>';
+	}
+}
 ?>
 <form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>">
 	<p class="strong">Modifier le/les groupe(s) d'un joueur</p>
@@ -156,6 +173,28 @@ if(isset($_POST['submit_deli'])) {
 	</p>
 	<p>
 		<input type="submit" name="submit_deli" id="submit_deli" value="Supprimer" />
-	</p>	
+	</p>
+</form>
+
+<br />
+<form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>">
+	<p class="strong">Modifier heure de début de journée</p>
+	<p>
+		<label>Journée : </label>
+		<?php
+		$journees = journee_get_next($all = true);
+		echo '<select name="journees">';
+		while($journee = mysql_fetch_assoc($journees))
+			echo '<option value="'.$journee['id'].'">'.$journee['numero'].' ('.time_to_str($journee['date']).')&nbsp;&nbsp;</option>';
+		echo '</select>';
+		?>
+	</p>
+	<p>
+		<label>Date/Heure premier match : </label>
+		<input type="text" name="dateheure" id="dateheure" />
+	</p>
+	<p>
+		<input type="submit" name="submit_modj" id="submit_modj" value="Modifier" />
+	</p>
 </form>
 
