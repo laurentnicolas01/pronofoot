@@ -55,6 +55,8 @@ BEGIN
 	(SELECT email, pseudo, pass, idgroups
 	FROM `demande`
 	WHERE id = param_iddemande
+	AND declined = 0
+	AND validated = 0
 	LIMIT 1);
 	
 	UPDATE `demande`

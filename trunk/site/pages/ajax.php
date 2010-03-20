@@ -50,9 +50,12 @@ switch($_REQUEST['action']) {
 	/* Member list ------------------------------- */
 	
 	case 'members_connected':
+		session_start();
 		require_once(get_file('lib/utils.php'));
 		require_once(get_file('lib/joueur.php'));
 		
+		joueur_refresh($_SESSION['id']);
+		joueur_timeout();
 		$list_connected = joueur_get_listconnect();
 		if(mysql_num_rows($list_connected)) {
 			echo 'ok&&&'.joueur_print_nbco(joueur_get_nbconnect()).'&&&<p class="strong table">Liste des membres connectés</p>';
