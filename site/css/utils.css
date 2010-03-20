@@ -161,7 +161,7 @@ ul.listmenu li a:hover {
 	padding-left: 20px;
 	min-height: 16px;
 }
-.rss, .tick, .time, .table, .key {
+.rss, .tick, .cross, .time, .table, .key {
 	padding: 5px 0 5px 23px;
 }
 .disconnect {
@@ -177,6 +177,7 @@ ul.listmenu li a:hover {
 .refresh{ background:url('../images/icons/arrow_refresh.png') no-repeat; }
 .rss	{ background:url('../images/icons/feed.png') no-repeat 0 center; }
 .tick	{ background:url('../images/icons/tick.png') no-repeat 0 center; }
+.cross	{ background:url('../images/icons/cross.png') no-repeat 0 center; }
 .time	{ background:url('../images/icons/time.png') no-repeat 0 center; }
 .table	{ background:url('../images/icons/table.png') no-repeat 0 center; }
 .user	{ background:url('../images/icons/user.png') no-repeat 0 center; }

@@ -126,4 +126,9 @@ $(function() {
 			}
 		});
 	});
+	
+	/* Demandes */
+	$('a.demande_link').click(function() {
+		return confirm('Confirmer ?');
+	});
 });
