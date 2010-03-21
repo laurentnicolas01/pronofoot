@@ -12,10 +12,11 @@ if(!$_SESSION['is_connect']) { ?>
 }
 else {
 	// News
+	echo '<p class="rss"><a href="'.FLUX_RSS.'">Abonnez vous au flux RSS</a></p>';
+	
 	require_once('lib/news.php');
 	$page = isset($_GET['numpage']) ? $_GET['numpage'] : 1;
 	$news = news_get($page*4-4,4);
-	
 
 	while($row = mysql_fetch_assoc($news))
 		echo '<div class="news">
@@ -29,4 +30,3 @@ else {
 		echo '<a href="accueil-'.($page+1).'" class="fright"><img src="images/icons/arrow_right.png" alt=" >" /></a>';
 	
 }
-

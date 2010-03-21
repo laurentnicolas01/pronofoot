@@ -65,7 +65,30 @@ switch($_REQUEST['action']) {
 		else
 			echo 'pas ok&&&';
 		break;
+		
+	/* News */
 	
+	case 'news_add':
+		require_once(get_file('lib/utils.php'));
+		require_once(get_file('lib/news.php'));
+
+		$idj = intval($_POST['idj']);
+		$titre = clean_str($_POST['titre']);
+		$contenu = clean_str_preserve_tags($_POST['contenu']);
+		$image = isset($_POST['image']) ? clean_str($_POST['image']) : '';
+		
+		if($titre != '' && $contenu != '' && $idj != '') {
+			if(news_add($titre, $contenu, $idj, $image)) {
+				news_feed_rss();
+				echo '<p class="success">News ajoutée avec succès</p>';
+			}
+			else
+				echo '<p class="error">Il y a eu une erreur lors de l\'ajout en base de données</p>';
+		}
+		else
+			echo '<p class="error">Il faut remplir tous les champs</p>';
+		break;
+		
 	/* Si l'action n'est pas trouvée ---------- */
 	
 	default:

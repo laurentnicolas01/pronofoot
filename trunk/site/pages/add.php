@@ -1,11 +1,10 @@
 <h2>Admin : création</h2>
 <?php
 require_once('lib/journee.php');
-require_once('lib/match.php');
-require_once('lib/joueur.php');
-require_once('lib/groupe.php');
 
 if(isset($_POST['submit_match'])) {
+	require_once('lib/match.php');
+	
 	$journee = intval($_POST['journee']);
 	$team1 = ucwords(clean_str($_POST['team1']));
 	$team2 = ucwords(clean_str($_POST['team2']));
@@ -42,6 +41,8 @@ if(isset($_POST['submit_journee'])) {
 }
 
 if(isset($_POST['submit_groupe'])) {
+	require_once('lib/groupe.php');
+
 	$nom = clean_str($_POST['nom']);
 	
 	if(groupe_exists($nom))
@@ -49,23 +50,6 @@ if(isset($_POST['submit_groupe'])) {
 	else
 		if(groupe_add($nom))
 			echo '<span class="success">Groupe ajouté avec succès : <strong>'.$nom.'</strong></span>';
-		else
-			echo '<span class="error">Il y a eu une erreur lors de l\'ajout en base de données</span>';
-}
-
-if(isset($_POST['submit_joueur'])) {
-	$mail = clean_str($_POST['mail']);
-	$pseudo = clean_str($_POST['pseudo']);
-	$groupes = clean_str($_POST['groupes']);
-	$pass = clean_str($_POST['pass']);
-	
-	if(joueur_exists($mail))
-		echo '<span class="error">Ce mail est déjà utilisé par un autre joueur</span>';
-	elseif(!valid_email($mail))
-		echo '<span class="error">Le mail saisi n\'est pas valide</span>';
-	else
-		if(joueur_add($mail, $pseudo, crypt_password($pass), $groupes))
-			echo '<span class="success">Joueur ajouté avec succès : <strong>'.$pseudo.' ('.$mail.')</strong></span>';
 		else
 			echo '<span class="error">Il y a eu une erreur lors de l\'ajout en base de données</span>';
 }
@@ -108,8 +92,8 @@ $journees_actives = journee_get_next($all = true);
 		</select>
 		<br /><br />
 		<label>Date/Heure premier match : </label>
-		<input type="text" name="dateheure" id="dateheure" />
-		<p>(jour/mois/annee/heure/minute ; 25/11/2009/20/30)</p>
+		<input type="text" name="dateheure" id="dateheure" /><br /><br />
+		<span class="smalltext">(jour/mois/annee/heure/minute ; 25/11/2009/20/30)</span>
 	</p>
 	<p>
 		<input type="submit" name="submit_journee" id="submit_journee" value="Ajouter journée" />
@@ -130,30 +114,29 @@ $journees_actives = journee_get_next($all = true);
 
 <br /><!-- ------------------------------------- -->
 <form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>">
-	<p class="strong">Ajouter un joueur</p>
+	<p class="strong">Ajouter une news</p>
 	<p>
-		Groupes :<br />
+		<input type="hidden" name="idposteur" value="<?php echo isset($_SESSION['id']) ? $_SESSION['id'] : '' ?>" />
+		<label for="titre">Titre : </label><br />
+		<input type="text" name="titre" id="titre" size="50" />
+		<br /><br />
+		<label>Contenu : </label><br />
+		<textarea name="contenu" id="contenu" rows="10" cols="50"></textarea>
+	</p>
+	<p>
+		<label for="image">Image : </label><br />
+		<input type="text" name="image" id="image" disabled="disabled" size="30" />
+		&nbsp;<img src="images/icons/cross.png" alt="clear" id="clear_img_news" /><br /><br />
 		<?php
-		$groupes = groupe_get_all();
-		while($groupe = mysql_fetch_assoc($groupes))
-			echo '('.$groupe['id'].') '.$groupe['nom'].'<br />';
+		$images = glob('images/news/*');
+        foreach($images as $img) {
+			echo '<img src="'.$img.'" alt="'.basename($img).'" class="add_img_news" />';
+		}
 		?>
-		<span class="smalltext">(IDs à séparer par des virgules)</span>
+		<br /><br /><span class="smalltext">Cliquez sur l'image que vous voulez utiliser pour la news</span>
 	</p>
 	<p>
-		<label>Mail : </label><br />
-		<input type="text" name="mail" id="mail" />
-		<br /><br />
-		<label>Pseudo : </label><br />
-		<input type="text" name="pseudo" id="pseudo" />
-		<br /><br />
-		<label>Groupe(s) : </label><br />
-		<input type="text" name="groupes" id="groupes" />
-		<br /><br />		
-		<label>Pass : </label><br />
-		<input type="password" name="pass" id="pass" />
+		<input type="submit" name="submit_news" id="submit_news" value="Ajouter news" />
 	</p>
-	<p>
-		<input type="submit" name="submit_joueur" id="submit_joueur" value="Ajouter joueur" />
-	</p>	
 </form>
+<div id="news_result"></div>

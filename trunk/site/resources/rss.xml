@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<rss version="2.0">
+	<channel>
+		<title>Prono Foot</title>
+		<link>http://pronofoot.julienp.fr</link>
+		<description>Les dernières news</description>
+		<lastBuildDate>Mon, 22 Mar 2010 00:34:48 +0100</lastBuildDate>
+		<language>fr</language>
+
+                <image>
+                        <title>Prono Foot - News</title>
+                        <url>http://pronofoot.julienp.fr/images/rss_ballon.png</url>
+                        <link>http://pronofoot.julienp.fr</link>
+                        <width>64</width>
+                        <height>64</height>
+                </image>
+		<item>
+			<title>dsf</title>
+			<link>http://pronofoot.julienp.fr/accueil</link>
+			<description>sfdf</description>
+			<pubDate>Sun, 21 Mar 2010 23:51:52 +0100</pubDate>
+		</item>
+		<item>
+			<title>sdf</title>
+			<link>http://pronofoot.julienp.fr/accueil</link>
+			<description>wfdsf</description>
+			<pubDate>Sun, 21 Mar 2010 23:51:16 +0100</pubDate>
+		</item>
+		<item>
+			<title>zefez</title>
+			<link>http://pronofoot.julienp.fr/accueil</link>
+			<description>zrtggvfsf</description>
+			<pubDate>Sun, 21 Mar 2010 23:50:35 +0100</pubDate>
+		</item>
+		<item>
+			<title>qsd</title>
+			<link>http://pronofoot.julienp.fr/accueil</link>
+			<description>sdqqd</description>
+			<pubDate>Sun, 21 Mar 2010 23:48:10 +0100</pubDate>
+		</item>
+		<item>
+			<title>2nd ajax test</title>
+			<link>http://pronofoot.julienp.fr/accueil</link>
+			<description>undefined</description>
+			<pubDate>Sun, 21 Mar 2010 23:47:05 +0100</pubDate>
+		</item>
+		<item>
+			<title>2nd ajax test</title>
+			<link>http://pronofoot.julienp.fr/accueil</link>
+			<description>undefined</description>
+			<pubDate>Sun, 21 Mar 2010 23:46:46 +0100</pubDate>
+		</item>
+		<item>
+			<title>First ajax test</title>
+			<link>http://pronofoot.julienp.fr/accueil</link>
+			<description>undefined</description>
+			<pubDate>Sun, 21 Mar 2010 23:45:22 +0100</pubDate>
+		</item>
+		<item>
+			<title>lol</title>
+			<link>http://pronofoot.julienp.fr/accueil</link>
+			<description>lol</description>
+			<pubDate>Sun, 21 Mar 2010 23:30:58 +0100</pubDate>
+		</item>
+		<item>
+			<title>My FINAL news added via GUI</title>
+			<link>http://pronofoot.julienp.fr/accueil</link>
+			<description>lol</description>
+			<pubDate>Sun, 21 Mar 2010 23:27:30 +0100</pubDate>
+		</item>
+		<item>
+			<title>My 6th news added via GUI</title>
+			<link>http://pronofoot.julienp.fr/accueil</link>
+			<description>Very nice job my dear don't you think oh no i didn't saiy what i did say Very nice job my dear don't you think oh no i didn't saiy what i did say Very nice job my dear don't you think oh no i didn't saiy what i did say Very nice job my dear don't you think oh no i didn't saiy what i did say 
+
+Very nice job my dear don't you think oh no i didn't saiy what i did say Very nice job my dear don't you think oh no i didn't saiy what i did say</description>
+			<pubDate>Sun, 21 Mar 2010 23:07:22 +0100</pubDate>
+		</item>
+	</channel>
+</rss>

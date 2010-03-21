@@ -1,3 +1,4 @@
+SetEnv PHP_VER 5
 Options +FollowSymlinks
 RewriteEngine On
 RewriteRule ^deconnexion$ index.php?deconnexion [L]
