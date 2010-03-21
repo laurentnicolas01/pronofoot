@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-// Tampon qui intercepte tous les output jusqu'à ob_end_flush
+// Tampon qui intercepte tous les outputs jusqu'à ob_end_flush
 ob_start();
 
 require_once('lib/constants.php');
@@ -58,6 +58,9 @@ $authorized = array('accueil','contact','inscription','password');
 	
 	<!-- website mini-icon -->
 	<link rel="icon" href="images/icons/sport_soccer.png" type="image/png" />
+	
+	<!-- rss -->
+	<?php if($_SESSION['is_connect']) echo '<link rel="alternate" type="application/rss+xml" href="/resources/rss.xml" title="Prono Foot RSS Feed" />'; ?>
 </head>
 <body>
 	<div id="title">

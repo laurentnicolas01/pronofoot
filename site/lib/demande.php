@@ -60,3 +60,13 @@ function demande_decline($idd) {
 			
 	return sql_query($sql);
 }
+
+function demande_get_mail($idd) {
+	$sql = "SELECT email
+			FROM demande
+			WHERE id = $idd
+			LIMIT 1;";
+	
+	$mail = mysql_fetch_row(sql_query($sql));
+	return $mail[0];
+}

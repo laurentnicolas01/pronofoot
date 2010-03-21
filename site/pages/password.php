@@ -11,6 +11,8 @@ if(isset($_POST['submit-mail'])) {
 	
 	if(!valid_email($mail))
 		echo '<p class="error">Le mail entré est invalide</p>';
+	elseif($_POST['confirm'] != $_POST['rand'])
+		echo '<p class="error">Le code de sécurité ne correspond pas</p>';
 	elseif(!joueur_exists($mail))
 		echo '<p class="error">Ce mail n\'existe pas dans la base de données</p>';
 	else {
@@ -45,12 +47,12 @@ echo '<p>Veuillez entrer l\'adresse mail du compte pour lequel vous avez perdu l
 		<input type="text" name="lost_mail" size="30" />
 	</p>
 	<p>
-		<input type="submit" name="submit-mail" value="Envoyer" />
-	</p>
-	<p>
 		Code de sécurité : &nbsp;<strong><?php echo $confirm=substr(md5(rand()), 3, 4); ?></strong><br />
 		<label for="confirm">Merci de recopier le code donné ci-dessus : </label>
 		<input type="text" name="confirm" id="confirm" maxlength="4" size="4" />
 		<input type="hidden" name="rand" id="rand" value="<?php echo $confirm; ?>" />
+	</p>
+	<p>
+		<input type="submit" name="submit-mail" value="Envoyer" />
 	</p>
 </form>

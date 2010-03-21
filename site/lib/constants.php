@@ -11,6 +11,8 @@ define('DEFAULT_MAIL', 'pronofoot@julienp.fr');
 
 define('WEBLINK', 'http://pronofoot.julienp.fr');
 
+define('FLUX_RSS', 'resources/rss.xml');
+
 // durée timeout pour le status 'online' en minutes
 define('TIMEOUT', 5);
 

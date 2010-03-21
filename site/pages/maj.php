@@ -73,6 +73,12 @@ if(isset($_POST['submit_modj'])) {
 		else echo '<span class="error">Le format de la date entrée est invalide</span>';
 	}
 }
+
+if(isset($_POST['submit_rss'])) {
+	require_once('lib/news.php');
+	news_feed_rss();
+	echo '<p class="success">Flux RSS regénéré avec succès</p>';
+}
 ?>
 <form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>">
 	<p class="strong">Modifier le/les groupe(s) d'un joueur</p>
@@ -195,6 +201,14 @@ if(isset($_POST['submit_modj'])) {
 	</p>
 	<p>
 		<input type="submit" name="submit_modj" id="submit_modj" value="Modifier" />
+	</p>
+</form>
+
+<br />
+<form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>">
+	<p class="strong">Regénérer le flux RSS</p>
+	<p>
+		<input type="submit" name="submit_rss" id="submit_rss" value="Générer RSS" />
 	</p>
 </form>
 
