@@ -44,13 +44,15 @@ if(mysql_num_rows($classement)) {
 			$position = $i == 1 || $joueur['avg'] != $old_value ? $i : $old_position;
 		else
 			$position = $i == 1 || $joueur['points'] != $old_value ? $i : $old_position;
+			
+		$avg_val = $joueur['avg'] != '' ? $joueur['avg'] : 0;
 		
 		echo '<tr>
 		<td>'.$position.'</td>
 		<td>'.$joueur['pseudo'].'</td>
 		<td>'.$joueur['nbmatchs'].'</td>
 		<td>'.$joueur['points'].'</td>
-		<td>'.$joueur['avg'].'</td>
+		<td>'.$avg_val.'</td>
 		</tr>';
 		
 		$old_value = $avg ? $joueur['avg'] : $joueur['points'];

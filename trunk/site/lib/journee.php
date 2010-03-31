@@ -20,7 +20,7 @@ function journee_get_next($all = false) {
 }
 
 function journee_get_current() {
-	$sql = 'SELECT j.id
+	$sql = 'SELECT j.id, j.numero
 			FROM journee j, `match` m
 			WHERE m.idjournee = j.id
 			AND m.score = ""
@@ -67,7 +67,7 @@ function journee_get_all_terminated($is_asc) {
 	$sql = 'SELECT id, numero
 			FROM journee
 			WHERE `terminated` = 1
-			ORDER BY numero '.$order.';';
+			ORDER BY numero '.$order.', date '.$order.';';
 	return sql_query($sql);
 }
 
@@ -75,7 +75,7 @@ function journee_get_last_terminated() {
 	$sql = 'SELECT id, numero
 			FROM journee
 			WHERE `terminated` = 1
-			ORDER BY numero DESC
+			ORDER BY numero DESC, date DESC
 			LIMIT 1;';
 	return mysql_fetch_assoc(sql_query($sql));
 }
@@ -148,7 +148,7 @@ function journee_remain_match($id) {
 }
 
 function journee_get_by_id($id) {
-	$sql = "SELECT *
+	$sql = "SELECT id, numero, date
 			FROM journee
 			WHERE id = '$id'";
 	

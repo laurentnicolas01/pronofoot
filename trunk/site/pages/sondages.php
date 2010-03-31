@@ -21,9 +21,9 @@ $already_done = $old_rep != '';
 /******************/
 /* ANSWERS
 /******************/
-echo '<p class="tick"><a href="javascript:;" id="show_answers">Afficher les réponses</a></p>
+echo '<p class="loupe"><a href="javascript:;" id="show_answers">Afficher les réponses</a></p>
 	<div title="Réponses" id="answers" class="ui-helper-hidden">
-	<div><p class="strong">'.$question.'</p><br />'.$answers.'</div>
+	<div><p class="strong">'.$question.'</p><br />'.$answers.'<br /></div>
 	</div>';
 
 /******************/

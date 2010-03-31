@@ -21,6 +21,7 @@
 			}
 	}
 	else { ?>
+		<li><a href="news">Actualités</a></li>
 		<li><a href="inscription">S'inscrire</a></li><?php
 	} ?>
 </ul>

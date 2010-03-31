@@ -95,7 +95,7 @@ body {
 
 #content {
 	width:620px;
-	min-height:400px;
+	min-height:700px;
 	float:left;
 	margin:0 15px 0 15px;
 	padding-bottom:20px;
@@ -122,20 +122,20 @@ body {
 	margin:4px 0 5px 0;
 }
 
-#member, #chatbox {
+#member, #chatbox, #pub {
 	float:right;
 	width:235px;
 }
 
 #chatbox {
-	margin:10px 0 10px 0;
+	margin:10px 0 5px 0;
 	overflow-x:hidden !important;
 }
 
 #chatbox #message_list {
 	margin-top:12px;
 	width:244px;
-	max-height:420px;
+	max-height:280px;
 	overflow:auto;
 }
 
@@ -183,10 +183,6 @@ div#connected_members p.pseudo_co {
 	font-size:12px;
 }
 
-p#question {
-	margin:10px 190px 10px 0;
-}
-
 .news {
 	clear:both;
 	border:1px solid silver;
@@ -224,15 +220,11 @@ img.add_img_news:hover, img#clear_img_news {
 	cursor:pointer;
 }
 
-#pub {
-	background:#DDDDDD;
-}
-
-#pub, #footer {
+#footer {
 	clear:both;
 }
 
-#menu, #menu ul, #pub, #footer {
+#menu, #menu ul, #footer {
 	height:30px;
 }
 
@@ -284,6 +276,28 @@ img.add_img_news:hover, img#clear_img_news {
 	padding-top:3px !important;
 	font-size:11px;
 }
+
+/* css sprites */
+
+.sprite { background: url('../images/sprites.png') no-repeat top left; }
+.sprite-books { background-position: 0 0; width: 40px; height: 40px; } 
+.sprite-broadcast { background-position: 0 -60px; width: 40px; height: 40px; } 
+.sprite-bubble { background-position: 0 -120px; width: 40px; height: 40px; } 
+.sprite-download { background-position: 0 -180px; width: 40px; height: 40px; } 
+.sprite-earth { background-position: 0 -240px; width: 40px; height: 40px; } 
+.sprite-engineer { background-position: 0 -300px; width: 40px; height: 40px; } 
+.sprite-facebook { background-position: 0 -360px; width: 40px; height: 40px; } 
+.sprite-france { background-position: 0 -420px; width: 40px; height: 40px; } 
+.sprite-graphic { background-position: 0 -480px; width: 40px; height: 40px; } 
+.sprite-harddrive { background-position: 0 -540px; width: 40px; height: 40px; } 
+.sprite-mario { background-position: 0 -600px; width: 40px; height: 40px; } 
+.sprite-mushroom { background-position: 0 -660px; width: 40px; height: 40px; } 
+.sprite-pet { background-position: 0 -720px; width: 40px; height: 40px; } 
+.sprite-poll { background-position: 0 -780px; width: 40px; height: 40px; } 
+.sprite-power { background-position: 0 -840px; width: 40px; height: 40px; } 
+.sprite-reload { background-position: 0 -900px; width: 40px; height: 40px; } 
+.sprite-rss { background-position: 0 -960px; width: 40px; height: 40px; } 
+.sprite-users { background-position: 0 -1020px; width: 40px; height: 40px; }
 
 /* rustines jquery */
 

@@ -14,7 +14,7 @@ if(mysql_num_rows($pronos)) {
 	$nbmatchs = mysql_num_rows($matchs);
 	while($prono = mysql_fetch_assoc($pronos)) {
 		if($nickname == '') {
-			echo '<h3>Tous les pronostics pour la '.display_number($prono['numero']).' journée</h3>
+			echo '<h3>Tous les pronostics pour la '.display_number($journee['numero']).' journée</h3>
 				  <table class="table-contain"><thead class="ui-state-default"><tr><th></th>';
 			while($match = mysql_fetch_assoc($matchs))
 				echo '<th>'.$match['equipe1'].' - '.$match['equipe2'].'</th>';

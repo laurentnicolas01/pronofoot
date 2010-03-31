@@ -8,6 +8,7 @@ require_once('lib/match.php');
 $journees = journee_get_all_terminated($asc = false);
 $selected_journee = isset($_POST['idj_asked']) && journee_exists(intval($_POST['idj_asked'])) ? journee_get_by_id(intval($_POST['idj_asked'])) : journee_get_last_terminated();
 $idjournee = $selected_journee['id'];
+$numjournee = $selected_journee['numero'];
 
 echo '<form method="post" action="'.$_SERVER['REQUEST_URI'].'"><p><label>Afficher l\'historique de la journée : </label><select name="idj_asked">';
 while($journee = mysql_fetch_assoc($journees)) {
@@ -26,7 +27,7 @@ if(mysql_num_rows($pronos)) {
 	$nbmatchs = mysql_num_rows($matchs);
 	while($prono = mysql_fetch_assoc($pronos)) {
 		if($nickname == '') {
-			echo '<h3>Historique des pronostics pour la '.display_number($prono['numero']).' journée</h3>
+			echo '<h3>Historique des pronostics pour la '.display_number($numjournee).' journée</h3>
 				  <table class="table-contain"><thead class="ui-state-default"><tr><th></th>';
 			while($match = mysql_fetch_assoc($matchs))
 				echo '<th>'.$match['equipe1'].' - '.$match['equipe2'].'</th>';

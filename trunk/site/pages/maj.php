@@ -8,11 +8,11 @@ require_once('lib/groupe.php');
 
 
 if(isset($_POST['submit_groupes'])) {
-	$id = intval($_POST['joueurs_g']);
-	$groupes = clean_str($_POST['groupes']);
+	$idg = intval($_POST['joueurs_g']);
+	$new_groupes = clean_str($_POST['groupes']);
 	
-	if(joueur_update_groupes($id, $groupes)) {
-		$joueur = mysql_fetch_assoc(joueur_get($id));
+	if(joueur_update_groupes($idg, $new_groupes)) {
+		$joueur = mysql_fetch_assoc(joueur_get($idg));
 		echo '<span class="success">Les groupes de <strong>'.$joueur['pseudo'].'</strong> ont été modifiés avec succès</span>';
 	}
 	else
@@ -20,38 +20,38 @@ if(isset($_POST['submit_groupes'])) {
 }
 
 if(isset($_POST['submit_delj'])) {
-	$id = intval($_POST['joueurs_d']);
-	$joueur = mysql_fetch_assoc(joueur_get($id));
+	$idj = intval($_POST['joueurs_d']);
+	$joueur = mysql_fetch_assoc(joueur_get($idj));
 	
-	if(joueur_delete($id))
+	if(joueur_delete($idj))
 		echo '<span class="success">Le joueur <strong>'.$joueur['pseudo'].'</strong> a bien été supprimé</span>';
 	else
 		echo '<span class="error">Il y a eu une erreur lors de la suppression en base de données</span>';
 }
 
 if(isset($_POST['submit_delg'])) {
-	$id = intval($_POST['groupe']);
-	$nom = groupe_get_name($id);
+	$idg = intval($_POST['groupe']);
+	$nom = groupe_get_name($idg);
 	
-	if(groupe_delete($id))
+	if(groupe_delete($idg))
 		echo '<span class="success">Le groupe <strong>'.$nom.'</strong> a bien été supprimé</span>';
 	else
 		echo '<span class="error">Il y a eu une erreur lors de la suppression en base de données</span>';
 }
 
 if(isset($_POST['submit_delm'])) {
-	$id = intval($_POST['matchs']);
+	$idm = intval($_POST['matchs']);
 	
-	if(match_delete($id))
+	if(match_delete($idm))
 		echo '<span class="success">Le match a bien été supprimé</span>';
 	else
 		echo '<span class="error">Il y a eu une erreur lors de la suppression en base de données</span>';
 }
 
 if(isset($_POST['submit_deli'])) {
-	$id = intval($_POST['journees']);
+	$idj = intval($_POST['journees']);
 	
-	if(journee_delete($id))
+	if(journee_delete($idj))
 		echo '<span class="success">La journée a bien été supprimée</span>';
 	else
 		echo '<span class="error">Il y a eu une erreur lors de la suppression en base de données</span>';
@@ -61,11 +61,11 @@ if(isset($_POST['submit_modj'])) {
 	if($_POST['journees'] == '' || $_POST['dateheure'] == '')
 		echo '<span class="error">Pour mettre à jour une journée, il faut en choisir une dans la liste et préciser la date/heure du premier match</span>';
 	else {
-		$id = intval($_POST['journees']);
+		$idj = intval($_POST['journees']);
 		$timestamp = get_timestamp($_POST['dateheure'],'/');
 		
 		if($timestamp) {
-			if(journee_update_date($id,$timestamp))
+			if(journee_update_date($idj,$timestamp))
 				echo '<span class="success">La date de la journée a bien été mise à jour</span>';
 			else
 				echo '<span class="error">Il y a eu une erreur lors de la mise à jour en base de données</span>';
@@ -78,6 +78,13 @@ if(isset($_POST['submit_rss'])) {
 	require_once('lib/news.php');
 	news_feed_rss();
 	echo '<p class="success">Flux RSS regénéré avec succès</p>';
+}
+
+if(isset($_POST['submit_xml'])) {
+	$file = clean_str($_POST['file']);
+	$path = clean_str($_POST['path']);
+	generate_sprite_xml($file,$path);
+	echo '<p class="success">Fichier XML regénéré avec succès</p>';
 }
 ?>
 <form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>">
@@ -212,3 +219,18 @@ if(isset($_POST['submit_rss'])) {
 	</p>
 </form>
 
+<br />
+<form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>">
+	<p class="strong">Regénérer un XML de sprites</p>
+	<p>
+		<label>Chemin du fichier XML : </label>
+		<input type="text" name="file" id="file" value="resources/sprites_news.xml" size="30" />
+	</p>
+	<p>
+		<label>Chemin des images : </label>
+		<input type="text" name="path" id="path" value="images/news/*" size="30" />
+	</p>
+	<p>
+		<input type="submit" name="submit_xml" id="submit_xml" value="Générer" />
+	</p>
+</form>

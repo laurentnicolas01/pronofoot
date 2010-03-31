@@ -45,7 +45,7 @@ function news_add($titre, $contenu, $idjoueur, $image = 'reload.png') {
 
 function news_make_results($idjournee) {
 	$num = mysql_fetch_row(sql_query("SELECT numero FROM journee WHERE id = $idjournee LIMIT 1;"));
-	$c = "Pour cette journée, les résultats sont les suivants :<br />";
+	$c = 'Pour cette journée, les résultats sont les suivants :<br /> ';
 	$resultats = joueur_get_resultset($idjournee);
 	while($res = mysql_fetch_assoc($resultats))
 		$c .= joueur_get_stringscore($res['pseudo'],$res['points']).', ';

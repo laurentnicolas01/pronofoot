@@ -1,8 +1,9 @@
 <?php
-session_start();
-
 // Tampon qui intercepte tous les outputs jusqu'à ob_end_flush
-ob_start();
+if(substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip')) ob_start('ob_gzhandler');
+else ob_start();
+
+session_start();
 
 require_once('lib/constants.php');
 error_reporting(E_ALL | E_STRICT);
@@ -43,7 +44,7 @@ elseif(isset($_GET['deconnexion'])) {
 
 $idadmins = array(1,8);
 $restricted = array('add','maj','scores','mailing','demandes');
-$authorized = array('accueil','contact','inscription','password');
+$authorized = array('accueil','contact','inscription','password','news');
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr">
@@ -51,7 +52,8 @@ $authorized = array('accueil','contact','inscription','password');
 	<title><?php echo TITLE; ?></title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<meta name="author" content="Julien P." />
-	<meta name="robots" content="noindex, nofollow" />
+	<meta name="robots" content="index, follow" />
+	<meta name="google-site-verification" content="3j_58lbwspsTkmMWHCMG-BANQyA09wPdHgWVId5rzcc" />
 
 	<!-- css -->
 	<link rel="stylesheet" media="screen" type="text/css" href="css/style.css" />
@@ -60,7 +62,7 @@ $authorized = array('accueil','contact','inscription','password');
 	<link rel="icon" href="images/icons/sport_soccer.png" type="image/png" />
 	
 	<!-- rss -->
-	<?php if($_SESSION['is_connect']) echo '<link rel="alternate" type="application/rss+xml" href="/resources/rss.xml" title="Prono Foot RSS Feed" />'; ?>
+	<link rel="alternate" type="application/rss+xml" href="/resources/rss.xml" title="Prono Foot RSS Feed" />
 </head>
 <body>
 	<div id="title">
@@ -105,30 +107,31 @@ $authorized = array('accueil','contact','inscription','password');
 				<?php include_once('includes/chatbox.php'); ?>
 			</div>
 		</div>
+		<div id="pub" class="ui-dialog ui-widget ui-widget-content ui-corner-all">
+			<div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix">Publicité</div>
+			<div id="adspace" class="center ui-dialog-content ui-widget-content">
+				<!-- <script type="text/javascript" language="javascript" src="http://pub.oxado.com/insert_ad?pub=249856"></script>
+				-->
+			</div>
+		</div>
 		
 		<!-- bottom -->
-		<!-- <div id="pub">adsense</div> -->
 		<div id="footer" class="ui-widget-header">
-			<?php 
-				include_once('includes/footer.php');
-				ob_end_flush(); // Envoie sur la sortie le contenu du tampon et le vide
-			?>
+			<?php include_once('includes/footer.php'); ?>
 		</div>
 	</div>
 	
-	<!-- jQuery Libs - deployed -->
-	<script src="http://www.google.com/jsapi" type="text/javascript"></script>
-	<script type="text/javascript">
-		google.load('jquery', '1.4.2');
-	</script>
+	<!-- jquery libs -->
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
 	
-	<!-- jQuery Libs - dev -->
+	<!-- jquery local libs -->
 	<!--
 	<script src="javascript/jquery-1.4.2.min.js" type="text/javascript"></script>
-	<script src="javascript/jquery-ui-1.8.min.js" type="text/javascript"></script>
+	<script src="javascript/jquery-ui-1.8.custom.min.js" type="text/javascript"></script>
 	-->
 	
-	<!-- jQuery add-ons & perso -->
+	<!-- jquery add-ons & perso -->
 	<script type="text/javascript" src="javascript/jquery.timers-1.2.js"></script>
 	<script type="text/javascript" src="javascript/myjs.js"></script>
 	

@@ -54,6 +54,28 @@ if(isset($_POST['submit_groupe'])) {
 			echo '<span class="error">Il y a eu une erreur lors de l\'ajout en base de données</span>';
 }
 
+if(isset($_POST['submit_news'])) {
+	require_once('lib/utils.php');
+	require_once('lib/news.php');
+
+	$idp = intval($_POST['idposteur']);
+	$titre = clean_str($_POST['titre']);
+	$contenu = clean_str_preserve_tags($_POST['contenu']);
+	$image = isset($_POST['image']) ? clean_str($_POST['image']) : '';
+	
+	if($titre != '' && $contenu != '' && $idp != '') {
+		if(news_add($titre, $contenu, $idp, $image)) {
+			news_feed_rss();
+			echo '<p class="success">News ajoutée avec succès</p>';
+		}
+		else
+			echo '<p class="error">Il y a eu une erreur lors de l\'ajout en base de données</p>';
+	}
+	else
+		echo '<p class="error">Il faut remplir tous les champs</p>';
+}
+else $contenu = '';
+
 $journees_actives = journee_get_next($all = true);
 ?>
 <form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>">
@@ -121,22 +143,24 @@ $journees_actives = journee_get_next($all = true);
 		<input type="text" name="titre" id="titre" size="50" />
 		<br /><br />
 		<label>Contenu : </label><br />
-		<textarea name="contenu" id="contenu" rows="10" cols="50"></textarea>
+		<textarea name="contenu" id="contenu" rows="10" cols="50"><?php echo $contenu; ?></textarea>
 	</p>
 	<p>
 		<label for="image">Image : </label><br />
-		<input type="text" name="image" id="image" disabled="disabled" size="30" />
+		<input type="text" name="image_dis" id="image_dis" disabled="disabled" size="30" />
+		<input type="hidden" name="image" id="image" />
 		&nbsp;<img src="images/icons/cross.png" alt="clear" id="clear_img_news" /><br /><br />
 		<?php
-		$images = glob('images/news/*');
-        foreach($images as $img) {
-			echo '<img src="'.$img.'" alt="'.basename($img).'" class="add_img_news" />';
+		$xml = simplexml_load_file('resources/sprites_news.xml');
+		$images = $xml->image;
+        foreach($xml as $img) {
+			echo '<div class="fleft sprite sprite-'.$img.'"></div>';
 		}
 		?>
+		<div class="clear"></div>
 		<br /><br /><span class="smalltext">Cliquez sur l'image que vous voulez utiliser pour la news</span>
 	</p>
 	<p>
 		<input type="submit" name="submit_news" id="submit_news" value="Ajouter news" />
 	</p>
 </form>
-<div id="news_result"></div>
