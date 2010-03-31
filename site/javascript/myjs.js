@@ -134,34 +134,11 @@ $(function() {
 	
 	/* Add news */
 	$('img.add_img_news').click(function() {
-		$('input#image').val($(this).attr('alt'));
+		$('input#image, input#image_dis').val($(this).attr('alt'));
 	});
 	
 	$('img#clear_img_news').click(function() {
-		$('input#image').val('');
-	});
-	
-	$('input#submit_news').click(function() {
-		start_loading($('div#news_result'));
-		var titre = $('input#titre').val(),
-			contenu = $('textarea#contenu').val(),
-			image = $('input#image').val(),
-			idj = $('input[name=idposteur]').val();
-		$.ajax({
-			type: "POST",
-			url: "pages/ajax.php",
-			data: "action=news_add"
-				+ "&titre=" + titre	
-				+ "&contenu=" + contenu	
-				+ "&image=" + image	
-				+ "&idj=" + idj,
-			
-			success: function(result) {
-				stop_loading();
-				$('div#news_result').html(result);
-			}
-		});
-		return false;
+		$('input#image, input#image_dis').val('');
 	});
 	
 	/* Sondage */

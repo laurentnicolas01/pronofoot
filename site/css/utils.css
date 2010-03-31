@@ -157,7 +157,7 @@ ul.listmenu li a:hover {
 
 .back, .go, .connect, .disconnect, .color,
 .pic, .add, .delete, .edit, .refresh, .user,
-.lock, .group, .save, .bgreen, .firefox {
+.lock, .group, .save, .bgreen, .firefox, .loupe {
 	padding-left: 20px;
 	min-height: 16px;
 }
@@ -187,4 +187,5 @@ ul.listmenu li a:hover {
 .save	{ background:url('../images/icons/disk.png') no-repeat 0 center; }
 .bgreen	{ background:url('../images/icons/bullet_green.png') no-repeat 0 center; }
 .firefox{ background:url('../images/icons/firefox.png') no-repeat 0 center; }
+.loupe	{ background:url('../images/icons/magnifier.png') no-repeat 0 center; }
 

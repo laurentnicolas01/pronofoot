@@ -27,7 +27,7 @@ if(isset($_GET['journee'])) {
 	else {
 		$journee = journee_get_by_id($idjournee);
 		echo '<p class="strong">Saisie des scores pour la '.display_number($journee['numero']).' journée</p>';
-	}	
+	}
 }
 else {
 	$journee = mysql_fetch_assoc(journee_get_waiting_results());

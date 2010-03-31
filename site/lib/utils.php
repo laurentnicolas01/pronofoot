@@ -440,3 +440,25 @@ function get_timestamp($string, $sep) {
 	$dh = explode($sep,$string);
 	return mktime($dh[3],$dh[4],0,$dh[1],$dh[0],$dh[2]);
 }
+
+
+/**
+ * Génère un fichier XML listant toutes les images d'un dossier
+ * @param path: le chemin du dossier
+ */
+function generate_sprite_xml($file,$path) {
+        $xml = fopen($file, 'w');
+        if($xml) {
+                fputs($xml, '<?xml version="1.0" encoding="utf-8" ?>'."\n");
+                fputs($xml, "<image_list>\n");
+				
+				$images = glob($path);
+				foreach($images as $img) {
+					$name = substr(basename($img), 0, strlen(basename($img))-4);
+					fputs($xml, "\t<image>$name</image>\n");
+				}
+				
+                fputs($xml, "</image_list>\n");
+                fclose($xml);
+		}
+}
