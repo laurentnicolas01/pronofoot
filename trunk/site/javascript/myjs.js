@@ -163,4 +163,17 @@ $(function() {
 		});
 		return false;
 	});
+	
+	/* Sondage */
+	$('div#answers').dialog({
+		autoOpen: false,
+		modal: true,
+		closeOnEscape: true,
+		resizable: false,
+		width: 350
+	});
+	
+	$('a#show_answers').click(function() {
+		$('div#answers').dialog('open');
+	});
 });
