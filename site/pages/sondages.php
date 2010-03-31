@@ -9,7 +9,7 @@ $sdg = mysql_fetch_assoc(sondage_get_by_id($ids));
 $idsondage = $sdg['id'];
 $question = $sdg['question'];
 $choices = explode(',', $sdg['reponse_set']);
-$answers = sondage_get_numanswers($ids);
+$answers = sondage_get_resultstring($ids, $choices);
 /******************/
 /* CONSTS
 /******************/
@@ -18,22 +18,13 @@ $chk = 'checked="checked"';
 $dis = 'disabled="disabled"';
 $old_rep = sondage_reponse_joueur($idsondage, $idj);
 $already_done = $old_rep != '';
-$nbanswers = 0;
 /******************/
 /* ANSWERS
 /******************/
-$i = 0; $nbfield = 0; $nbanswers = 0;
-if(mysql_num_rows($answers)) {
-	$nbfield = mysql_num_fields($answers);
-	$column = mysql_fetch_row($answers);
-}
-echo '<div id="answers" class="fright"><p class="strong">Réponses</p><table>';
-foreach($choices as $choice) {
-	echo '<tr id="rep_'.($i+1).'"><td>'.ucfirst($choice).'</td><td>&nbsp;&nbsp;&nbsp;'.$column[$i].'</td></tr>';
-	$nbanswers += $column[$i];
-	++$i;
-}
-echo '</table></div>';
+echo '<p class="tick"><a href="javascript:;" id="show_answers">Afficher les réponses</a></p>
+	<div title="Réponses" id="answers" class="ui-helper-hidden">
+	<div><p class="strong">'.$question.'</p><br />'.$answers.'</div>
+	</div>';
 
 /******************/
 if(isset($_POST['submit_sondage']) && isset($_POST['choix']) && !$already_done) {
