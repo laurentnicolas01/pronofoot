@@ -8,7 +8,7 @@ $journee = mysql_fetch_assoc(journee_get_current());
 $matchs = match_get_by_journee($journee['id']);
 $pronos = prono_get_by_journee($journee['id']);
 
-if(mysql_num_rows($pronos)) {
+if((mysql_num_rows($pronos))&&(time()>$journee['date'])) {
 	$nickname = ''; // Impossible d'utiliser $pseudo, cela créer un conflit avec la session en prod
 	$count = 0;
 	$nbmatchs = mysql_num_rows($matchs);

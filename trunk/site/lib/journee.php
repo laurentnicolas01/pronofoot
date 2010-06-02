@@ -20,7 +20,7 @@ function journee_get_next($all = false) {
 }
 
 function journee_get_current() {
-	$sql = 'SELECT j.id, j.numero
+	$sql = 'SELECT j.id, j.numero, j.date
 			FROM journee j, `match` m
 			WHERE m.idjournee = j.id
 			AND m.score = ""
