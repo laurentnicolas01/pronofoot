@@ -161,7 +161,7 @@ if(isset($_POST['submit_xml'])) {
 		$matchs = match_get_allnext();
 		echo '<select name="matchs">';
 		while($match = mysql_fetch_assoc($matchs))
-			echo '<option value="'.$match['id'].'">(J'.$match['numero'].') '.$match['equipe1'].' - '.$match['equipe2'].'&nbsp;&nbsp;</option>';
+			echo '<option value="'.$match['id'].'">('.shortdate_to_str($match['numero']).') '.$match['equipe1'].' - '.$match['equipe2'].'&nbsp;&nbsp;</option>';
 		echo '</select>';
 		?>
 	</p>
@@ -175,12 +175,12 @@ if(isset($_POST['submit_xml'])) {
 	<p class="strong">Supprimer journée</p>
 	<p class="smalltext">(Tous les matchs liés à cette journée seront supprimés)</p>
 	<p>
-		<label>Journée : </label>
+		<label>Journée du: </label>
 		<?php
 		$journees = journee_get_next($all = true);
 		echo '<select name="journees">';
 		while($journee = mysql_fetch_assoc($journees))
-			echo '<option value="'.$journee['id'].'">'.$journee['numero'].' ('.time_to_str($journee['date']).')&nbsp;&nbsp;</option>';
+			echo '<option value="'.$journee['id'].'">'.time_to_str($journee['date']).'&nbsp;&nbsp;</option>';
 		echo '</select>';
 		?>
 	</p>
@@ -193,12 +193,12 @@ if(isset($_POST['submit_xml'])) {
 <form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>">
 	<p class="strong">Modifier heure de début de journée</p>
 	<p>
-		<label>Journée : </label>
+		<label>Journée du: </label>
 		<?php
 		$journees = journee_get_next($all = true);
 		echo '<select name="journees">';
 		while($journee = mysql_fetch_assoc($journees))
-			echo '<option value="'.$journee['id'].'">'.$journee['numero'].' ('.time_to_str($journee['date']).')&nbsp;&nbsp;</option>';
+			echo '<option value="'.$journee['id'].'">'.time_to_str($journee['date']).'&nbsp;&nbsp;</option>';
 		echo '</select>';
 		?>
 	</p>
