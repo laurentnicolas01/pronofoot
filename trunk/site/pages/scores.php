@@ -8,11 +8,11 @@ require_once('lib/news.php');
 
 $waiting_journees = journee_get_waiting_results();
 if(mysql_num_rows(journee_get_nbunterminate()) > 1) {
-	echo '<p>Journée : ';
+	echo '<p>Journée du: ';
 	$idj = '';
 	while($j = mysql_fetch_assoc($waiting_journees)) {
 		if($j['id'] != $idj)
-			echo '<strong><a href="?p=scores&amp;journee='.$j['id'].'">'.$j['numero'].'</a></strong> ';
+			echo '<strong><a href="?p=scores&amp;journee='.$j['id'].'">'.shortdate_to_str($j['numero']).'</a></strong> ';
 		$idj = $j['id'];
 	}
 	echo '<br /><br />';
@@ -26,7 +26,7 @@ if(isset($_GET['journee'])) {
 		echo '<span class="error">Aucun match n\'est enregistré pour la journée demandée</span>';
 	else {
 		$journee = journee_get_by_id($idjournee);
-		echo '<p class="strong">Saisie des scores pour la '.display_number($journee['numero']).' journée</p>';
+		echo '<p class="strong">Saisie des scores pour la journée du '.shortdate_to_str($journee['numero']).'</p>';
 	}
 }
 else {
@@ -35,7 +35,7 @@ else {
 	if(!journee_has_match($idjournee))
 		echo '<span class="error">Aucun match n\'est enregistré pour la prochaine journée</span>';
 	else
-		echo '<p class="strong">Saisie des scores pour la '.display_number($journee['numero']).' journée</p>';
+		echo '<p class="strong">Saisie des scores pour la journée du '.shortdate_to_str($journee['numero']).'</p>';
 }
 
 if(isset($_POST['submit_scores'])) {

@@ -13,7 +13,7 @@ $numjournee = $selected_journee['numero'];
 echo '<form method="post" action="'.$_SERVER['REQUEST_URI'].'"><p><label>Afficher l\'historique de la journée : </label><select name="idj_asked">';
 while($journee = mysql_fetch_assoc($journees)) {
 	$selected = $journee['id'] == $idjournee ? ' selected="selected" ' : '';
-	echo '<option value="'.$journee['id'].'" '.$selected.'>'.$journee['numero'].'</option>';
+	echo '<option value="'.$journee['id'].'" '.$selected.'>'.shortdate_to_str($journee['numero']).'</option>';
 }
 echo '</select><input type="submit" name="submit_asked" value="GO" class="hidden" /></p></form>';
 
@@ -27,7 +27,7 @@ if(mysql_num_rows($pronos)) {
 	$nbmatchs = mysql_num_rows($matchs);
 	while($prono = mysql_fetch_assoc($pronos)) {
 		if($nickname == '') {
-			echo '<h3>Historique des pronostics pour la '.display_number($numjournee).' journée</h3>
+			echo '<h3>Historique des pronostics pour le '.shortdate_to_str($numjournee).'</h3>
 				  <table class="table-contain"><thead class="ui-state-default"><tr><th></th>';
 			while($match = mysql_fetch_assoc($matchs))
 				echo '<th>'.$match['equipe1'].' - '.$match['equipe2'].'</th>';

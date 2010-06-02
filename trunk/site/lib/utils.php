@@ -116,6 +116,20 @@ function date_to_str($timestamp)
 {
 	return date('d/m/Y', $timestamp);
 }
+/**
+ * @return 'jj/mm'
+ */
+function shortdate_to_str($timestamp)
+{
+	return date('d/m', $timestamp);
+}
+/**
+ * @return 'HH:MM'
+ */
+function shorttime_to_str($timestamp)
+{
+	return date('H:i', $timestamp);
+}
 
 /*
  * Retourne une chaîne représentant des octets dans l'unité adéquate
