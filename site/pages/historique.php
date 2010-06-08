@@ -13,7 +13,7 @@ $numjournee = $selected_journee['numero'];
 echo '<form method="post" action="'.$_SERVER['REQUEST_URI'].'"><p><label>Afficher l\'historique de la journée : </label><select name="idj_asked">';
 while($journee = mysql_fetch_assoc($journees)) {
 	$selected = $journee['id'] == $idjournee ? ' selected="selected" ' : '';
-	echo '<option value="'.$journee['id'].'" '.$selected.'>'.shortdate_to_str($journee['numero']).'</option>';
+	echo '<option value="'.$journee['id'].'" '.$selected.'>'.shortdate_to_str($journee['numero']).'&nbsp;</option>';
 }
 echo '</select><input type="submit" name="submit_asked" value="GO" class="hidden" /></p></form>';
 

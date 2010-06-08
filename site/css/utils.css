@@ -13,6 +13,7 @@
 .smalltext { font-size:10px !important; }
 .fleft { float:left; }
 .fright { float:right; }
+.underline { text-decoration:underline; }
 
 /* tableaux */
 
@@ -157,7 +158,7 @@ ul.listmenu li a:hover {
 
 .back, .go, .connect, .disconnect, .color,
 .pic, .add, .delete, .edit, .refresh, .user,
-.lock, .group, .save, .bgreen, .firefox, .loupe {
+.lock, .group, .save, .bgreen, .firefox, .loupe, .ystar {
 	padding-left: 20px;
 	min-height: 16px;
 }
@@ -188,4 +189,5 @@ ul.listmenu li a:hover {
 .bgreen	{ background:url('../images/icons/bullet_green.png') no-repeat 0 center; }
 .firefox{ background:url('../images/icons/firefox.png') no-repeat 0 center; }
 .loupe	{ background:url('../images/icons/magnifier.png') no-repeat 0 center; }
+.ystar	{ background:url('../images/icons/asterisk_yellow.png') no-repeat 0 center; }
 

@@ -54,11 +54,13 @@ function joueur_get_classement($groupe = 0, $sort, $is_asc) {
 
 	$sql = 'SELECT ROUND(points/nbmatchs, 2) AS avg, pseudo, points, nbmatchs
 			FROM joueur
+			WHERE nbmatchs <> 0
 			';
 			
-	if($groupe) $sql .= "WHERE idgroups LIKE '%$groupe%'\n";
+	if($groupe) $sql .= "AND idgroups LIKE '%$groupe%'\n";
 			
-	// $order doit être égal à 'points' ou 'avg'
+	// $sort doit être égal à 'points' ou 'avg'
+	if($sort == 'avg') $sort = 'points/nbmatchs';
 	$sql .= "ORDER BY $sort $order, pseudo ASC;";
 	
 	return sql_query($sql);
