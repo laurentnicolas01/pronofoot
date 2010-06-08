@@ -135,7 +135,7 @@ body {
 #chatbox #message_list {
 	margin-top:12px;
 	width:244px;
-	max-height:280px;
+	max-height:400px;
 	overflow:auto;
 }
 
@@ -163,10 +163,6 @@ div.bienvenue img {
 
 p.acc_dec {
 	margin-left:100px !important;
-}
-
-select[name=idj_asked] {
-	width:45px;
 }
 
 div#connected_members {

@@ -55,7 +55,7 @@ if(isset($_POST['submit_save'])) {
 <form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>">
 	<?php $checked = joueur_wants_reminder($_SESSION['id']) ? 'checked="checked"' : ''; ?>
 	<p>
-		<label>Je veux recevoir un rappel automatique par mail chaque semaine : </label>
+		<label>Je veux recevoir un rappel automatique par mail pour chaque journée : </label>
 		<input type="checkbox" name="reminder" id="reminder" <?php echo $checked; ?> />
 	</p>
 	<p>
