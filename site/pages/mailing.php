@@ -36,7 +36,7 @@ function send_contact_mail($email, $message)
 }
 
 if(isset($_POST['send'])) {
-	$message = clean_str($_POST['message']);
+	$message = $_POST['message'];
 	$rand = $_POST['rand'];
 	$confirm = $_POST['confirm'];
 	

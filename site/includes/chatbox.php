@@ -8,14 +8,27 @@
 		<span id="chat_loading"></span>
 	</p>
 	</form>
+	<p id="selectgroup"<?php echo $is_hidden; ?>>
+		Groupe&nbsp;
+		<select name="idgroup" id="idgroup" class="ui-widget-content">
+			<option value="0">Général&nbsp;</option>
+			<?php 
+			require_once('lib/groupe.php');
+			$mygroups = groupe_get_list($_SESSION['groups']);
+			while($group = mysql_fetch_row($mygroups)) {
+				echo '<option value="'.$group[0].'">'.$group[1].'&nbsp;</option>';
+			}
+			?>
+		</select>
+	</p>
 <?php } else { $is_hidden = ' class="ui-helper-hidden"'; } ?>
 
 <p id="selectnb"<?php echo $is_hidden; ?>>
-	Afficher 
+	Afficher&nbsp;
 	<select name="nbmess" id="nbmess" class="ui-widget-content">
 		<?php for($i=10;$i<100;$i+=20) echo '<option value="'.$i.'">'.$i.'&nbsp;</option>'; ?>
 		<option value="0">tous&nbsp;</option>
-	</select> 
+	</select>&nbsp;
 	messages
 </p>
 
