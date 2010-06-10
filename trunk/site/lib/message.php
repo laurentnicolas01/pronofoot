@@ -9,20 +9,21 @@ require_once('mysql.php');
 sql_connect();
 
 // Fonctions
-function message_create($texte, $idjoueur) {
+function message_create($texte, $idjoueur, $idgroup) {
 	$date = time();
-	$sql = "INSERT INTO message(date,texte,idjoueur)
-			VALUES($date,'$texte',$idjoueur);";
+	$sql = "INSERT INTO message(date,texte,idjoueur,idgroup)
+			VALUES($date,'$texte',$idjoueur,$idgroup);";
 			
 	return sql_query($sql);
 }
 
-function message_get_list($nb) {
-	$sql = 'SELECT m.date, m.texte, j.pseudo
+function message_get_list($nb, $idgroup) {
+	$sql = "SELECT m.date, m.texte, j.pseudo
 			FROM message m
 			LEFT JOIN joueur j
 			ON j.id = m.idjoueur
-			ORDER BY m.date DESC';
+			WHERE m.idgroup = $idgroup
+			ORDER BY m.date DESC";
 			
 	$sql .= $nb != 0 ? " LIMIT $nb;" : ';';
 			

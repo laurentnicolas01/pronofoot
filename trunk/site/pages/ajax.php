@@ -26,20 +26,29 @@ switch($_REQUEST['action']) {
 	
 	case 'message_update':
 		require_once(get_file('lib/message.php'));
-		$nb = isset($_POST['nb']) ? intval($_POST['nb']) : 10;
-		$messages = message_get_list($nb);
-		while($message = mysql_fetch_assoc($messages))
-			message_print($message['pseudo'], $message['date'], $message['texte']);
+		require_once(get_file('lib/groupe.php'));
+		$nb = isset($_POST['nb']) && intval($_POST['nb']) >= 0 ? intval($_POST['nb']) : 10;
+		$idg = isset($_POST['idg']) && groupe_id_exists(intval($_POST['idg'])) ? intval($_POST['idg']) : 0;
+		$messages = message_get_list($nb, $idg);
+		if(mysql_num_rows($messages)) {
+			while($message = mysql_fetch_assoc($messages))
+				message_print($message['pseudo'], $message['date'], $message['texte']);
+		}
+		else {
+			message_print('Notification', time(), '(aucun message pour le moment)');
+		}
 		break;
 	
 	case 'message_insert':
 		require_once(get_file('lib/utils.php'));
 		require_once(get_file('lib/message.php'));
 		require_once(get_file('lib/joueur.php'));
+		require_once(get_file('lib/groupe.php'));
 
 		$texte = mysql_real_escape_string(clean_str($_POST['message']));
 		$idjoueur = intval($_POST['id']);
-		if($texte != '' && joueur_id_exists($idjoueur) && message_create($texte,$idjoueur)) {
+		$idgroup = groupe_id_exists(intval($_POST['idg'])) ? intval($_POST['idg']) : 0;
+		if($texte != '' && joueur_id_exists($idjoueur) && message_create($texte,$idjoueur,$idgroup)) {
 			echo 'ok&&&';
 			message_print(joueur_get_pseudo($idjoueur), time(), stripslashes($texte));
 		}

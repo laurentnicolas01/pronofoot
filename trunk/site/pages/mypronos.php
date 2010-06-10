@@ -7,10 +7,10 @@ require_once('lib/prono.php');
 
 $futures_journees = journee_get_next($all = true);
 if(mysql_num_rows($futures_journees) > 1) {
-	echo '<p>Journée : ';
+	echo '<p id="myplistj">Journée : ';
 	while($nextj = mysql_fetch_assoc($futures_journees))
 		echo '<strong><a href="mypronos-'.$nextj['id'].'" class="ui-state-default">'.shortdate_to_str($nextj['numero']).'</a></strong> ';
-	echo '<br /><br />';
+	echo '<br />';
 }
 
 if(isset($_GET['journee'])) {

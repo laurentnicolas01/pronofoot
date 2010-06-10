@@ -29,6 +29,15 @@ function groupe_exists($nom) {
 	return mysql_num_rows(sql_query($sql));
 }
 
+function groupe_id_exists($id) {
+	$sql = "SELECT id
+			FROM groupe
+			WHERE id = $id
+			LIMIT 1;";
+	
+	return mysql_num_rows(sql_query($sql));
+}
+
 function groupe_add($nom) {
 	$sql = "INSERT INTO groupe(nom)
 			VALUES('$nom');";

@@ -6,8 +6,8 @@ if(isset($_POST['submit_match'])) {
 	require_once('lib/match.php');
 	
 	$journee = intval($_POST['journee']);
-	$team1 = ucwords(clean_str($_POST['team1']));
-	$team2 = ucwords(clean_str($_POST['team2']));
+	$team1 = ucwords(clean_str(mysql_real_escape_string($_POST['team1'])));
+	$team2 = ucwords(clean_str(mysql_real_escape_string($_POST['team2'])));
 	
 	if($team1 == '' || $team2 == '')
 		echo '<span class="error">Vous devez donner un nom pour chaque équipe</span>';
@@ -142,11 +142,10 @@ $journees_actives = journee_get_next($all = true);
 		<input type="hidden" name="image" id="image" />
 		&nbsp;<img src="images/icons/cross.png" alt="clear" id="clear_img_news" /><br /><br />
 		<?php
-		$xml = simplexml_load_file('resources/sprites_news.xml');
-		$images = $xml->image;
-        foreach($xml as $img) {
-			echo '<div class="fleft sprite sprite-'.$img.'"></div>';
-		}
+        $images = glob('images/news/*');
+        foreach($images as $img) {
+            echo '<img src="'.$img.'" alt="'.basename($img).'" class="add_img_news" />';
+        }
 		?>
 		<div class="clear"></div>
 		<br /><br /><span class="smalltext">Cliquez sur l'image que vous voulez utiliser pour la news</span>
