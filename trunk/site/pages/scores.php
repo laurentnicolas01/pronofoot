@@ -12,7 +12,7 @@ if(mysql_num_rows(journee_get_nbunterminate()) > 1) {
 	$idj = '';
 	while($j = mysql_fetch_assoc($waiting_journees)) {
 		if($j['id'] != $idj)
-			echo '<strong><a href="?p=scores&amp;journee='.$j['id'].'">'.shortdate_to_str($j['numero']).'</a></strong> ';
+			echo '<strong><a href="scores-'.$j['id'].'">'.shortdate_to_str($j['numero']).'</a></strong> ';
 		$idj = $j['id'];
 	}
 	echo '<br /><br />';

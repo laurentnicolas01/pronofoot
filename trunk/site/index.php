@@ -26,10 +26,10 @@ if(!isset($_SESSION['is_connect'])) {
 if(!$_SESSION['is_connect']) {
 	// connexion depuis le formulaire
 	if(isset($_POST['submit-connection'])) {
-		$email = clean_str($_POST['log_email']);
+		$login = clean_str($_POST['log_login']);
 		$password = crypt_password($_POST['pass']);
 	
-		session_connect($email, $password);
+		session_connect($login, $password);
 	}
 }
 elseif(isset($_GET['deconnexion'])) {
@@ -41,10 +41,6 @@ elseif(isset($_GET['deconnexion'])) {
 	session_destroy();
 	$_SESSION['is_connect'] = false;
 }
-
-$idadmins = array(1,8);
-$restricted = array('add','maj','scores','mailing','demandes');
-$authorized = array('accueil','contact','inscription','password','news','reglement');
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr">
@@ -56,13 +52,16 @@ $authorized = array('accueil','contact','inscription','password','news','regleme
 	<meta name="google-site-verification" content="3j_58lbwspsTkmMWHCMG-BANQyA09wPdHgWVId5rzcc" />
 
 	<!-- css -->
-	<link rel="stylesheet" media="screen" type="text/css" href="css/style.css" />
+	<link rel="stylesheet" media="screen" type="text/css" href="css/style_3.css" />
 	
 	<!-- website mini-icon -->
 	<link rel="icon" href="images/icons/sport_soccer.png" type="image/png" />
 	
 	<!-- rss -->
 	<link rel="alternate" type="application/rss+xml" href="/resources/rss.xml" title="Prono Foot RSS Feed" />
+	
+	<!-- Google Analytics
+	<script type="text/javascript" src="javascript/google-analytics.js"></script> -->
 </head>
 <body>
 	<div id="title">
@@ -107,13 +106,13 @@ $authorized = array('accueil','contact','inscription','password','news','regleme
 				<?php include_once('includes/chatbox.php'); ?>
 			</div>
 		</div>
-		<div id="pub" class="ui-dialog ui-widget ui-widget-content ui-corner-all">
+		<!-- <div id="pub" class="ui-dialog ui-widget ui-widget-content ui-corner-all">
 			<div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix">Publicité</div>
 			<div id="adspace" class="center ui-dialog-content ui-widget-content">
-				<!-- <script type="text/javascript" language="javascript" src="http://pub.oxado.com/insert_ad?pub=249856"></script>
-				-->
+				<script type="text/javascript" language="javascript" src="http://pub.oxado.com/insert_ad?pub=249856"></script>
+				
 			</div>
-		</div>
+		</div>-->
 		
 		<!-- bottom -->
 		<div id="footer" class="ui-widget-header">
@@ -122,20 +121,17 @@ $authorized = array('accueil','contact','inscription','password','news','regleme
 	</div>
 	
 	<!-- jquery libs -->
+	<!--
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
+	-->
 	
 	<!-- jquery local libs -->
-	<!--
 	<script src="javascript/jquery-1.4.2.min.js" type="text/javascript"></script>
 	<script src="javascript/jquery-ui-1.8.custom.min.js" type="text/javascript"></script>
-	-->
 	
 	<!-- jquery add-ons & perso -->
 	<script type="text/javascript" src="javascript/jquery.timers-1.2.js"></script>
 	<script type="text/javascript" src="javascript/myjs.js"></script>
-	
-	<!-- Stats Google
-	<script type="text/javascript" src="javascript/google-analytics.js"></script> -->
 </body>
 </html>

@@ -24,7 +24,7 @@ if(isset($_GET['journee'])) {
 	else {
 		$journee = journee_get_by_id($idjournee);
 		echo '<p class="strong">Mes pronostics pour le '.shortdate_to_str($journee['numero']).' (premier match à '.shorttime_to_str($journee['date']).')</p>';
-	}	
+	}
 }
 else {
 	$journee = mysql_fetch_assoc(journee_get_next());
@@ -40,11 +40,15 @@ if(isset($_POST['submit_pronos'])) {
 	foreach($_POST as $key => $score) {
 		$name = explode('_',$key);
 		if($name[0] == 'match' && $score != '') {
-			if(valid_score($score)) {
-				if(prono_exists($name[1], $_SESSION['id']))
-					prono_update($name[1], $_SESSION['id'], $score);
+			$idm = intval($name[1]);
+			if(journee_of_match_is_locked($idm)) {
+				$display['error'] = '<span class="warning">N\'essayez pas de tricher, les pronostics sont fermés pour cette journée</span>';
+			}
+			else if(valid_score($score)) {
+				if(prono_exists($idm, $_SESSION['id']))
+					prono_update($idm, $_SESSION['id'], $score);
 				else
-					prono_record($name[1], $_SESSION['id'], $score);
+					prono_record($idm, $_SESSION['id'], $score);
 					
 				$display['success'] = '<span class="success">Les scores correctement écrits ont été enregistrés et/ou mis à jour !</span>';
 			}

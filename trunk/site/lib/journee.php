@@ -183,3 +183,20 @@ function journee_update_date($id,$timestamp) {
 	return sql_query($sql);
 }
 
+/**
+ * Permet de savoir si la journée est bloquée pour un id de match (corrige la faille qui permettait de modifier les prono après fermeture)
+ */
+function journee_of_match_is_locked($idmatch) {
+	$sql = "SELECT j.date
+			FROM journee j
+			
+			INNER JOIN `match` m
+			ON m.idjournee = j.id
+			AND m.id = $idmatch
+			
+			LIMIT 1;";
+
+	$result = mysql_fetch_row(sql_query($sql));
+	return $result[0] < time();
+}
+

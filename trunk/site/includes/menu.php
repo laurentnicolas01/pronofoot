@@ -13,6 +13,7 @@
 					<ul>
 						<li><a href="add">Création</a></li>
 						<li><a href="maj">Mises à jour</a></li>
+						<li><a href="groupes">Groupes</a></li>
 						<li><a href="scores">Saisie scores</a></li>
 						<li><a href="demandes">Demandes</a></li>
 						<li><a href="mailing">Mailing</a></li>

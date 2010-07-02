@@ -26,7 +26,8 @@ function sql_connect()
  */
 function sql_query($query)
 {
-	$handle = mysql_query($query) or die('MySQL query error : '.mysql_error().'<br /><br />'.nl2br($query));
+	// dev : $handle = mysql_query($query) or die('MySQL query error : '.mysql_error().'<br /><br />'.nl2br($query));
+	$handle = mysql_query($query) or die('MySQL query error : '.mysql_error());
 	return $handle;
 }
 
