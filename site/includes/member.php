@@ -5,8 +5,8 @@ if(!$_SESSION['is_connect']) {
 	} ?>
 	<form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>">
 		<p>
-			<label class="user block">Email</label>
-			<input type="text" name="log_email" id="log_email" size="25" />
+			<label class="user block">Identifiant</label>
+			<input type="text" name="log_login" id="log_login" size="25" />
 		</p>
 		<p>
 			<label class="lock block">Pass</label>

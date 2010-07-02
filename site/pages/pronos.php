@@ -40,6 +40,9 @@ if(mysql_num_rows($pronos) && time() > $journee['date']) {
 	}
 	echo '</tr></tbody></table>';
 }
+elseif(time() < $journee['date']) {
+	echo '<span class="warning">Les pronostics de la prochaine journée ne sont pas encore consultables</span>';
+}
 else {
-	echo '<span class="error">Il n\'y a pas encore de pronostics effectués pour la journée en cours</span>';
+	echo '<span class="error">Il n\'y a pas encore de pronostics effectués pour la prochaine journée</span>';
 }

@@ -17,6 +17,12 @@ SetOutputFilter DEFLATE
 # Setting PHP Version
 SetEnv PHP_VER 5
 
+# Use cookie to manage sessions
+SetEnv SESSION_USE_TRANS_SID 0
+
+# Desactivate register globales
+SetEnv REGISTER_GLOBALS 0
+
 # Setting rewrite rules
 Options +FollowSymlinks
 RewriteEngine On
@@ -28,6 +34,7 @@ RewriteRule ^news-([0-9]+)$ index.php?p=news&numpage=$1 [L]
 RewriteRule ^mypronos-([0-9]+)$ index.php?p=mypronos&journee=$1 [L]
 RewriteRule ^historique-([0-9]+)$ index.php?p=historique&j=$1 [L]
 RewriteRule ^sondages-([0-9]+)$ index.php?p=sondages&s=$1 [L]
+RewriteRule ^scores-([0-9]+)$ index.php?p=scores&journee=$1 [L]
 RewriteRule ^demandes-a-([0-9]+)$ index.php?p=demandes&da=$1 [L]
 RewriteRule ^demandes-r-([0-9]+)$ index.php?p=demandes&dr=$1 [L]
 RewriteRule ^classements-([0-9]+)$ index.php?p=classements&groupe=$1 [L]

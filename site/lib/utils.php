@@ -347,17 +347,19 @@ function generate_title($page, $rubrique)
 
 /**
  * Connecter une session
- * @param email: email servant de login
+ * @param login: email ou pseudo servant de login
  * @param password: hash du mot de passe
  * @return true si connexion réussie, sinon false
  */
-function session_connect($email, $password)
+function session_connect($login, $password)
 {
-	$email = mysql_real_escape_string($email);
+	require_once('groupe.php');
+
+	$login = mysql_real_escape_string($login);
 	
 	$sql = 'SELECT id, email, pseudo, idgroups
 	        FROM joueur
-	        WHERE email = "'.$email.'"
+	        WHERE (email = "'.$login.'" OR pseudo = "'.$login.'")
 			AND pass = "'.$password.'";';
 	
 	$data = sql_query($sql);
@@ -366,7 +368,7 @@ function session_connect($email, $password)
 		$_SESSION['id'] = intval($row['id']);
 		$_SESSION['email'] = $row['email'];
 		$_SESSION['pseudo'] = $row['pseudo'];
-		$_SESSION['groups'] = $row['idgroups'];
+		$_SESSION['groups'] = groupe_get_string_by_idjoueur(intval($row['id']));
 		return true;
 	}
 	$_SESSION['is_connect'] = false;

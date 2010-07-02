@@ -74,7 +74,7 @@ function joueur_get($exp) {
 	$sql = "SELECT *
 			FROM joueur\n";
 	
-	$sql .= $exp == 'all' ? ';' : 'WHERE id = '.$exp.' LIMIT 1;';
+	$sql .= $exp == 'all' ? 'ORDER BY pseudo;' : 'WHERE id = '.$exp.' ORDER BY pseudo LIMIT 1;';
 	
 	return sql_query($sql);
 }
@@ -176,14 +176,6 @@ function joueur_delete($id) {
 function joueur_update_pass($id, $pass) {
 	$sql = "UPDATE joueur
 			SET pass = '$pass'
-			WHERE id = $id;";
-	
-	return sql_query($sql);
-}
-
-function joueur_update_groupes($id, $groupes) {
-	$sql = "UPDATE joueur
-			SET idgroups = '$groupes'
 			WHERE id = $id;";
 	
 	return sql_query($sql);

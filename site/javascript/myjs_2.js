@@ -39,7 +39,7 @@ $(function() {
 	/* Chat */
 	var loading = $('span#chat_loading'),
 		div = $('div#message_list'),
-		nbmess = $('select#nbmess')
+		nbmess = $('select#nbmess'),
 		idgroup = $('select#idgroup');
 	
 	function update_list(div) {
@@ -156,4 +156,10 @@ $(function() {
 	$('a#show_answers').click(function() {
 		$('div#answers').dialog('open');
 	});
+	
+	if(href == 'maj' || href == 'groupes') {
+		$('input[type=submit]').click(function() {
+			return confirm('Etes vous sûr ?');
+		});
+	}
 });

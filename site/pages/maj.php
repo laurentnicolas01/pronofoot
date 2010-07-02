@@ -6,35 +6,12 @@ require_once('lib/joueur.php');
 require_once('lib/prono.php');
 require_once('lib/groupe.php');
 
-
-if(isset($_POST['submit_groupes'])) {
-	$idg = intval($_POST['joueurs_g']);
-	$new_groupes = clean_str($_POST['groupes']);
-	
-	if(joueur_update_groupes($idg, $new_groupes)) {
-		$joueur = mysql_fetch_assoc(joueur_get($idg));
-		echo '<span class="success">Les groupes de <strong>'.$joueur['pseudo'].'</strong> ont été modifiés avec succès</span>';
-	}
-	else
-		echo '<span class="error">Il y a eu une erreur lors de la mise à jour en base de données</span>';
-}
-
 if(isset($_POST['submit_delj'])) {
 	$idj = intval($_POST['joueurs_d']);
 	$joueur = mysql_fetch_assoc(joueur_get($idj));
 	
 	if(joueur_delete($idj))
 		echo '<span class="success">Le joueur <strong>'.$joueur['pseudo'].'</strong> a bien été supprimé</span>';
-	else
-		echo '<span class="error">Il y a eu une erreur lors de la suppression en base de données</span>';
-}
-
-if(isset($_POST['submit_delg'])) {
-	$idg = intval($_POST['groupe']);
-	$nom = groupe_get_name($idg);
-	
-	if(groupe_delete($idg))
-		echo '<span class="success">Le groupe <strong>'.$nom.'</strong> a bien été supprimé</span>';
 	else
 		echo '<span class="error">Il y a eu une erreur lors de la suppression en base de données</span>';
 }
@@ -55,6 +32,37 @@ if(isset($_POST['submit_deli'])) {
 		echo '<span class="success">La journée a bien été supprimée</span>';
 	else
 		echo '<span class="error">Il y a eu une erreur lors de la suppression en base de données</span>';
+}
+
+if(isset($_POST['submit_modidj'])) {
+	$idjour = $_POST['journees'];
+	$idma = $_POST['matchs'];
+	
+	if(journee_exists($idjour) && match_id_exists($idma)) {
+		if(prono_add($idma, $idjour))
+			echo '<p class="success">Journée du match modifiée avec succès !</p>';
+		else
+			echo '<span class="error">Il y a eu une erreur lors de la modification en base de données</span>';
+	}
+	else
+		echo '<p class="error">Impossible, vous avez fait n\'importe quoi avec les selects !</p>';
+}
+
+if(isset($_POST['submit_modt'])) {
+	$idma = intval(intval($_POST['matchs']));
+	$team1 = ucwords(clean_str(mysql_real_escape_string($_POST['team1'])));
+	$team2 = ucwords(clean_str(mysql_real_escape_string($_POST['team2'])));
+	$journee = match_get_journee($idma);
+
+	if($team1 == '' || $team2 == '')
+		echo '<span class="error">Vous devez donner un nom pour chaque équipe</span>';
+	elseif(match_exists($journee, $team1, $team2))
+		echo '<span class="error">Le match modifié existe déjà</span>';
+	else
+		if(match_update_teams($idma, $team1, $team2))
+			echo '<span class="success">Match modifié avec succès : <strong>'.$team1.' - '.$team2.'</strong></span>';
+		else
+			echo '<span class="error">Il y a eu une erreur lors de la modification en base de données</span>';
 }
 
 if(isset($_POST['submit_modj'])) {
@@ -88,73 +96,7 @@ if(isset($_POST['submit_xml'])) {
 }
 ?>
 <form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>">
-	<p class="strong">Modifier le/les groupe(s) d'un joueur</p>
-	<p>
-		Groupes :<br />
-		<?php
-		$groupes = groupe_get_all();
-		while($groupe = mysql_fetch_assoc($groupes))
-			echo '('.$groupe['id'].') '.$groupe['nom'].'<br />';
-		?>
-		<span class="smalltext">(IDs à séparer par des virgules)</span>
-	</p>
-	<p>
-		<label>Joueur : </label>
-		<?php
-		$joueurs = joueur_get('all');
-		echo '<select name="joueurs_g">';
-		while($joueur = mysql_fetch_assoc($joueurs))
-			echo '<option value="'.$joueur['id'].'">'.$joueur['pseudo'].'</option>';
-		echo '</select>';
-		?>
-		<br /><br />
-		<label>Nouveaux groupes : </label>
-		<input type="text" name="groupes" id="groupes" />
-	</p>
-	<p>
-		<input type="submit" name="submit_groupes" id="submit_groupes" value="Modifier" />
-	</p>	
-</form>
-
-<br />
-<form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>">
-	<p class="strong">Supprimer joueur</p>
-	<p>
-		<label>Joueur : </label>
-		<?php
-		$joueurs = joueur_get('all');
-		echo '<select name="joueurs_d">';
-		while($joueur = mysql_fetch_assoc($joueurs))
-			echo '<option value="'.$joueur['id'].'">'.$joueur['pseudo'].'</option>';
-		echo '</select>';
-		?>
-	</p>
-	<p>
-		<input type="submit" name="submit_delj" id="submit_delj" value="Supprimer" />
-	</p>	
-</form>
-
-<br />
-<form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>">
-	<p class="strong">Supprimer groupe</p>
-	<p>
-		<label>Groupe : </label>
-		<?php
-		$groupes = groupe_get_all();
-		echo '<select name="groupe">';
-		while($groupe = mysql_fetch_assoc($groupes))
-			echo '<option value="'.$groupe['id'].'">'.$groupe['nom'].'&nbsp;&nbsp;</option>';
-		echo '</select>';
-		?>
-	</p>
-	<p>
-		<input type="submit" name="submit_delg" id="submit_delg" value="Supprimer" />
-	</p>	
-</form>
-
-<br />
-<form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>">
-	<p class="strong">Supprimer match</p>
+	<p class="strong">Modifier la journée d'un match</p>
 	<p>
 		<label>Match : </label>
 		<?php
@@ -166,16 +108,7 @@ if(isset($_POST['submit_xml'])) {
 		?>
 	</p>
 	<p>
-		<input type="submit" name="submit_delm" id="submit_delm" value="Supprimer" />
-	</p>	
-</form>
-
-<br />
-<form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>">
-	<p class="strong">Supprimer journée</p>
-	<p class="smalltext">(Tous les matchs liés à cette journée seront supprimés)</p>
-	<p>
-		<label>Journée du: </label>
+		<label>Journée du : </label>
 		<?php
 		$journees = journee_get_next($all = true);
 		echo '<select name="journees">';
@@ -185,15 +118,38 @@ if(isset($_POST['submit_xml'])) {
 		?>
 	</p>
 	<p>
-		<input type="submit" name="submit_deli" id="submit_deli" value="Supprimer" />
-	</p>
+		<input type="submit" name="submit_modidj" id="submit_modidj" value="Modifier" />
+	</p>	
 </form>
 
 <br />
 <form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>">
-	<p class="strong">Modifier heure de début de journée</p>
+	<p class="strong">Modifier les équipes d'un match</p>
 	<p>
-		<label>Journée du: </label>
+		<label>Match : </label>
+		<?php
+		$matchs = match_get_allnext();
+		echo '<select name="matchs">';
+		while($match = mysql_fetch_assoc($matchs))
+			echo '<option value="'.$match['id'].'">('.shortdate_to_str($match['numero']).') '.$match['equipe1'].' - '.$match['equipe2'].'&nbsp;&nbsp;</option>';
+		echo '</select>';
+		?>
+	</p>	
+	<p>
+		<label>Equipes : </label>
+		<input type="text" name="team1" id="team1" /> -
+		<input type="text" name="team2" id="team2" />
+	</p>
+	<p>
+		<input type="submit" name="submit_modt" id="submit_modt" value="Modifier" />
+	</p>	
+</form>
+
+<br />
+<form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>">
+	<p class="strong">Modifier l'heure de début d'une journée</p>
+	<p>
+		<label>Journée du : </label>
 		<?php
 		$journees = journee_get_next($all = true);
 		echo '<select name="journees">';
@@ -213,10 +169,58 @@ if(isset($_POST['submit_xml'])) {
 
 <br />
 <form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>">
-	<p class="strong">Regénérer le flux RSS</p>
+	<p class="strong">Supprimer journée</p>
+	<p class="smalltext">(Tous les matchs et les pronostics liés à cette journée seront supprimés)</p>
 	<p>
-		<input type="submit" name="submit_rss" id="submit_rss" value="Générer RSS" />
+		<label>Journée du : </label>
+		<?php
+		$journees = journee_get_next($all = true);
+		echo '<select name="journees">';
+		while($journee = mysql_fetch_assoc($journees))
+			echo '<option value="'.$journee['id'].'">'.time_to_str($journee['date']).'&nbsp;&nbsp;</option>';
+		echo '</select>';
+		?>
 	</p>
+	<p>
+		<input type="submit" name="submit_deli" id="submit_deli" value="Supprimer" class="need_confirm" />
+	</p>
+</form>
+
+<br />
+<form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>">
+	<p class="strong">Supprimer match</p>
+	<p class="smalltext">(Tous les pronostics liés à ce match seront supprimés)</p>
+	<p>
+		<label>Match : </label>
+		<?php
+		$matchs = match_get_allnext();
+		echo '<select name="matchs">';
+		while($match = mysql_fetch_assoc($matchs))
+			echo '<option value="'.$match['id'].'">('.shortdate_to_str($match['numero']).') '.$match['equipe1'].' - '.$match['equipe2'].'&nbsp;&nbsp;</option>';
+		echo '</select>';
+		?>
+	</p>
+	<p>
+		<input type="submit" name="submit_delm" id="submit_delm" value="Supprimer" class="need_confirm" />
+	</p>	
+</form>
+
+<br />
+<form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>">
+	<p class="strong">Supprimer joueur</p>
+	<p>
+		<label>Joueur : </label>
+		<?php
+		$joueurs = joueur_get('all');
+		echo '<select name="joueurs_d">';
+		while($joueur = mysql_fetch_assoc($joueurs))
+			echo '<option value="'.$joueur['id'].'">'.$joueur['pseudo'].'</option>';
+		echo '</select>';
+		?>
+	</p>
+	<p>
+		<input type="submit" name="submit_delj" id="submit_delj" value="Supprimer" class="need_confirm" />
+	</p>	
 </form>
 
 <br />
@@ -232,5 +236,13 @@ if(isset($_POST['submit_xml'])) {
 	</p>
 	<p>
 		<input type="submit" name="submit_xml" id="submit_xml" value="Générer" />
+	</p>
+</form>
+
+<br />
+<form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>">
+	<p class="strong">Regénérer le flux RSS</p>
+	<p>
+		<input type="submit" name="submit_rss" id="submit_rss" value="Générer RSS" />
 	</p>
 </form>

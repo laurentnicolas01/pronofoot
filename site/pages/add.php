@@ -40,18 +40,19 @@ if(isset($_POST['submit_journee'])) {
 	}
 }
 
-if(isset($_POST['submit_groupe'])) {
-	require_once('lib/groupe.php');
-
-	$nom = clean_str($_POST['nom']);
+if(isset($_POST['submit_prono'])) {
+	$idjoue = intval($_POST['joueur']);
+	$idma = intval($_POST['match']);
+	$score = clean_str(mysql_real_escape_string($_POST['pronoj']));
 	
-	if(groupe_exists($nom))
-		echo '<span class="error">Un groupe portant le même nom existe déjà</span>';
-	else
-		if(groupe_add($nom))
-			echo '<span class="success">Groupe ajouté avec succès : <strong>'.$nom.'</strong></span>';
+	if(valid_score($score) && joueur_id_exists($idjoue) && match_id_exists($idma) && !prono_exists($idma, $idjoue)) {
+		if(prono_record($idma, $idjoue, $score))
+			echo '<p class="success">Pronostic ajouté avec succès !</p>';
 		else
-			echo '<span class="error">Il y a eu une erreur lors de l\'ajout en base de données</span>';
+			echo '<span class="error">Il y a eu une erreur lors de la modification en base de données</span>';
+	}
+	else
+		echo '<p class="error">Impossible, vous avez fait n\'importe quoi avec les inputs !</p>';
 }
 
 if(isset($_POST['submit_news'])) {
@@ -115,13 +116,36 @@ $journees_actives = journee_get_next($all = true);
 
 <br /><!-- ------------------------------------- -->
 <form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>">
-	<p class="strong">Ajouter un groupe</p>
+	<p class="strong">Ajouter un pronostic pour un joueur</p>
 	<p>
-		<label>Nom : </label>
-		<input type="text" name="nom" id="nom" />
+		<label>Joueur : </label>
+		<?php
+		$joueurs = joueur_get('all');
+		echo '<select name="joueur">';
+		while($joueur = mysql_fetch_assoc($joueurs))
+			echo '<option value="'.$joueur['id'].'">'.$joueur['pseudo'].'</option>';
+		echo '</select>';
+		?>
 	</p>
 	<p>
-		<input type="submit" name="submit_groupe" id="submit_groupe" value="Ajouter groupe" />
+		<label>Match : </label>
+		<?php
+		$matchs = journee_get_waiting_results();
+		if(mysql_num_rows($matchs)) {
+			echo '<select name="match">';
+			while($match = mysql_fetch_assoc($matchs))
+				echo '<option value="'.$match['idmatch'].'">('.shortdate_to_str($match['numero']).') '.$match['equipe1'].' - '.$match['equipe2'].'&nbsp;&nbsp;</option>';
+			echo '</select>';
+		}
+		?>
+		</select>
+	</p>
+	<p>
+		<label>Score : </label>
+		<input type="text" name="pronoj" id="pronoj" />
+	</p>
+	<p>
+		<input type="submit" name="submit_prono" id="submit_prono" value="Ajouter pronostic" />
 	</p>	
 </form>
 
