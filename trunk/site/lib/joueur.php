@@ -157,10 +157,10 @@ function joueur_id_exists($id) {
 	return mysql_num_rows(sql_query($sql));
 }
 
-function joueur_add($mail, $pseudo, $pass, $groupes) {
+function joueur_add($mail, $pseudo, $pass) {
 	$pseudo = mysql_real_escape_string($pseudo);
-	$sql = "INSERT INTO joueur(email, pseudo, pass, idgroups)
-			VALUES('$mail', '$pseudo', '$pass', '$groupes');";
+	$sql = "INSERT INTO joueur(email, pseudo, pass)
+			VALUES('$mail', '$pseudo', '$pass');";
 	
 	return sql_query($sql);
 }

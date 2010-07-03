@@ -357,7 +357,7 @@ function session_connect($login, $password)
 
 	$login = mysql_real_escape_string($login);
 	
-	$sql = 'SELECT id, email, pseudo, idgroups
+	$sql = 'SELECT id, email, pseudo
 	        FROM joueur
 	        WHERE (email = "'.$login.'" OR pseudo = "'.$login.'")
 			AND pass = "'.$password.'";';
