@@ -168,7 +168,7 @@ else {
 		?>
 	</p>
 	<p>
-		<input type="submit" name="submit_deljg" id="submit_deljg" value="Supprimer" />&nbsp;&nbsp;
+		<input type="submit" name="submit_deljg" id="submit_deljg" value="Supprimer" class="need_confirm" />&nbsp;&nbsp;
 		<input type="submit" name="submit_candeljg" id="submit_candeljg" value="Annuler" />
 	</p>
 	<?php } else { ?>

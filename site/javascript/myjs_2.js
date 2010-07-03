@@ -158,7 +158,7 @@ $(function() {
 	});
 	
 	if(href == 'maj' || href == 'groupes') {
-		$('input[type=submit]').click(function() {
+		$('input[type=submit].need_confirm').click(function() {
 			return confirm('Etes vous sûr ?');
 		});
 	}

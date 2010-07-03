@@ -51,13 +51,16 @@ DELIMITER //
 DROP PROCEDURE IF EXISTS validate_demande//
 CREATE PROCEDURE validate_demande(param_iddemande INTEGER)
 BEGIN
-	INSERT INTO `joueur`(email,pseudo,pass,idgroups)
-	(SELECT email, pseudo, pass, idgroups
+	INSERT INTO `joueur`(email,pseudo,pass)
+	(SELECT email, pseudo, pass
 	FROM `demande`
 	WHERE id = param_iddemande
 	AND declined = 0
 	AND validated = 0
 	LIMIT 1);
+	
+	INSERT INTO `adhesion`(idjoueur,idgroupe,date)
+	VALUES((SELECT MAX(id) FROM `joueur`), (SELECT idgroups FROM `demande` WHERE id = param_iddemande), UNIX_TIMESTAMP());
 	
 	UPDATE `demande`
 	SET `validated` = 1
