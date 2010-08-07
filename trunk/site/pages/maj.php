@@ -39,7 +39,7 @@ if(isset($_POST['submit_modidj'])) {
 	$idma = $_POST['matchs'];
 	
 	if(journee_exists($idjour) && match_id_exists($idma)) {
-		if(prono_add($idma, $idjour))
+		if(match_update_journee($idma, $idjour))
 			echo '<p class="success">Journée du match modifiée avec succès !</p>';
 		else
 			echo '<span class="error">Il y a eu une erreur lors de la modification en base de données</span>';
@@ -118,7 +118,7 @@ if(isset($_POST['submit_xml'])) {
 		?>
 	</p>
 	<p>
-		<input type="submit" name="submit_modidj" id="submit_modidj" value="Modifier" />
+		<input type="submit" name="submit_modidj" id="submit_modidj" value="Modifier" class="need_confirm" />
 	</p>	
 </form>
 

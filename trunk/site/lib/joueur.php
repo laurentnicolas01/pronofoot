@@ -50,6 +50,7 @@ function joueur_get_result($idjoueur, $idjournee) {
 }
 
 function joueur_get_classement($groupe = 0, $sort, $is_asc) {
+	$groupe = intval($groupe);
 	$order = $is_asc ? 'ASC' : 'DESC';
 
 	$sql = 'SELECT ROUND(points/nbmatchs, 2) AS avg, pseudo, points, nbmatchs
@@ -57,7 +58,7 @@ function joueur_get_classement($groupe = 0, $sort, $is_asc) {
 			WHERE nbmatchs <> 0
 			';
 			
-	if($groupe) $sql .= "AND idgroups LIKE '%$groupe%'\n";
+	if($groupe) $sql .= "AND EXISTS (SELECT idjoueur, idgroupe FROM adhesion WHERE idjoueur = id AND idgroupe = $groupe)\n";
 			
 	// $sort doit être égal à 'points' ou 'avg'
 	if($sort == 'avg') $sort = 'points/nbmatchs';
