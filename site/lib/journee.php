@@ -67,7 +67,7 @@ function journee_get_all_terminated($is_asc) {
 	$sql = 'SELECT id, numero
 			FROM journee
 			WHERE `terminated` = 1
-			AND numero > 38 -- MODIF COUPE DU MONDE
+			AND date > 1281045600 -- MODIF L1 2010/2011, date = 06/08/10 00h
 			ORDER BY numero '.$order.', date '.$order.';';
 	return sql_query($sql);
 }
@@ -76,7 +76,7 @@ function journee_get_last_terminated() {
 	$sql = 'SELECT id, numero
 			FROM journee
 			WHERE `terminated` = 1
-			AND numero > 38 -- MODIF COUPE DU MONDE
+			AND date > 1281045600 -- MODIF L1 2010/2011, date = 06/08/10 00h
 			ORDER BY numero DESC, date DESC
 			LIMIT 1;';
 	return mysql_fetch_assoc(sql_query($sql));

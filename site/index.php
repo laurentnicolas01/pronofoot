@@ -52,7 +52,7 @@ elseif(isset($_GET['deconnexion'])) {
 	<meta name="google-site-verification" content="3j_58lbwspsTkmMWHCMG-BANQyA09wPdHgWVId5rzcc" />
 
 	<!-- css -->
-	<link rel="stylesheet" media="screen" type="text/css" href="css/style_3.css" />
+	<link rel="stylesheet" media="screen" type="text/css" href="css/style.css" />
 	
 	<!-- website mini-icon -->
 	<link rel="icon" href="images/icons/sport_soccer.png" type="image/png" />

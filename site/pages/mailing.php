@@ -93,7 +93,7 @@ else {
 <form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>">
 	<p>
 		<label for="message">Message :</label><br />
-		<textarea name="message" id="message" rows="10" cols="50"><?php echo $message; ?></textarea>
+		<textarea name="message" id="message" rows="15" cols="70"><?php echo $message; ?></textarea>
 	</p>
 	<p>
 		Code de sécurité : &nbsp;<strong><?php echo $confirm=substr(md5(rand()), 3, 4); ?></strong><br />
