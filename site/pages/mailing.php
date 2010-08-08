@@ -28,8 +28,8 @@ function send_contact_mail($email, $message)
 	// preparation de l'objet
 	$object = 'Message de l\'équipe Prono Foot';
 	
-	// préparation du contenu du mail
-	$content  = $message."\n".DEFAULT_MAIL."\n".WEBLINK;
+	// préparation du contenu du mail (clean_str nécessaire pour le problème slashes)
+	$content = clean_str_preserve_tags($message)."\n".DEFAULT_MAIL."\n".WEBLINK;
 	
 	// envoi du mail et retour du résultat (true ou false)
 	return mail($receiver, $object, $content, $headers);

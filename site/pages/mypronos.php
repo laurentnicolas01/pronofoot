@@ -23,7 +23,7 @@ if(isset($_GET['journee'])) {
 		echo '<span class="error">Les pronostics sont fermés pour la journée demandée</span>';
 	else {
 		$journee = journee_get_by_id($idjournee);
-		echo '<p class="strong">Mes pronostics pour la '.display_number($journee['numero']).' journée (premier match à '.shorttime_to_str($journee['date']).')</p>';
+		echo '<p class="strong">Mes pronostics pour la '.display_number($journee['numero']).' journée (premier match le '.time_to_str($journee['date']).')</p>';
 	}
 }
 else {
@@ -32,7 +32,7 @@ else {
 	if(!journee_has_match($idjournee))
 		echo '<span class="error">Aucun match n\'est enregistré pour la prochaine journée</span>';
 	else
-		echo '<p class="strong">Mes pronostics pour la '.display_number($journee['numero']).' journée (premier match à '.shorttime_to_str($journee['date']).')</p>';
+		echo '<p class="strong">Mes pronostics pour la '.display_number($journee['numero']).' journée (premier match le '.time_to_str($journee['date']).')</p>';
 }
 
 if(isset($_POST['submit_pronos'])) {

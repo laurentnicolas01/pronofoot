@@ -75,6 +75,17 @@ switch($_REQUEST['action']) {
 			echo 'pas ok&&&';
 		break;
 		
+	/* Match creation ------------------------------- */
+	
+	case 'match_team_autocomplete':
+		require_once(get_file('lib/match.php'));
+		$tmp_list = match_get_distinct_team();
+		$team_list = array();
+		while($team = mysql_fetch_row($tmp_list))
+			$team_list[] = $team[0];
+		die(json_encode($team_list));
+		break;
+		
 	/* Si l'action n'est pas trouvée ---------- */
 	
 	default:
