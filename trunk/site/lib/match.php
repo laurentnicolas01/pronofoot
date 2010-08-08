@@ -125,3 +125,13 @@ function match_get_allnext() {
 	return sql_query($sql);
 }
 
+function match_get_distinct_team() {
+	$sql = "SELECT distinct(equipe1)
+			FROM `match`
+			UNION
+			SELECT distinct(equipe2)
+			FROM `match`;";
+			
+	return sql_query($sql);
+}
+

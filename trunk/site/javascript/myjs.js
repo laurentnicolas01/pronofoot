@@ -162,4 +162,13 @@ $(function() {
 			return confirm('Etes vous sûr ?');
 		});
 	}
+	
+	/* Match team autocomplete */
+	if(href == 'add') {
+		$.getJSON('pages/ajax.php', {action:'match_team_autocomplete'}, function(data) {
+			$('input#team1, input#team2').autocomplete({
+				source: data
+			});
+		});
+	}
 });

@@ -100,9 +100,9 @@ elseif(isset($_GET['deconnexion'])) {
 				<?php include_once('includes/member.php'); ?>
 			</div>
 		</div>
-		<div id="chatbox" class="ui-dialog ui-widget ui-widget-content ui-corner-all">
-			<div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix">Chatbox</div>
-			<div class="ui-dialog-content ui-widget-content">
+		<div class="ui-dialog ui-widget ui-widget-content ui-corner-all" id="chatbox">
+			<div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix" id="chatbox_title">Chatbox</div>
+			<div class="ui-dialog-content ui-widget-content" id="chatbox_content">
 				<?php include_once('includes/chatbox.php'); ?>
 			</div>
 		</div>
@@ -128,7 +128,7 @@ elseif(isset($_GET['deconnexion'])) {
 	
 	<!-- jquery local libs -->
 	<script src="javascript/jquery-1.4.2.min.js" type="text/javascript"></script>
-	<script src="javascript/jquery-ui-1.8.custom.min.js" type="text/javascript"></script>
+	<script src="javascript/jquery-ui-1.8.4.custom.min.js" type="text/javascript"></script>
 	
 	<!-- jquery add-ons & perso -->
 	<script type="text/javascript" src="javascript/jquery.timers-1.2.js"></script>

@@ -21,22 +21,22 @@ if(isset($_POST['submit_match'])) {
 }
 
 if(isset($_POST['submit_journee'])) {
-	if(/* $_POST['numero'] == '' || */ $_POST['dateheure'] == '')
-		echo '<span class="error">Pour ajouter une journée, il faut préciser le numéro et la date/heure du premier match</span>'; 
+	if($_POST['numero'] == '' || $_POST['dateheure'] == '')
+			echo '<span class="error">Pour ajouter une journée, il faut préciser le numéro et la date/heure du premier match</span>';
 	else {
-		$numero = get_timestamp($_POST['dateheure'],'/');
-		$timestamp = get_timestamp($_POST['dateheure'],'/');
-		
-		if($timestamp) {
-			if(journee_exists('',$numero, $timestamp))
-				echo '<span class="error">La journée que vous voulez ajouter existe déjà</span>';
-			else
-				if(journee_add($numero, $timestamp))
-					echo '<span class="success">Journée ajoutée avec succès : <strong>Journée du '.time_to_str($timestamp).'</strong></span>';
-				else
-					echo '<span class="error">Il y a eu une erreur lors de l\'ajout en base de données</span>';
-		}
-		else echo '<span class="error">Le format de la date entrée est invalide</span>';
+			$numero = intval($_POST['numero']);
+			$timestamp = get_timestamp($_POST['dateheure'],'/');
+			
+			if($timestamp) {
+					if(journee_exists('',$numero, $timestamp))
+							echo '<span class="error">La journée que vous voulez ajouter existe déjà</span>';
+					else
+							if(journee_add($numero, $timestamp))
+									echo '<span class="success">Journée ajoutée avec succès : <strong>Journée '.$numero.' ('.time_to_str($timestamp).')</strong></span>';
+							else
+									echo '<span class="error">Il y a eu une erreur lors de l\'ajout en base de données</span>';
+			}
+			else echo '<span class="error">Le format de la date entrée est invalide</span>';
 	}
 }
 
@@ -105,6 +105,15 @@ $journees_actives = journee_get_next($all = true);
 <form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>">
 	<p class="strong">Ajouter une journée</p>
 	<p>
+		<label>Numéro : </label>
+		<select name="numero">
+		<option value=""></option>
+		<?php
+		for($i = 1 ; $i < 39 ; ++$i)
+				echo '<option value="'.$i.'">'.$i.'&nbsp;&nbsp;&nbsp;</option>'."\n";
+		?>
+		</select>
+		<br /><br />	
 		<label>Date/Heure premier match : </label>
 		<input type="text" name="dateheure" id="dateheure" /><br /><br />
 		<span class="smalltext">(jour/mois/annee/heure/minute ; 25/11/2009/20/30)</span>
@@ -138,7 +147,6 @@ $journees_actives = journee_get_next($all = true);
 			echo '</select>';
 		}
 		?>
-		</select>
 	</p>
 	<p>
 		<label>Score : </label>
