@@ -28,10 +28,11 @@ if(mysql_num_rows($pronos)) {
 	while($prono = mysql_fetch_assoc($pronos)) {
 		if($nickname == '') {
 			echo '<h3>Historique des pronostics pour le '.shortdate_to_str($numjournee).'</h3>
+				<p> Les équipes sont représentées par leurs initiales. Vous pouvez consulter la liste des équivalences en bas de page.</p>	
 				  <table class="table-contain"><thead class="ui-state-default"><tr><th></th>';
 			while($match = mysql_fetch_assoc($matchs))
-				echo '<th>'.$match['equipe1'].' - '.$match['equipe2'].'</th>';
-			echo '<th>*Points*</th></tr></thead><tbody><tr><td class="strong left">'.$prono['pseudo'].'</td><td>'.$prono['score'].'</td>';
+				echo '<th>'.team_shortname($match['equipe1']).'<br> - <br>'.team_shortname($match['equipe2']).'</th>';
+			echo '<th>Points</th></tr></thead><tbody><tr><td class="strong left">'.$prono['pseudo'].'</td><td>'.$prono['score'].'</td>';
 			$nickname = $prono['pseudo'];
 			$idj = $prono['idjoueur'];
 			++$count;
@@ -52,11 +53,19 @@ if(mysql_num_rows($pronos)) {
 		$nickname = $prono['pseudo'];
 		$idj = $prono['idjoueur'];
 	}
-	echo '<td class="strong">'.joueur_get_result($idj,$idjournee).'</td></tr><tr><td class="strong">*Scores*</td>';
+	echo '<td class="strong">'.joueur_get_result($idj,$idjournee).'</td></tr><tr><td class="strong">Scores</td>';
 	$match_res = match_get_scores($idjournee);
 	while($m = mysql_fetch_assoc($match_res))
 		echo '<td class="strong">'.$m['score'].'</td>';
 	echo '</tr></tbody></table>';
+	echo'<h3>Noms des équipes :</h3>
+	<p><strong>ACA</strong> = Arles-Avignon; <strong>AJA</strong> = Auxerre; <strong>ASM</strong> = Monaco; <strong>ASNL</strong> = Nancy;
+	<strong>ASSE</strong> = Saint-Etienne; <strong>FCGB</strong> = Bordeaux; <strong>FCL</strong> = Lorient; <strong>FCSM</strong> = Sochaux;
+	<strong>LOSC</strong> = Lille; <strong>MHSC</strong> = Montpellier; <strong>OGCN</strong> = Nice; <strong>OL</strong> = Lyon;
+	<strong>OM</strong> = Marseille; <strong>PSG</strong> = Paris; <strong>RCL</strong> = Lens; <strong>SB29</strong> = Brest;
+	<strong>SMC</strong> = Caen; <strong>SRFC</strong> = Rennes; <strong>TFC</strong> = Toulouse; <strong>VAFC</strong> = Valenciennes</p>';
+		
+	
 }
 else {
 	echo '<span class="error">Il n\'y a pas encore d\'historique des pronostics</span>';

@@ -478,3 +478,75 @@ function generate_sprite_xml($file,$path) {
                 fclose($xml);
 		}
 }
+
+/**
+ * Transformer le nom d'une equipe en ses initiales
+ * @param string: le nom de lequipe
+ * @return les initiales
+ */
+function team_shortname($team) {
+	$team_init=$team;
+	switch ($team) {
+case "Toulouse":
+    $team_init="TFC";
+    break;
+case "Saint-Etienne":
+    $team_init="ASSE";
+    break;
+case "Auxerre":
+    $team_init="AJA";
+    break;
+case "Caen":
+    $team_init="SMC";
+    break;
+case "Nice":
+    $team_init="OGCN";
+    break;
+case "Bordeaux":
+    $team_init="FCGB";
+    break;
+case "Paris":
+    $team_init="PSG";
+    break;
+case "Arles-Avignon":
+    $team_init="ACA";
+    break;
+case "Rennes":
+    $team_init="SRFC";
+    break;
+case "Sochaux":
+    $team_init="FCSM";
+    break;
+case "Montpellier":
+    $team_init="MHSC";
+    break;
+case "Nancy":
+    $team_init="ASNL";
+    break;
+case "Marseille":
+    $team_init="OM";
+    break;
+case "Monaco":
+    $team_init="ASM";
+    break;
+case "Brest":
+    $team_init="SB29";
+    break;
+case "Lorient":
+    $team_init="FCL";
+    break;
+case "Lens":
+    $team_init="RCL";
+    break;
+case "Lille":
+    $team_init="LOSC";
+    break;
+case "Lyon":
+    $team_init="OL";
+    break;
+case "Valenciennes":
+    $team_init="VAFC";
+    break;
+}
+		return $team_init;
+}
