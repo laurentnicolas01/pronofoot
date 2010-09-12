@@ -16,9 +16,10 @@ if(mysql_num_rows($pronos) && time() > $journee['date']) {
 	while($prono = mysql_fetch_assoc($pronos)) {
 		if($nickname == '') {
 			echo '<h3>Tous les pronostics pour la '.display_number($journee['numero']).' journée</h3>
+				  <p> Les équipes sont représentées par leurs initiales. Vous pouvez consulter la liste des équivalences en bas de page.</p>
 				  <table class="table-contain"><thead class="ui-state-default"><tr><th></th>';
 			while($match = mysql_fetch_assoc($matchs))
-				echo '<th>'.$match['equipe1'].' - '.$match['equipe2'].'</th>';
+				echo '<th>'.team_shortname($match['equipe1']).'<br> - <br>'.team_shortname($match['equipe2']).'</th>';
 			echo '</tr></thead><tbody><tr><td class="strong left">'.$prono['pseudo'].'</td><td>'.$prono['score'].'</td>';
 			$nickname = $prono['pseudo'];
 			++$count;
@@ -39,6 +40,12 @@ if(mysql_num_rows($pronos) && time() > $journee['date']) {
 		$nickname = $prono['pseudo'];
 	}
 	echo '</tr></tbody></table>';
+	echo'<h3>Noms des équipes :</h3>
+	<p><strong>ACA</strong> = Arles-Avignon; <strong>AJA</strong> = Auxerre; <strong>ASM</strong> = Monaco; <strong>ASNL</strong> = Nancy;
+	<strong>ASSE</strong> = Saint-Etienne; <strong>FCGB</strong> = Bordeaux; <strong>FCL</strong> = Lorient; <strong>FCSM</strong> = Sochaux;
+	<strong>LOSC</strong> = Lille; <strong>MHSC</strong> = Montpellier; <strong>OGCN</strong> = Nice; <strong>OL</strong> = Lyon;
+	<strong>OM</strong> = Marseille; <strong>PSG</strong> = Paris; <strong>RCL</strong> = Lens; <strong>SB29</strong> = Brest;
+	<strong>SMC</strong> = Caen; <strong>SRFC</strong> = Rennes; <strong>TFC</strong> = Toulouse; <strong>VAFC</strong> = Valenciennes</p>';
 }
 elseif(time() < $journee['date']) {
 	echo '<span class="warning">Les pronostics de la prochaine journée ne sont pas encore consultables</span>';
