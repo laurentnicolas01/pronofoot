@@ -125,13 +125,29 @@ function match_get_allnext() {
 	return sql_query($sql);
 }
 
-function match_get_distinct_team() {
-	$sql = "SELECT distinct(equipe1)
-			FROM `match`
-			UNION
-			SELECT distinct(equipe2)
-			FROM `match`;";
-			
+function match_get_allnoscore() {
+	$current_date = time();
+	$sql = "SELECT m.id, m.equipe1, m.equipe2, j.numero
+			FROM `match` as m, journee as j
+			WHERE m.idjournee = j.id
+			AND m.score = ''
+			ORDER BY j.numero, m.id;";
+	
 	return sql_query($sql);
 }
 
+/**
+ * Récupère toutes les entrées déjà existantes pour les équipes (1 et 2) des matchs
+ */
+function match_get_distinct_team() {
+	// Condition sur l'id de la journée supérieur à 72 pour ne prendre qu'à partir de 08/2010
+	$sql = "SELECT distinct(equipe1)
+			FROM `match`
+			WHERE idjournee > 72
+			UNION
+			SELECT distinct(equipe2)
+			FROM `match` 
+			WHERE idjournee > 72;";
+			
+	return sql_query($sql);
+}

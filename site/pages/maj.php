@@ -100,10 +100,10 @@ if(isset($_POST['submit_xml'])) {
 	<p>
 		<label>Match : </label>
 		<?php
-		$matchs = match_get_allnext();
+		$matchs = match_get_allnoscore();
 		echo '<select name="matchs">';
 		while($match = mysql_fetch_assoc($matchs))
-			echo '<option value="'.$match['id'].'">('.shortdate_to_str($match['numero']).') '.$match['equipe1'].' - '.$match['equipe2'].'&nbsp;&nbsp;</option>';
+			echo '<option value="'.$match['id'].'">('.$match['numero'].') '.$match['equipe1'].' - '.$match['equipe2'].'&nbsp;&nbsp;</option>';
 		echo '</select>';
 		?>
 	</p>
@@ -113,7 +113,7 @@ if(isset($_POST['submit_xml'])) {
 		$journees = journee_get_next($all = true);
 		echo '<select name="journees">';
 		while($journee = mysql_fetch_assoc($journees))
-			echo '<option value="'.$journee['id'].'">'.time_to_str($journee['date']).'&nbsp;&nbsp;</option>';
+			echo '<option value="'.$journee['id'].'">'.$journee['numero'].' ('.time_to_str($journee['date']).')&nbsp;&nbsp;</option>';
 		echo '</select>';
 		?>
 	</p>
@@ -131,7 +131,7 @@ if(isset($_POST['submit_xml'])) {
 		$matchs = match_get_allnext();
 		echo '<select name="matchs">';
 		while($match = mysql_fetch_assoc($matchs))
-			echo '<option value="'.$match['id'].'">('.shortdate_to_str($match['numero']).') '.$match['equipe1'].' - '.$match['equipe2'].'&nbsp;&nbsp;</option>';
+			echo '<option value="'.$match['id'].'">('.$match['numero'].') '.$match['equipe1'].' - '.$match['equipe2'].'&nbsp;&nbsp;</option>';
 		echo '</select>';
 		?>
 	</p>	
@@ -196,7 +196,7 @@ if(isset($_POST['submit_xml'])) {
 		$matchs = match_get_allnext();
 		echo '<select name="matchs">';
 		while($match = mysql_fetch_assoc($matchs))
-			echo '<option value="'.$match['id'].'">('.shortdate_to_str($match['numero']).') '.$match['equipe1'].' - '.$match['equipe2'].'&nbsp;&nbsp;</option>';
+			echo '<option value="'.$match['id'].'">('.$match['numero'].') '.$match['equipe1'].' - '.$match['equipe2'].'&nbsp;&nbsp;</option>';
 		echo '</select>';
 		?>
 	</p>

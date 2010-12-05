@@ -26,7 +26,7 @@ if(isset($_GET['journee'])) {
 		echo '<span class="error">Aucun match n\'est enregistré pour la journée demandée</span>';
 	else {
 		$journee = journee_get_by_id($idjournee);
-		echo '<p class="strong">Saisie des scores pour la journée du '.shortdate_to_str($journee['numero']).'</p>';
+		echo '<p class="strong">Saisie des scores pour la journée '.$journee['numero'].' du '.shortdate_to_str($journee['date']).'</p>';
 	}
 }
 else {
@@ -35,7 +35,7 @@ else {
 	if(!journee_has_match($idjournee))
 		echo '<span class="error">Aucun match n\'est enregistré pour la prochaine journée</span>';
 	else
-		echo '<p class="strong">Saisie des scores pour la journée du '.shortdate_to_str($journee['numero']).'</p>';
+		echo '<p class="strong">Saisie des scores pour la journée '.$journee['numero'].' du '.shortdate_to_str($journee['date']).'</p>';
 }
 
 if(isset($_POST['submit_scores'])) {
@@ -47,7 +47,7 @@ if(isset($_POST['submit_scores'])) {
 			if(valid_score($score)) {
 				if(match_set_score($idm[1], $score)) { /* maj des <points;nbmatchs> ici */
 					$idj = match_get_journee($idm[1]);
-					if(!journee_remain_match($idj)) { /*news_make_results($idj); news_feed_rss();*/ journee_terminate($idj); }
+					if(!journee_remain_match($idj)) { news_make_results($idj); news_feed_rss(); journee_terminate($idj); }
 					$good += 1;
 					$display['success'] = '<span class="success">Les scores de <strong>'.$good.'</strong> match(s) ont été enregistrés et les joueur mis à jour !</span>';
 				}

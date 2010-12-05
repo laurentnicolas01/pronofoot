@@ -132,6 +132,6 @@ elseif(isset($_GET['deconnexion'])) {
 	
 	<!-- jquery add-ons & perso -->
 	<script type="text/javascript" src="javascript/jquery.timers-1.2.js"></script>
-	<script type="text/javascript" src="javascript/myjs.js"></script>
+	<script type="text/javascript" src="javascript/myjs_update.js"></script>
 </body>
 </html>
