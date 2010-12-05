@@ -82,12 +82,18 @@ $journees_actives = journee_get_next($all = true);
 <form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>">
 	<p class="strong">Ajouter un match</p>
 	<p>
-		<label>Journée du : </label>
+		<label>Journée : </label>
 		<?php
 		if(mysql_num_rows($journees_actives)) {
+			$journee = array();
+			for($i = mysql_num_rows($journees_actives) ; $tmpj = mysql_fetch_assoc($journees_actives) ; --$i) {
+				$journee[$i-1]['id'] = $tmpj['id'];
+				$journee[$i-1]['numero'] = $tmpj['numero'];
+				$journee[$i-1]['date'] = $tmpj['date'];
+			}
 			echo '<select name="journee">';
-			while($journee = mysql_fetch_assoc($journees_actives))
-				echo '<option value="'.$journee['id'].'">'.time_to_str($journee['date']).'&nbsp;</option>';
+			for($i = 0 ; $i < count($journee) ; ++$i)
+				echo '<option value="'.$journee[$i]['id'].'">'.$journee[$i]['numero'].' ('.time_to_str($journee[$i]['date']).')&nbsp;</option>';
 			echo '</select>';
 		}
 		?>

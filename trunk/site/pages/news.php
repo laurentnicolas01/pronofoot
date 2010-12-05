@@ -1,5 +1,5 @@
 <?php
-echo '<h2>Actualiés</h2><p class="ystar"><a href="reglement">Le règlement du concours COUPE DU MONDE est disponible</a></p><p class="rss"><a href="'.FLUX_RSS.'">Abonnez vous au flux RSS</a></p>';
+echo '<h2>Actualiés</h2><p class="ystar"><a href="reglement">Le règlement du jeu est disponible ici</a></p><p class="rss"><a href="'.FLUX_RSS.'">Abonnez vous au flux RSS</a></p>';
 // Ligne avec asterisk à DELETE en fin de CDM
 
 require_once('lib/news.php');

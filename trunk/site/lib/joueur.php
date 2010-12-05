@@ -61,8 +61,9 @@ function joueur_get_classement($groupe = 0, $sort, $is_asc) {
 	if($groupe) $sql .= "AND EXISTS (SELECT idjoueur, idgroupe FROM adhesion WHERE idjoueur = id AND idgroupe = $groupe)\n";
 			
 	// $sort doit être égal à 'points' ou 'avg'
-	if($sort == 'avg') $sort = 'points/nbmatchs';
-	$sql .= "ORDER BY $sort $order, pseudo ASC;";
+	if($sort == 'avg') { $sort = 'points/nbmatchs'; $other = 'points'; }
+	else $other = 'points/nbmatchs';
+	$sql .= "ORDER BY $sort $order, $other $order, pseudo ASC;";
 	
 	return sql_query($sql);
 }
