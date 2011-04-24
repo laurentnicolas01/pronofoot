@@ -41,11 +41,14 @@ elseif(isset($_GET['deconnexion'])) {
 	session_destroy();
 	$_SESSION['is_connect'] = false;
 }
+
+// Determination de la page à afficher
+$page = isset($_GET['p']) ? $_GET['p'] : 'accueil';
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr">
 <head>
-	<title><?php echo TITLE; ?></title>
+	<title><?php echo TITLE.' | '.ucfirst(strtolower($page)); ?></title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<meta name="author" content="Julien P." />
 	<meta name="robots" content="index, follow" />
@@ -60,8 +63,24 @@ elseif(isset($_GET['deconnexion'])) {
 	<!-- rss -->
 	<link rel="alternate" type="application/rss+xml" href="/resources/rss.xml" title="Prono Foot RSS Feed" />
 	
-	<!-- Google Analytics
-	<script type="text/javascript" src="javascript/google-analytics.js"></script> -->
+	<!-- js dev -->
+	<script type="text/javascript" src="javascript/head.load.min.js"></script>
+	<script type="text/javascript">
+		head.js('javascript/jquery.min.js',
+				'javascript/jquery-ui.min.js',
+				'javascript/jquery.timers-1.2.js',
+				'javascript/myjs.min.js');
+	</script>
+	
+	<!-- js online
+	<script type="text/javascript" src="https://github.com/headjs/headjs/raw/v0.9/dist/head.load.min.js"></script>
+	<script type="text/javascript">
+		head.js('javascript/google-analytics.js',
+				'https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js',
+				'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.11/jquery-ui.min.js',
+				'javascript/jquery.timers-1.2.js',
+				'javascript/myjs.min.js');
+	</script> -->
 </head>
 <body>
 	<div id="title">
@@ -78,8 +97,7 @@ elseif(isset($_GET['deconnexion'])) {
 		
 		<!-- middle -->
 		<div id="content">
-			<?php				
-			$page = isset($_GET['p']) ? $_GET['p'] : 'accueil';
+			<?php
 			$path = 'pages/'.$page.'.php';
 			
 			if(in_array($page, $authorized))
@@ -119,19 +137,5 @@ elseif(isset($_GET['deconnexion'])) {
 			<?php include_once('includes/footer.php'); ?>
 		</div>
 	</div>
-	
-	<!-- jquery libs -->
-	<!--
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
-	-->
-	
-	<!-- jquery local libs -->
-	<script src="javascript/jquery-1.4.2.min.js" type="text/javascript"></script>
-	<script src="javascript/jquery-ui-1.8.4.custom.min.js" type="text/javascript"></script>
-	
-	<!-- jquery add-ons & perso -->
-	<script type="text/javascript" src="javascript/jquery.timers-1.2.js"></script>
-	<script type="text/javascript" src="javascript/myjs_update.js"></script>
 </body>
 </html>
