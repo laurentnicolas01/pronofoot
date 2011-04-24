@@ -170,5 +170,7 @@ $(function() {
 				source: data
 			});
 		});
+		
+		$('input#team1').focus();
 	}
 });
