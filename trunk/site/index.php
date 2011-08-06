@@ -68,17 +68,17 @@ $page = isset($_GET['p']) ? $_GET['p'] : 'accueil';
 	<script type="text/javascript">
 		head.js('javascript/jquery.min.js',
 				'javascript/jquery-ui.min.js',
-				'javascript/jquery.timers-1.2.js',
+				'javascript/jquery.timers-1.2.min.js',
 				'javascript/myjs.min.js');
 	</script>
 	
 	<!-- js online
-	<script type="text/javascript" src="https://github.com/headjs/headjs/raw/v0.9/dist/head.load.min.js"></script>
+	<script type="text/javascript" src="javascript/head.load.min.js"></script>
 	<script type="text/javascript">
 		head.js('javascript/google-analytics.js',
-				'https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js',
-				'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.11/jquery-ui.min.js',
-				'javascript/jquery.timers-1.2.js',
+				'https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js',
+				'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.13/jquery-ui.min.js',
+				'javascript/jquery.timers-1.2.min.js',
 				'javascript/myjs.min.js');
 	</script> -->
 </head>
