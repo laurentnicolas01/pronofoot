@@ -143,11 +143,11 @@ function match_get_distinct_team() {
 	// Condition sur l'id de la journée supérieur à 72 pour ne prendre qu'à partir de 08/2010
 	$sql = "SELECT distinct(equipe1)
 			FROM `match`
-			WHERE idjournee > 72
+			WHERE idjournee > 116
 			UNION
 			SELECT distinct(equipe2)
 			FROM `match` 
-			WHERE idjournee > 72;";
+			WHERE idjournee > 116;";
 			
 	return sql_query($sql);
 }
