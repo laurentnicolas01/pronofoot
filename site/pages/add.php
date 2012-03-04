@@ -5,10 +5,43 @@ require_once('lib/journee.php');
 if(isset($_POST['submit_match'])) {
 	require_once('lib/match.php');
 	
-	$journee = intval($_POST['journee']);
-	$team1 = ucwords(clean_str(mysql_real_escape_string($_POST['team1'])));
-	$team2 = ucwords(clean_str(mysql_real_escape_string($_POST['team2'])));
+	$journee = isset($_POST['journee']) ? intval($_POST['journee']) : 0;
+	// $team1 = ucwords(clean_str(mysql_real_escape_string($_POST['team1'])));
+	// $team2 = ucwords(clean_str(mysql_real_escape_string($_POST['team2'])));
 	
+	if($journee > 0) {
+		if(isset($_POST['lequipelink']) && $_POST['lequipelink'] != '') {
+			require_once('lib/simple_html_dom.php');
+			
+			$nb = 0;
+			$html = file_get_html($_POST['lequipelink']);
+
+			$programme = $html->find('div#CONT');
+			$lignes = $programme[0]->find('div.ligne');
+			foreach($lignes as $ligne):
+				$cell_domicile = $ligne->find('div.equipeDom');
+				$cell_visiteur = $ligne->find('div.equipeExt');
+				if(!empty($cell_domicile) && !empty($cell_visiteur)) {
+					$domicile = clean_lequipe_teamname($cell_domicile[0]->plaintext);
+					$visiteur = clean_lequipe_teamname($cell_visiteur[0]->plaintext);
+					if(!match_exists($journee, $domicile, $visiteur)) {
+						if(match_add($journee, $domicile, $visiteur))
+							++$nb;
+					}
+				}
+			endforeach;
+			
+			if($nb > 0)
+				echo '<span class="success">Il y a eu <strong>'.$nb.'</strong> '.plural('match',$nb).' '.plural('ajouté',$nb).'</span>';
+			else
+				echo '<span class="info">Aucun match n\'a été ajouté avec ce lien</span>';
+		}
+		else
+			echo '<span class="error">Il faut fournir un lien</span>';
+	}
+	else
+		echo '<span class="error">Il faut préciser une journée</span>';
+	/*
 	if($team1 == '' || $team2 == '')
 		echo '<span class="error">Vous devez donner un nom pour chaque équipe</span>';
 	elseif(match_exists($journee, $team1, $team2))
@@ -18,6 +51,7 @@ if(isset($_POST['submit_match'])) {
 			echo '<span class="success">Match ajouté avec succès : <strong>'.$team1.' - '.$team2.'</strong></span>';
 		else
 			echo '<span class="error">Il y a eu une erreur lors de l\'ajout en base de données</span>';
+	*/
 }
 
 if(isset($_POST['submit_journee'])) {
@@ -98,9 +132,17 @@ $journees_actives = journee_get_next($all = true);
 		}
 		?>
 		<br /><br />
+		<label>Lien de la page avec le tableau de L'équipe : </label>
+		<input type="text" name="lequipelink" id="lequipelink" />
+		
+		<!--
 		<label>Equipes : </label>
 		<input type="text" name="team1" id="team1" /> -
 		<input type="text" name="team2" id="team2" />
+		-->
+	</p>
+	<p>
+		<span class="smalltext">Exemple de lien : <a href="http://www.lequipe.fr/Football/FootballResultat34861.html">http://www.lequipe.fr/Football/FootballResultat34861.html</a></span>
 	</p>
 	<p>
 		<input type="submit" name="submit_match" id="submit_match" value="Ajouter match" />

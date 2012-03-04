@@ -31,7 +31,7 @@ if(mysql_num_rows($pronos)) {
 				<p> Les équipes sont représentées par leurs initiales. Vous pouvez consulter la liste des équivalences en bas de page.</p>	
 				  <table class="table-contain"><thead class="ui-state-default"><tr><th></th>';
 			while($match = mysql_fetch_assoc($matchs))
-				echo '<th>'.team_shortname($match['equipe1']).'<br> - <br>'.team_shortname($match['equipe2']).'</th>';
+				echo '<th>'.team_shortname($match['equipe1']).'<br /> - <br />'.team_shortname($match['equipe2']).'</th>';
 			echo '<th>Points</th></tr></thead><tbody><tr><td class="strong left">'.$prono['pseudo'].'</td><td>'.$prono['score'].'</td>';
 			$nickname = $prono['pseudo'];
 			$idj = $prono['idjoueur'];

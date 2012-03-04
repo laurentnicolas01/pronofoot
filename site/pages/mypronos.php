@@ -10,7 +10,7 @@ if(mysql_num_rows($futures_journees) > 1) {
 	echo '<p id="myplistj">Journée : ';
 	while($nextj = mysql_fetch_assoc($futures_journees))
 		echo '<strong><a href="mypronos-'.$nextj['id'].'" class="ui-state-default">'.$nextj['numero'].'</a></strong> ';
-	echo '<br />';
+	echo '</p>';
 }
 
 if(isset($_GET['journee'])) {
@@ -72,7 +72,7 @@ if(mysql_num_rows($matchs) && !journee_locked($idjournee)) {
 		echo '<p><input type="text" name="match_'.$match['id'].'" value="'.$value.'" size="4" />&nbsp;&nbsp;'.$match['equipe1'].' - '.$match['equipe2'].'</p>';
 	}
 	?>
-	<br />
+	<p>&nbsp;</p>
 	<p>
 		<input type="submit" name="submit_pronos" id="submit_pronos" value="Valider mes pronostics" />
 	</p>	
