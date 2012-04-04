@@ -4,7 +4,7 @@
 		<title>Prono Foot</title>
 		<link>http://pronofoot.julienp.fr</link>
 		<description>Les dernières news</description>
-		<lastBuildDate>Mon, 22 Mar 2010 00:34:48 +0100</lastBuildDate>
+		<lastBuildDate>Sun, 28 Mar 2010 06:23:43 +0200</lastBuildDate>
 		<language>fr</language>
 
                 <image>
@@ -15,66 +15,65 @@
                         <height>64</height>
                 </image>
 		<item>
-			<title>dsf</title>
+			<title>Résultats de la 30ème journée</title>
 			<link>http://pronofoot.julienp.fr/accueil</link>
-			<description>sfdf</description>
-			<pubDate>Sun, 21 Mar 2010 23:51:52 +0100</pubDate>
+			<description>Pour cette journée, les résultats sont les suivants : Arthur +3 points, BoStoNnnNn +3 points, Charpen +1 point, Chasseur +3 points, Falco +3 points, Folk17 +0 point, Gaga +3 points, Hotkebab +3 points, Iflo93 +3 points, Jaminben +3 points, Kiddo +3 points, Matie7 +3 points, MattLoW +1 point, Mayk +1 point, Miko +3 points, Momo +1 point, Rapha +3 points, Remy81 +1 point, Robertjul +1 point, Tok +1 point, Tonio +3 points, Ubu +1 point</description>
+			<pubDate>Sat, 27 Mar 2010 18:57:31 +0100</pubDate>
 		</item>
 		<item>
-			<title>sdf</title>
+			<title>Finale coupe de la ligue</title>
 			<link>http://pronofoot.julienp.fr/accueil</link>
-			<description>wfdsf</description>
-			<pubDate>Sun, 21 Mar 2010 23:51:16 +0100</pubDate>
+			<description>En raison de la finale de la coupe de la ligue les matchs de l'OM et Bordeaux de la 30e journée sont reportés. Ils sont donc supprimés de la journée 30 et seront rajoutés ultérieurement.</description>
+			<pubDate>Sat, 27 Mar 2010 17:45:39 +0100</pubDate>
 		</item>
 		<item>
-			<title>zefez</title>
+			<title>Sondage : pot commun pour la coupe du monde</title>
 			<link>http://pronofoot.julienp.fr/accueil</link>
-			<description>zrtggvfsf</description>
-			<pubDate>Sun, 21 Mar 2010 23:50:35 +0100</pubDate>
+			<description>Nouveau sondage, encore une fois les anciens restent accessibles (il faut aller chercher dans les anciennes news). Celui-ci va en intéresser certains je crois : il s'agit de savoir combien de personnes seraient prêtes, pour la coupe du monde, à mettre quelques euros dans un pot commun qui serait ensuite redistribué aux meilleurs pronostiqueurs. Pour y accéder, cliquez ici</description>
+			<pubDate>Fri, 26 Mar 2010 22:38:12 +0100</pubDate>
 		</item>
 		<item>
-			<title>qsd</title>
+			<title>Nouveauté : le flux RSS</title>
 			<link>http://pronofoot.julienp.fr/accueil</link>
-			<description>sdqqd</description>
-			<pubDate>Sun, 21 Mar 2010 23:48:10 +0100</pubDate>
+			<description>Vous pouvez désormais suivre l'actualité du site plus facilement grâce au flux RSS ! Il contient les 10 dernière news postées sur Prono Foot et il est lisible avec tous les outils qui permettent de gérer des flux : Netvibes, Google Reader, Bookmarks Firefox... Pour s'abonner, on peut soit cliquer sur le lien qui se trouve au dessus de la liste des news en page d'accueil, soit sur l'icône de la barre d'adresse du navigateur.</description>
+			<pubDate>Mon, 22 Mar 2010 00:24:54 +0100</pubDate>
 		</item>
 		<item>
-			<title>2nd ajax test</title>
+			<title>Résultats de la 29ème journée</title>
 			<link>http://pronofoot.julienp.fr/accueil</link>
-			<description>undefined</description>
-			<pubDate>Sun, 21 Mar 2010 23:47:05 +0100</pubDate>
+			<description>Pour cette journée, les résultats sont les suivants :Arthur +5 points, BoStoNnnNn +2 points, Chasseur +2 points, Falco +4 points, Folk17 +2 points, Gaga +1 point, Hotkebab +5 points, Iflo93 +0 point, Jaminben +4 points, Kiddo +2 points, Matie7 +2 points, MattLoW +2 points, Mayk +4 points, Miko +3 points, Momo +1 point, Rapha +1 point, Robertjul +0 point, Tok +4 points, Tonio +0 point</description>
+			<pubDate>Sun, 21 Mar 2010 22:53:54 +0100</pubDate>
 		</item>
 		<item>
-			<title>2nd ajax test</title>
+			<title>Nouvelle fonctionnalité</title>
 			<link>http://pronofoot.julienp.fr/accueil</link>
-			<description>undefined</description>
-			<pubDate>Sun, 21 Mar 2010 23:46:46 +0100</pubDate>
+			<description>Une nouvelle fonctionnalité a fait son apparition sur Prono Foot : dans l'espace "Membre", vous avez désormais la possibilité de voir le nombre de connectés et la liste des pseudos correspondants.
+Cette idée m'a été soufflée par un des membres de Prono Foot et je vous invite vous aussi à faire des suggestions similaires sur des choses qui, selon vous, apporteraient un intérêt supplémentaire au site. Je ne garanti pas de pouvoir répondre à toutes les demandes, mais ça ne coûte rien d'essayer ! Vous pouvez passer par le formulaire de contact (en bas) ou bien m'envoyer un mail à pronofoot@julienp.fr</description>
+			<pubDate>Wed, 17 Mar 2010 12:27:34 +0100</pubDate>
 		</item>
 		<item>
-			<title>First ajax test</title>
+			<title>Modification de la journée 30</title>
 			<link>http://pronofoot.julienp.fr/accueil</link>
-			<description>undefined</description>
-			<pubDate>Sun, 21 Mar 2010 23:45:22 +0100</pubDate>
+			<description>Le match de Lyon de la 30ème journée étant avancé au vendredi, la journée a été dédoublée pour éviter de contraindre les joueurs à pronostiquer dès le vendredi.</description>
+			<pubDate>Tue, 16 Mar 2010 16:15:10 +0100</pubDate>
 		</item>
 		<item>
-			<title>lol</title>
+			<title>Résultats de la 28ème journée</title>
 			<link>http://pronofoot.julienp.fr/accueil</link>
-			<description>lol</description>
-			<pubDate>Sun, 21 Mar 2010 23:30:58 +0100</pubDate>
+			<description>Pour cette journée, les résultats sont les suivants :Arthur +4 points, BoStoNnnNn +1 point, Chasseur +1 point, Falco +1 point, Folk17 +0 point, Gaga +1 point, Hotkebab +2 points, Iflo93 +7 points, Jaminben +1 point, Kiddo +2 points, MattLoW +1 point, Mayk +1 point, Miko +1 point, Momo +4 points, Rapha +1 point, Robertjul +1 point, Tok +3 points, Tonio +1 point</description>
+			<pubDate>Sun, 14 Mar 2010 23:00:23 +0100</pubDate>
 		</item>
 		<item>
-			<title>My FINAL news added via GUI</title>
+			<title>Résultats de la 25ème journée</title>
 			<link>http://pronofoot.julienp.fr/accueil</link>
-			<description>lol</description>
-			<pubDate>Sun, 21 Mar 2010 23:27:30 +0100</pubDate>
+			<description>Pour cette journée, les résultats sont les suivants :Arthur +0 point, BoStoNnnNn +0 point, Falco +0 point, Folk17 +0 point, Gaga +0 point, Hotkebab +0 point, MattLoW +0 point, Miko +0 point, Rapha +0 point, Tok +0 point, Tonio +0 point</description>
+			<pubDate>Wed, 10 Mar 2010 21:00:10 +0100</pubDate>
 		</item>
 		<item>
-			<title>My 6th news added via GUI</title>
+			<title>Résultats de la 27ème journée</title>
 			<link>http://pronofoot.julienp.fr/accueil</link>
-			<description>Very nice job my dear don't you think oh no i didn't saiy what i did say Very nice job my dear don't you think oh no i didn't saiy what i did say Very nice job my dear don't you think oh no i didn't saiy what i did say Very nice job my dear don't you think oh no i didn't saiy what i did say 
-
-Very nice job my dear don't you think oh no i didn't saiy what i did say Very nice job my dear don't you think oh no i didn't saiy what i did say</description>
-			<pubDate>Sun, 21 Mar 2010 23:07:22 +0100</pubDate>
+			<description>Pour cette journée, les résultats sont les suivants :Arthur +3 points, Chasseur +0 point, Falco +6 points, Folk17 +6 points, Gaga +1 point, Hotkebab +6 points, Jaminben +3 points, Kiddo +0 point, Matie7 +4 points, Mayk +0 point, Momo +1 point, Tok +4 points, Tonio +0 point</description>
+			<pubDate>Sun, 07 Mar 2010 22:55:58 +0100</pubDate>
 		</item>
 	</channel>
 </rss>
